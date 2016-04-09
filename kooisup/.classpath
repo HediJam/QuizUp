@@ -19,5 +19,7 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/SARIR/Downloads/javax.mail-1.5.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SARIR/Downloads/jaf-1_0_2-upd2.zip"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
