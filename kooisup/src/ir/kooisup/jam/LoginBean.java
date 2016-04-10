@@ -44,7 +44,7 @@ public class LoginBean {
 			//FacesMessage message = new FacesMessage("Invalid password length");
             //FacesContext context = FacesContext.getCurrentInstance();
             //context.addMessage(loginButton.getClientId(context), message);
-            FacesContext.getCurrentInstance().addMessage("myForm:loginButton", new FacesMessage("ksdnfjNSG"));
+            FacesContext.getCurrentInstance().addMessage("myForm:loginButton", new FacesMessage("اطلاعات ورودی صحیح نیست"));
 			return "th";
 		}
 	}
