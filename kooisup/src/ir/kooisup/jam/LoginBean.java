@@ -3,6 +3,7 @@ package ir.kooisup.jam;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -10,7 +11,16 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class LoginBean {
 	
+	private UIComponent loginButton;
 	private String password;
+	private UIComponent loginButton1;
+	public UIComponent getLoginButton1() {
+		return loginButton1;
+	}
+	public void setLoginButton1(UIComponent loginButton1) {
+		this.loginButton1 = loginButton1;
+	}
+
 	private String username;
 	public String getPassword() {
 		return password;
@@ -25,21 +35,27 @@ public class LoginBean {
 		this.username = username;
 	}
 	
+	public UIComponent getLoginButton() {
+		return loginButton;
+	}
+	public void setLoginButton(UIComponent loginButton) {
+		this.loginButton = loginButton;
+	}	
 	public String doLogin(){
 		if(username.equals("admin")&& password.equals("admin")){
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			RegistrationListener.sendMail();
-			return "WebPage/home.xhtml";
+			return "th";
 		}
 		else{
-			FacesMessage fm = new FacesMessage("Login Error","Error MSG");
-			fm.setSeverity(FacesMessage.SEVERITY_ERROR);
-			FacesContext.getCurrentInstance().addMessage(null, fm);
-			return "login.xhtml";
+			
+			FacesMessage message = new FacesMessage("Invalid password length");
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(loginButton.getClientId(context), message);
+			return "th";
 		}
 	}
-	
+
 	public String doLogout(){
 		HttpSession hs = Util.getSession();
 		hs.invalidate();

@@ -28,7 +28,7 @@
   display: block;
   width: 100%;
 }
-.form inputText {
+.form .input {
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -42,7 +42,7 @@
   box-sizing: border-box;
   font-size: 14px;
 }
-.form commandButton {
+.form button {
   outline: 0;
   background: #EF3B3A;
   width: 100%;
@@ -58,8 +58,7 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
-
-.form .text-input {
+.form .commandButton {
   outline: 0;
   background: #EF3B3A;
   width: 100%;
@@ -75,7 +74,6 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
-
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
@@ -126,6 +124,7 @@
 /* END Form */
 /* Demo Purposes */
 body {
+   background-color:#EF3B3A;
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

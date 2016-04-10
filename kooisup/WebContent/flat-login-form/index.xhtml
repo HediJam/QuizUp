@@ -2,11 +2,16 @@
 xmlns:h="http://java.sun.com/jsf/html"
 xmlns:p="http://java.sun.com/jsf/core"
 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
->
+xmlns:u="http://primefaces.org/ui">
 <h:head>
 <title>Login Page</title>
  <h:outputStylesheet name="css/reset.css" />
  <h:outputStylesheet name="css/style.css" /> 
+ <h:outputStylesheet name="css/bootstrap.min.css" />
+ <h:outputStylesheet name="fonts/myFonts.css" />
+ <h:outputStylesheet name="css/animate.min.css" />
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </h:head>
   
 <h:body>
@@ -20,17 +25,13 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
   <h:graphicImage name="img/logo5.png"/>
   </div>
   <h:form class="register-form">
-    <input type="text" placeholder="نام"/>
-    <h:inputText id="username"  a:placeholder="نام کاربری"></h:inputText>
-    <h:inputText id="name"  a:placeholder="نام  و نام خانوادگی"></h:inputText>
-    <h:inputSecret id="password" a:placeholder="رمز"></h:inputSecret>
-    <h:inputSecret id="rep_password" a:placeholder="تکرار رمز"></h:inputSecret>
-    <h:inputText id="mail"  a:placeholder="ایمیل"></h:inputText>
+    
+    <h:inputText id="username" styleClass="input" a:placeholder="نام کاربری"></h:inputText>
+    <h:inputText id="name"  styleClass="input" a:placeholder="نام  و نام خانوادگی"></h:inputText>
+    <h:inputSecret id="password" styleClass="input" a:placeholder="رمز"></h:inputSecret>
+    <h:inputSecret id="rep_password"  styleClass="input" a:placeholder="تکرار رمز"></h:inputSecret>
+    <h:inputText id="mail"  styleClass="input" a:placeholder="ایمیل"></h:inputText>
     <div class="dropdown">
-    <h:commandButton class="btn btn-primary dropdown-toggle" value="کشور">
-    <span class="caret">
-    </span>
-    </h:commandButton>
     <ul class="dropdown-menu">
       <li><a href="#">ایران</a></li>
       <li><a href="#">مکزیک</a></li>
@@ -38,14 +39,25 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
     </ul>
   </div>
 <br></br>
-    <h:commandButton value="ساخت"></h:commandButton>
+    <h:commandButton styleClass="commandButton" value="ساخت"></h:commandButton>
     <p class="message">ثبت نام کرده اید؟<a href="#">ورود</a></p>
   </h:form>
   <h:form class="login-form">
-    <h:inputText id="username"  a:placeholder="نام کاربری" value="#{loginBean.username}"></h:inputText>
-    <h:inputSecret id="password" a:placeholder="رمز" value="#{loginBean.password}"></h:inputSecret>
-    <h:commandButton value="ورود" action="#{loginBean.doLogin}"></h:commandButton>
-    <button>ورود</button>
+    <h:inputText id="username" styleClass="input"  required="true" 
+    requiredMessage="نام کاربری را وارد کنید"
+    a:placeholder="نام کاربری" value="#{loginBean.username}"></h:inputText>
+    <u:watermark for="username" value="Username *" />
+    <h:message for="username" />
+    
+    <h:inputSecret id="password" styleClass="input" required="true" 
+    requiredMessage="رمز را وارد کنید"
+     a:placeholder="رمز" value="#{loginBean.password}">
+    </h:inputSecret>
+    <u:watermark for="password" value="password *" />
+    <h:message for="password" />
+    <h:commandButton id="loginButton" value="ورود" styleClass="commandButton" binding="#{loginBean.loginButton}"
+    action="#{loginBean.doLogin}"></h:commandButton>
+ 	<h:message for="loginButton" />
     <p class="message">هنوز ثبت نام نکرده اید؟ <a href="#">ساخت اکانت</a></p>
   </h:form>
 </div>
