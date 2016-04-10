@@ -28,7 +28,7 @@
   display: block;
   width: 100%;
 }
-.form input {
+.form inputText {
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -42,7 +42,7 @@
   box-sizing: border-box;
   font-size: 14px;
 }
-.form button {
+.form commandButton {
   outline: 0;
   background: #EF3B3A;
   width: 100%;
@@ -58,6 +58,24 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
+
+.form .text-input {
+  outline: 0;
+  background: #EF3B3A;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
@@ -108,7 +126,6 @@
 /* END Form */
 /* Demo Purposes */
 body {
-  background: #ccc;
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

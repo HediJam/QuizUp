@@ -12,6 +12,7 @@ body {
 
 @font-face {
         font-family: 'BBardiya';
+        
                 src:url(./fonts/BBardiya.eot) format(‘eot’),
                 url(./fonts/BBardiya.woff) format('woff'),
                 url(./fonts/BBardiya.ttf) format(‘truetype’);
