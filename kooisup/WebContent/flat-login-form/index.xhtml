@@ -42,7 +42,7 @@ xmlns:u="http://primefaces.org/ui">
     <h:commandButton styleClass="commandButton" value="ساخت"></h:commandButton>
     <p class="message">ثبت نام کرده اید؟<a href="#">ورود</a></p>
   </h:form>
-  <h:form class="login-form">
+  <h:form class="login-form" id="myForm">
     <h:inputText id="username" styleClass="input"  required="true" 
     requiredMessage="نام کاربری را وارد کنید"
     a:placeholder="نام کاربری" value="#{loginBean.username}"></h:inputText>
@@ -55,7 +55,7 @@ xmlns:u="http://primefaces.org/ui">
     </h:inputSecret>
     <u:watermark for="password" value="password *" />
     <h:message for="password" />
-    <h:commandButton id="loginButton" value="ورود" styleClass="commandButton" binding="#{loginBean.loginButton}"
+    <h:commandButton id="loginButton" value="ورود" styleClass="commandButton"
     action="#{loginBean.doLogin}"></h:commandButton>
  	<h:message for="loginButton" />
     <p class="message">هنوز ثبت نام نکرده اید؟ <a href="#">ساخت اکانت</a></p>

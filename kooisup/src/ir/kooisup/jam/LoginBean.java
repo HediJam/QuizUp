@@ -13,14 +13,6 @@ public class LoginBean {
 	
 	private UIComponent loginButton;
 	private String password;
-	private UIComponent loginButton1;
-	public UIComponent getLoginButton1() {
-		return loginButton1;
-	}
-	public void setLoginButton1(UIComponent loginButton1) {
-		this.loginButton1 = loginButton1;
-	}
-
 	private String username;
 	public String getPassword() {
 		return password;
@@ -49,9 +41,10 @@ public class LoginBean {
 		}
 		else{
 			
-			FacesMessage message = new FacesMessage("Invalid password length");
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(loginButton.getClientId(context), message);
+			//FacesMessage message = new FacesMessage("Invalid password length");
+            //FacesContext context = FacesContext.getCurrentInstance();
+            //context.addMessage(loginButton.getClientId(context), message);
+            FacesContext.getCurrentInstance().addMessage("myForm:loginButton", new FacesMessage("ksdnfjNSG"));
 			return "th";
 		}
 	}
