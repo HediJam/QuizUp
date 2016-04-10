@@ -19,7 +19,7 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-  <welcome-file>narm/index.xhtml</welcome-file>
+  <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
   <context-param>
     <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
