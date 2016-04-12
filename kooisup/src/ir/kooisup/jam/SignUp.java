@@ -34,9 +34,9 @@ public class SignUp {
 	private String email;
 	private String gender;
 	private String country;
-	
 	private JsfCaptcha captcha;
 	private String captchaCode;
+	private String uuid;
 	
 	public String getCaptchaCode() {
 		return captchaCode;
@@ -91,11 +91,19 @@ public class SignUp {
 	public String signItUp(){
 		
 		
+		System.out.println(name);
+		System.out.println(captchaCode);
+		System.out.println(country);
+		System.out.println(gender);
+		System.out.println(username);
+		System.out.println(email);
 		//connect to DB
-		User u = new User(name, password, email,"ssaf","asdff");
+		RegistrationListener.sendMail(email);
+		String uuid = RegistrationListener.uuid; 
+		User u = new User(name, password, email,"ssaf","asdff",uuid);
 		System.out.println(name+password);
 		try {
-			System.out.println("horaaaaaaaaaaaa");
+			System.out.println(name);
 			System.out.println(u.getName());
 			DBHandler.getInstance().insertUser(u);
 			System.out.println("djsnfjsd" + DBHandler.getInstance().existUser(name, password));

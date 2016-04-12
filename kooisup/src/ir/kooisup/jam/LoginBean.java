@@ -36,10 +36,9 @@ public class LoginBean {
 	public String doLogin(){
 		if(username.equals("admin")&& password.equals("admin")){
 			//System.out.println("salam");
-			RegistrationListener.sendMail();	
+			//RegistrationListener.sendMail();	
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			
 			return "/WebPage/home.xhtml";
 		}
 		else{

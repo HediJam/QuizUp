@@ -1,9 +1,7 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://java.sun.com/jsf/core"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:u="http://primefaces.org/ui"
-	xmlns:botDetect="botDetectFacelets"
-	>
+	xmlns:u="http://primefaces.org/ui" xmlns:botDetect="botDetectFacelets">
 <h:head>
 	<title>Login Page</title>
 	<h:outputStylesheet name="css/reset.css" />
@@ -32,43 +30,66 @@
 			<h:inputText id="username" styleClass="input"
 				a:placeholder="نام کاربری" value="#{signUp.username}"
 				required="true" requiredMessage="نام کاربری را وارد کنید"></h:inputText>
+				<u:watermark for="username" value="Username *" />
+			<h:message for="username" />
 			<h:inputText id="name" styleClass="input"
 				a:placeholder="نام  و نام خانوادگی" value="#{signUp.name}"
 				required="true" requiredMessage="نام و نام خانوادگی را وارد کنید"></h:inputText>
+			<h:message for="name" />
 			<h:inputSecret id="password" styleClass="input" a:placeholder="رمز"
 				required="true" requiredMessage="رمز را وارد کنید"
 				value="#{signUp.password}"></h:inputSecret>
+			<h:message for="password" />
 			<h:inputSecret id="rep_password" styleClass="input"
 				a:placeholder="تکرار رمز" required="true"
 				requiredMessage="تکرار رمز را وارد کنید"
 				value="#{signUp.rePassword}"></h:inputSecret>
+			<h:message for="rep_password" />
 			<h:inputText id="mail" styleClass="input" a:placeholder="ایمیل"
 				required="true" size="40" requiredMessage="ورود ایمیل را وارد کنید"
 				validatorMessage="ایمیل نامعتبر است" value="#{signUp.email}">
 				<p:validateRegex
 					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 			</h:inputText>
-			<div class="dropdown">
-				<ul class="dropdown-menu">
-					<li><a href="#">ایران</a></li>
-					<li><a href="#">مکزیک</a></li>
-					<li><a href="#">دبی</a></li>
-				</ul>
-			</div>
+			<h:message for="mail" />
+
+			<h:selectOneMenu value="#{signUp.gender}" styleClass="commandButton">
+				<p:selectItem styleClass="input" itemValue="woman" itemLabel="زن" />
+				<p:selectItem styleClass="input" itemValue="man" itemLabel="مرد" />
+			</h:selectOneMenu>
+
 			<br></br>
-			<h:commandButton styleClass="commandButton" value="ساخت" action="#{signUp.signItUp}"></h:commandButton>
+			<br></br>
+			<h:selectOneMenu value="#{signUp.country}" styleClass="commandButton">
+				<p:selectItem itemValue="iran"  styleClass="input" itemLabel="ایران" />
+				<p:selectItem itemValue="ger" styleClass="input" itemLabel="آلمان" />
+			</h:selectOneMenu>
+
+			<br></br>
+			<br></br>
+			<h:form prependId="false">
+				<botDetect:jsfCaptcha id="exampleCaptcha"
+					binding="#{signUp.captcha}" />
+				<br></br>
+				<h:inputText id="captchaCodeTextBox" value="#{signUp.captchaCode}"
+					styleClass="input" />
+				<br></br>
+
+			</h:form>
+			<h:commandButton styleClass="commandButton" value="ثبت نام" action="#{signUp.signItUp}"></h:commandButton>
 			<p class="message">
 				ثبت نام کرده اید؟<a href="#">ورود</a>
 			</p>
+
 		</h:form>
-		
-		
+		<h:commandButton value="ثبت نام" action="#{loginBean.doLogin}"></h:commandButton>
 		<h:form class="login-form" id="myForm">
 			<h:inputText id="username" styleClass="input" required="true"
 				requiredMessage="نام کاربری را وارد کنید" a:placeholder="نام کاربری"
 				value="#{loginBean.username}"></h:inputText>
 			<u:watermark for="username" value="Username *" />
 			<h:message for="username" />
+
 
 			<h:inputSecret id="password" styleClass="input" required="true"
 				requiredMessage="رمز را وارد کنید" a:placeholder="رمز"
@@ -79,7 +100,6 @@
 			<h:commandButton id="loginButton" value="ورود"
 				styleClass="commandButton" action="#{loginBean.doLogin}"></h:commandButton>
 			<h:message color="red" for="loginButton" />
-
 			<p class="message">
 				هنوز ثبت نام نکرده اید؟ <a href="#">ساخت اکانت</a>
 			</p>
