@@ -24,6 +24,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 
+
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
  
@@ -74,7 +75,9 @@ public class DBHandler {
 		return instance;
 	}
 	
-	private DBHandler() {}
+	private DBHandler() {
+		initDB();
+	}
 	
 	static void initDB()
 	{
@@ -145,6 +148,8 @@ public class DBHandler {
 	
 	public static void insertUser(User u) throws Exception
 	{
+		
+		System.out.println("enter");
 		BasicDBObject query = new BasicDBObject("_id", u.getName()).append("password", u.getPassword());
 		DBCursor cursor = users.find(query);
 		try {

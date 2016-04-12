@@ -56,17 +56,13 @@
 				</ul>
 			</div>
 			<br></br>
-
-			<h:form prependId="false">
-				<botDetect:jsfCaptcha id="exampleCaptcha"
-					binding="#{signUp.captcha}" />
-				<h:inputText id="captchaCodeTextBox" value="#{signUp.captchaCode}" />
-			</h:form>
 			<h:commandButton styleClass="commandButton" value="ساخت" action="#{signUp.signItUp}"></h:commandButton>
 			<p class="message">
 				ثبت نام کرده اید؟<a href="#">ورود</a>
 			</p>
 		</h:form>
+		
+		
 		<h:form class="login-form" id="myForm">
 			<h:inputText id="username" styleClass="input" required="true"
 				requiredMessage="نام کاربری را وارد کنید" a:placeholder="نام کاربری"
