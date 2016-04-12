@@ -35,9 +35,10 @@ public class LoginBean {
 	}	
 	public String doLogin(){
 		if(username.equals("admin")&& password.equals("admin")){
+			System.out.println("salam");
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			return "th";
+			return "index.xhtml";
 		}
 		else{
 			
@@ -50,9 +51,10 @@ public class LoginBean {
 	}
 
 	public String doLogout(){
+		System.out.println("logOut");
 		HttpSession hs = Util.getSession();
 		hs.invalidate();
-		return "/login.xhtml";
+		return "th";
 	}
 
 }

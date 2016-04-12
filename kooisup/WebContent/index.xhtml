@@ -21,14 +21,16 @@ xmlns:p="http://java.sun.com/jsf/core"
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
+            
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+          	       <span class="icon-bar"></span>
                     
-                </button>
-                <a class="navbar-brand page-scroll" href="flat-login-form/index.xhtml">شروع بازی</a>
+               </button>   
+               <h:commandButton styleClass="btn btn-primary btn-xl page-scroll" value="خروج" action="#{loginBean.doLogout}" />
+              
             </div>
         </div> 
         <!-- /.container-fluid -->
