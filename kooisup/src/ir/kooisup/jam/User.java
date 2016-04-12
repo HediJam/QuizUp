@@ -1,12 +1,13 @@
 package ir.kooisup.jam;
 public class User {
 	
-	public User(String name, String password, String email, String gender, String country){
+	public User(String name, String password, String email, String gender, String country,String uuid){
 		this.name = name;
 		this.password = password;
 		this.email = email;
 		this.gender = gender;
 		this.country = country;
+		this.confirmationCode = uuid;
 	}
 	
 	private String name;

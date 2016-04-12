@@ -11,11 +11,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class RegistrationListener {
+	
+	static String uuid;
 
-	public static void sendMail() {
+	public String getUuid() {
+		return uuid;
+	}
+
+	public static void sendMail(String mail) {
 
 		final String username = "kooisup.ir@gmail.com";
 		final String password = "d7100game";
+		
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -35,11 +42,11 @@ public class RegistrationListener {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("kooisup.ir"));
 			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse("hedieh_jam@live.com"));
+				InternetAddress.parse(mail));
 			message.setSubject("KooisUp-confirmation mail");
-			String uuid = UUID.randomUUID().toString();
+			uuid = UUID.randomUUID().toString();
 			message.setText("Hello"
-				+ "\n\n please click  http://localhost:8080/quizup/flat-login-form/index.xhtml?code=" + uuid);
+				+ "\n\n please click on " + "\n\n http://localhost:8080/quizup/flat-login-form/index.xhtml?code=" + uuid);
 
 			Transport.send(message);
 
