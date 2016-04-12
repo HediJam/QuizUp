@@ -24,5 +24,7 @@
 	<classpathentry kind="lib" path="E:/uni/az_narm/sw/bson-3.0.2.jar"/>
 	<classpathentry kind="lib" path="E:/uni/az_narm/sw/mongodb-driver-core-3.0.2.jar"/>
 	<classpathentry kind="lib" path="E:/uni/az_narm/sw/mongo-java-driver-3.0.2.jar"/>
+	<classpathentry kind="lib" path="E:/uni/az_narm/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="E:/uni/az_narm/lib/botdetect-4.0.alpha4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
