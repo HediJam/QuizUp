@@ -38,8 +38,8 @@ public class RegistrationListener {
 				InternetAddress.parse("hedieh_jam@live.com"));
 			message.setSubject("KooisUp-confirmation mail");
 			String uuid = UUID.randomUUID().toString();
-			message.setText("Dear Mail Crawler,"
-				+ "\n\n No spam to my email, please! http://localhost:8080/quizup/activate.xhtml?code=" + uuid);
+			message.setText("Hello"
+				+ "\n\n please click  http://localhost:8080/quizup/flat-login-form/index.xhtml?code=" + uuid);
 
 			Transport.send(message);
 
