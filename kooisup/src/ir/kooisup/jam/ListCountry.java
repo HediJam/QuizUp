@@ -1,7 +1,7 @@
 package ir.kooisup.jam;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
@@ -14,13 +14,11 @@ public class ListCountry{
 	private Map<String,String> countries;
 	
 	public ListCountry(){
-		System.out.println("********");
 		countries = new HashMap<String, String>();
 		run();
 	}
 	
 	public void run(){
-		System.out.println("--------------------------------------");
 		String[] locales = Locale.getISOCountries();
 		
 		for (String countryCode : locales ) {
@@ -30,10 +28,8 @@ public class ListCountry{
 		}
 	}
 	
-	public Collection<String> getCountries() {
-		run();
-		System.out.println("--> "+countries.size());
-        return countries.values();
+	public List<String> getCountries() {
+        return (List<String>) countries.values();
     }
 	
 }
