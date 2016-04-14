@@ -1,27 +1,22 @@
-<HTML
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:p="http://java.sun.com/jsf/core"
->
-<h:head><title>Login Page</title></h:head>
-<h:body>
-<h:form>
-	<table>
-		<tr>
-		<td><h:outputText value="enter username"></h:outputText></td>
-		<td><h:outputText value=":"></h:outputText></td>
-		<td><h:inputText id="username" value="#{loginBean.username}"></h:inputText></td>
-		</tr>
-		
-		<tr>
-		<td><h:outputText value="password"></h:outputText></td>
-		<td><h:outputText value=":"></h:outputText></td>
-		<td><h:inputSecret id="password" value="#{loginBean.password}"></h:inputSecret></td>
-		</tr>
-		
-		<tr><td><h:commandButton value="Login" action="#{loginBean.doLogin}"></h:commandButton></td></tr>
-	</table>
-		<font color="red"><h:messages></h:messages></font>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<h:body>
+		<h:form>
+			username: <h:inputText id="username" value="#{user.userName}"/>
+			<h:message for="username"></h:message>
+			<br/><br/>
+			password: <h:inputSecret id="password" value="#{user.password}"/>
+			<h:message for="password"></h:message>
+			<br/><br/>
+			<h:commandButton value="Login" action="#{user.login}"/>
+	        <br/><br/>
+	        <h:messages />
 		</h:form>
-		</h:body>
-</HTML>
-		
+	</h:body>
+</html>

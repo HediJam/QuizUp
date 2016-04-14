@@ -38,7 +38,8 @@ public class LoginBean {
 			System.out.println("salam");
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			return "index.xhtml";
+			//return "/index.xhtml";
+			return "/WebPage/index.html";
 		}
 		else{
 			
@@ -54,7 +55,7 @@ public class LoginBean {
 		System.out.println("logOut");
 		HttpSession hs = Util.getSession();
 		hs.invalidate();
-		return "th";
+		return "WebPage/home.xhtml";
 	}
 
 }
