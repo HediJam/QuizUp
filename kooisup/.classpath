@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre8">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
@@ -19,7 +19,8 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/SARIR/Downloads/jaf-1_0_2-upd2.zip"/>
-	<classpathentry kind="lib" path="C:/Users/SARIR/Downloads/javax.mail-1.5.5.jar"/>
+	<classpathentry kind="lib" path="F:/tools/eclipse-jee-mars-2-win32-x86_64/lib/jaf-1_0_2-upd2.zip"/>
+	<classpathentry kind="lib" path="F:/tools/eclipse-jee-mars-2-win32-x86_64/lib/javax.mail-1.5.5.jar"/>
+	<classpathentry kind="lib" path="F:/tools/mojarra-2.2.0-FCS-binary/mojarra-2.2.0-FCS/lib/javax.faces.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
