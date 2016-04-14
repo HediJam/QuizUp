@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/WebPage/index.html=UTF-8
+encoding//WebContent/activate.xhtml=UTF-8
 encoding//WebContent/flat-login-form/index.xhtml=UTF-8
 encoding//WebContent/index.xhtml=UTF-8
 encoding//src/ir/kooisup/jam/LoginBean.java=UTF-8
+encoding//src/ir/kooisup/jam/RegistrationListener.java=UTF-8
+encoding//src/ir/kooisup/jam/SignUp.java=UTF-8

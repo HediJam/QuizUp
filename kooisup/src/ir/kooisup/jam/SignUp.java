@@ -6,19 +6,37 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import botdetect.web.jsf.JsfCaptcha;
 
+
 @ManagedBean
 @SessionScoped
 public class SignUp {
 	public SignUp(){}
 	
+	public String getRePassword() {
+		return rePassword;
+	}
+
+	public void setRePassword(String rePassword) {
+		this.rePassword = rePassword;
+	}
+
+	private String username;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	private String rePassword;
 	private String name;
 	private String password;
 	private String email;
 	private String gender;
 	private String country;
-	
 	private JsfCaptcha captcha;
 	private String captchaCode;
+	private String uuid;
 	
 	public String getCaptchaCode() {
 		return captchaCode;
@@ -71,10 +89,52 @@ public class SignUp {
 	}
 	
 	public String signItUp(){
+		
+		
+		System.out.println(name);
+		System.out.println(captchaCode);
+		System.out.println(country);
+		System.out.println(gender);
+		System.out.println(username);
+		System.out.println(email);
 		//connect to DB
-		User u = new User(name, password, email, gender, country);
-		if (captcha.validate(captchaCode))
+		RegistrationListener.sendMail(email);
+		String uuid = RegistrationListener.uuid; 
+		User u = new User(name, password, email,"ssaf","asdff",uuid);
+		System.out.println(name+password);
+		try {
+			System.out.println(name);
+			System.out.println(u.getName());
+			DBHandler.getInstance().insertUser(u);
+			System.out.println("djsnfjsd" + DBHandler.getInstance().existUser(name, password));
+		}catch(Exception e){
+			
+		}
+		System.out.println("horaaaaaaaaaaaa");
+		/*if (captcha.validate(captchaCode)){
+			try {
+				DBHandler.getInstance().insertUser(u);
+			} catch (Exception e) {
+				if (e.getMessage().equals("code1")){
+		            FacesContext.getCurrentInstance().addMessage(
+		                    null,
+		                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+		                            "ایمیل وارد شده قبلا در سیستم ثبت شده است.",
+		                            "Please enter correct username and Password"));
+				}
+				else if (e.getMessage().equals("code2")){
+		            FacesContext.getCurrentInstance().addMessage(
+		                    null,
+		                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+		                            "نام کاربری قبلا در سیستم ثبت شده است.",
+		                            "Please enter correct username and Password"));
+				}
+				else {
+					
+				}
+			}
 			return "admin";
+		}*/
 		return "index";
 	}
 	

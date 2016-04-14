@@ -35,11 +35,11 @@ public class LoginBean {
 	}	
 	public String doLogin(){
 		if(username.equals("admin")&& password.equals("admin")){
-			System.out.println("salam");
+			//System.out.println("salam");
+			//RegistrationListener.sendMail();	
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			//return "/index.xhtml";
-			return "/WebPage/index.html";
+			return "/WebPage/home.xhtml";
 		}
 		else{
 			
@@ -55,7 +55,13 @@ public class LoginBean {
 		System.out.println("logOut");
 		HttpSession hs = Util.getSession();
 		hs.invalidate();
-		return "WebPage/home.xhtml";
+		return "/index.xhtml";
+	}
+	
+	public String test(){
+		System.out.println("logOutljdgkjfsbgnljsnglksdngksdnglkds");
+
+		return "/index.xhtml";
 	}
 
 }
