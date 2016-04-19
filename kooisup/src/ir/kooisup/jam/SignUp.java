@@ -5,8 +5,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import botdetect.web.jsf.JsfCaptcha;
-
-
 @ManagedBean
 @SessionScoped
 public class SignUp {
@@ -98,15 +96,16 @@ public class SignUp {
 		System.out.println(username);
 		System.out.println(email);
 		//connect to DB
-		RegistrationListener.sendMail(email);
+		RegistrationListener.sendMail("hedieh_jam@live.com");
+		RegistrationListener.sendMail("sjfjsa");
 		String uuid = RegistrationListener.uuid; 
 		User u = new User(name, password, email,"ssaf","asdff","hghgh");
 		System.out.println(name+password);
 		try {
 			System.out.println(name);
-			System.out.println(u.getName());
-			DBHandler.getInstance().insertUser(u);
-			System.out.println("djsnfjsd" + DBHandler.getInstance().existUser(name, password));
+			//System.out.println(u.getName());
+			//DBHandler.getInstance().insertUser(u);
+			//System.out.println("djsnfjsd" + DBHandler.getInstance().existUser(name, password));
 		}catch(Exception e){
 			
 		}
