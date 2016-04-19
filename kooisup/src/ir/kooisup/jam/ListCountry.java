@@ -1,5 +1,6 @@
 package ir.kooisup.jam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -23,13 +24,17 @@ public class ListCountry{
 		
 		for (String countryCode : locales ) {
 			Locale obj = new Locale("", countryCode);
-			System.out.println(obj.getDisplayCountry());
+			//System.out.println(obj.getDisplayCountry());
 			countries.put(obj.getCountry(), obj.getDisplayCountry());
 		}
 	}
 	
+//	public List<String> getCountries() {
+//        return (List<String>) countries.values();
+//    }
 	public List<String> getCountries() {
-        return (List<String>) countries.values();
+		
+        return (List<String>) new ArrayList<String>( countries.values());
     }
 	
 }
