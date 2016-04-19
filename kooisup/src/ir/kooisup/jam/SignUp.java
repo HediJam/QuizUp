@@ -100,7 +100,7 @@ public class SignUp {
 		//connect to DB
 		RegistrationListener.sendMail(email);
 		String uuid = RegistrationListener.uuid; 
-		User u = new User(name, password, email,"ssaf","asdff",uuid);
+		User u = new User(name, password, email,"ssaf","asdff","hghgh");
 		System.out.println(name+password);
 		try {
 			System.out.println(name);

@@ -1,0 +1,118 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:u="http://primefaces.org/ui" xmlns:botDetect="botDetectFacelets">
+<h:head>
+<meta charset="UTF-8"/>
+	<title>Login Page</title>
+	<h:outputStylesheet name="css/reset.css" />
+	<h:outputStylesheet name="css/style.css" />
+	<h:outputStylesheet name="css/bootstrap.min.css" />
+	<h:outputStylesheet name="fonts/myFonts.css" />
+	<h:outputStylesheet name="css/animate.min.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</h:head>
+
+<h:body>
+	<div class="container">
+		<div class="info">
+			<h1>ظپط±ظ… ط«ط¨طھ ظ†ط§ظ…</h1>
+		</div>
+	</div>
+	<div class="form">
+		<div class="thumbnail">
+			<h:graphicImage name="img/logo5.png" />
+		</div>
+		<h:form class="register-form">
+
+			<h:inputText id="username" styleClass="input"
+				a:placeholder="ظ†ط§ظ… ع©ط§ط±ط¨ط±غŒ" value="#{signUp.username}"
+				required="true" requiredMessage="ظ†ط§ظ… ع©ط§ط±ط¨ط±غŒ ط±ط§ ظˆط§ط±ط¯ ع©ظ†غŒط¯"></h:inputText>
+				<u:watermark for="username" value="Username *" />
+			<h:message for="username" />
+			<h:inputText id="name" styleClass="input"
+				a:placeholder="ظ†ط§ظ…  ظˆ ظ†ط§ظ… ط®ط§ظ†ظˆط§ط¯ع¯غŒ" value="#{signUp.name}"
+				required="true" requiredMessage="ظ†ط§ظ… ظˆ ظ†ط§ظ… ط®ط§ظ†ظˆط§ط¯ع¯غŒ ط±ط§ ظˆط§ط±ط¯ ع©ظ†غŒط¯"></h:inputText>
+			<h:message for="name" />
+			<h:inputSecret id="password" styleClass="input" a:placeholder="ط±ظ…ط²"
+				required="true" requiredMessage="ط±ظ…ط² ط±ط§ ظˆط§ط±ط¯ ع©ظ†غŒط¯"
+				value="#{signUp.password}"></h:inputSecret>
+			<h:message for="password" />
+			<h:inputSecret id="rep_password" styleClass="input"
+				a:placeholder="طھع©ط±ط§ط± ط±ظ…ط²" required="true"
+				requiredMessage="طھع©ط±ط§ط± ط±ظ…ط² ط±ط§ ظˆط§ط±ط¯ ع©ظ†غŒط¯"
+				value="#{signUp.rePassword}"></h:inputSecret>
+			<h:message for="rep_password" />
+			<h:inputText id="mail" styleClass="input" a:placeholder="ط§غŒظ…غŒظ„"
+				required="true" size="40" requiredMessage="ظˆط±ظˆط¯ ط§غŒظ…غŒظ„ ط±ط§ ظˆط§ط±ط¯ ع©ظ†غŒط¯"
+				validatorMessage="ط§غŒظ…غŒظ„ ظ†ط§ظ…ط¹طھط¨ط± ط§ط³طھ" value="#{signUp.email}">
+				<p:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			</h:inputText>
+			<h:message for="mail" />
+
+			<h:selectOneMenu value="#{signUp.gender}" styleClass="commandButton">
+				<p:selectItem styleClass="input" itemValue="woman" itemLabel="ط²ظ†" />
+				<p:selectItem styleClass="input" itemValue="man" itemLabel="ظ…ط±ط¯" />
+			</h:selectOneMenu>
+
+			<br></br>
+			<br></br>
+			<h:selectOneMenu value="#{signUp.country}" styleClass="commandButton">
+				<p:selectItem itemValue="iran"  styleClass="input" itemLabel="ط§غŒط±ط§ظ†" />
+				<p:selectItem itemValue="ger" styleClass="input" itemLabel="ط¢ظ„ظ…ط§ظ†" />
+			</h:selectOneMenu>
+
+			<br></br>
+			<br></br>
+			<h:form prependId="false">
+				<botDetect:jsfCaptcha id="exampleCaptcha"
+					binding="#{signUp.captcha}" />
+				<br></br>
+				<h:inputText id="captchaCodeTextBox" value="#{signUp.captchaCode}"
+					styleClass="input" />
+				<br></br>
+
+			</h:form>
+			<h:commandButton styleClass="commandButton" value="ط«ط¨طھ ظ†ط§ظ…" action="#{signUp.signItUp}"></h:commandButton>
+			<p class="message">
+				ط«ط¨طھ ظ†ط§ظ… ع©ط±ط¯ظ‡ ط§غŒط¯طں<a href="#">ظˆط±ظˆط¯</a>
+			</p>
+
+		</h:form>
+		<h:commandButton value="ط«ط¨طھ ظ†ط§ظ…" action="#{loginBean.doLogin}"></h:commandButton>
+		<h:form class="login-form" id="myForm">
+			<h:inputText id="username" styleClass="input" required="true"
+				requiredMessage="ظ†ط§ظ… ع©ط§ط±ط¨ط±غŒ ط±ط§ ظˆط§ط±ط¯ ع©ظ†غŒط¯" a:placeholder="ظ†ط§ظ… ع©ط§ط±ط¨ط±غŒ"
+				value="#{loginBean.username}"></h:inputText>
+			<u:watermark for="username" value="Username *" />
+			<h:message for="username" />
+
+
+			<h:inputSecret id="password" styleClass="input" required="true"
+				requiredMessage="ط±ظ…ط² ط±ط§ ظˆط§ط±ط¯ ع©ظ†غŒط¯" a:placeholder="ط±ظ…ط²"
+				value="#{loginBean.password}">
+			</h:inputSecret>
+			<u:watermark for="password" value="password *" />
+			<h:message for="password" />
+			<h:commandButton id="loginButton" value="ظˆط±ظˆط¯"
+				styleClass="commandButton" action="#{loginBean.doLogin}"></h:commandButton>
+			<h:message color="red" for="loginButton" />
+			<p class="message">
+				ظ‡ظ†ظˆط² ط«ط¨طھ ظ†ط§ظ… ظ†ع©ط±ط¯ظ‡ ط§غŒط¯طں <a href="#">ط³ط§ط®طھ ط§ع©ط§ظ†طھ</a>
+			</p>
+		</h:form>
+	</div>
+	<script
+		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+	<script src="js/index.js"></script>
+
+
+
+
+</h:body>
+</html>

@@ -131,7 +131,7 @@ public class DBHandler {
 	//mail unique
 	public static void main(final String[] args) {
 		initDB();
-		User u = new User("eeee", "1", "c.gmail.com", "FM", "Iran","jj");
+		User u = new User("eeee", "1", "FM","hgh", "Iran","jj");
 		try {
 			insertUser(u);
 		} catch (Exception e) {
@@ -168,8 +168,8 @@ public class DBHandler {
                 .append("gender", u.getGender())
                 .append("email",u.getEmail())
                 .append("country", u.getCountry())
-                .append("mailConfirmed", false)
-                .append("confirmationCode",u.getConfirmationCode());
+                .append("mailConfirmed", false);
+      
         try {
         	users.insert(doc);
         } catch(MongoException ex) {

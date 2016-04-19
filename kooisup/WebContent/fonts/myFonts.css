@@ -1,0 +1,21 @@
+﻿body { 
+
+}
+
+@font-face {
+        font-family: 'BBardiya';
+                src:url(../fonts/BBardiya.eot) format(‘eot’),
+                url(../fonts/BBardiya.woff) format('woff'),
+                url(../fonts/BBardiya.ttf) format(‘truetype’);
+    }
+    
+@font-face {
+    font-family: 'Morvarid';
+    src: url(../fonts/BMorvarid.eot) format(‘eot’),
+            url(../fonts/BMorvarid.woff) format('woff'),
+            url(../fonts/BMorvarid.ttf) format(‘truetype’);
+}
+
+.Font{
+    font-family:BBardiya;
+}
