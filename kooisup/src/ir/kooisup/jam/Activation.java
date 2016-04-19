@@ -1,49 +1,36 @@
 package ir.kooisup.jam;
 
-import java.util.Map;
-
-import javax.annotation.*;
-import javax.faces.bean.ManagedProperty;
+import javax.annotation.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-
 
 @ManagedBean
 @RequestScoped
 public class Activation {
-
-    private String key;
-    private boolean valid = false;
-
-  
-    public void onload() {
-    
-      System.out.println(key);
-      //check with db
-      valid = true; // And auto-login if valid?
-    }
-
-
-	public String getKey() {
-		return key;
+	
+	private String code;
+	private String mail;
+	
+	public String getCode() {
+		return code;
 	}
 
-
-	public void setKey(String key) {
-		this.key = key;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-
-	public boolean isValid() {
-		return valid;
+	public String getMail() {
+		return mail;
 	}
 
-
-	public void setValid(boolean valid) {
-		this.valid = valid;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
-    // ...
-    
-    
+	public void onload(){
+		System.out.println("activation code is" + code);
+		System.out.println("activation mail is" + mail);
+		DBHandler.getInstance().active(mail, code);
+		System.out.println("active shod!");
+	}
+
 }

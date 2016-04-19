@@ -1,71 +1,19 @@
-<HTML
+<html
 xmlns:h="http://java.sun.com/jsf/html"
-xmlns:p="http://java.sun.com/jsf/core"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns="http://www.w3.org/1999/xhtml"
 >
-<h:head>
 
 
-    <title>kooisup</title>
+<f:metadata>
+    <f:viewParam name="code" value="#{activation.code}" />
+    <f:viewParam name="mail" value="#{activation.mail}" />
+    <f:viewAction action="#{activation.onload}" />
+</f:metadata>
 
-    <!-- Bootstrap Core CSS -->
-    <h:outputStylesheet name="css/bootstrap.min.css" />
-    <h:outputStylesheet name="fonts/myFonts.css" />
-    <h:outputStylesheet name="css/animate.min.css" />
-    <h:outputStylesheet name="css/creative.css"/>
-    
-</h:head>
-
-<h:body id="page-top">
-
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-            
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-          	       <span class="icon-bar"></span>
-               </button>   
-            </div>
-        </div> 
-        <!-- /.container-fluid -->
-    </nav>
-
-    <header>
-        <div class="header-content">
-            <div class="header-content-inner">
-            	<h:graphicImage name="img/logo5.png"/>
-                <h1 class="Font">برحسب علایق خود بازی کنید</h1>
-                <hr></hr>
-                	<p>موضاعات متنوع و جذاب</p>
-                	<p>به صورت آنلاین با دوستانتان بازی کنید</p>
-                	<p>افرادی که شبیه شما هستند را پیدا کنید و با آنها دوست شوید</p>
-                
-                <a href="flat-login-form/index.xhtml" class="btn btn-primary btn-xl page-scroll">ورود</a>
-            </div>
-        </div>
-    </header>
-
-
-
-		
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
-    <script src="js/jquery.fittext.js"></script>
-    <script src="js/wow.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="js/creative.js"></script>
-
-</h:body>
-</HTML>
-
+<h:head><title>Login Page</title></h:head>
+<h:body>
+<h:outputFormat>login bashe</h:outputFormat>
+		</h:body>
+</html>

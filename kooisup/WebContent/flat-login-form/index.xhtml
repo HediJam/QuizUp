@@ -1,78 +1,97 @@
 ﻿<!DOCTYPE html>
 <html xmlns:h="http://xmlns.jcp.org/jsf/html"
-		xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-		xmlns:f="http://xmlns.jcp.org/jsf/core"
-		xmlns:p="http:/primefaces.org/ui"
- 		xmlns:botDetect="botDetectFacelets">
-	<h:head>
-	    <meta charset="UTF-8"/>
-	    	<title>فرم ورود</title>
-	        
-	    <link rel="stylesheet" href="css/reset.css"/>
-	    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'/>
-		<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Montserrat:400,700'/>
-		<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'/>
-	 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-	 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="css/style.css"/>
-		<link rel="stylesheet" href="../fonts/myFonts.css"/>
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http:/primefaces.org/ui" xmlns:botDetect="botDetectFacelets">
 
-	</h:head>
+<h:head>
+	<meta charset="UTF-8" />
+	<title>فرم ورود</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel='stylesheet prefetch'
+		href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' />
+	<link rel='stylesheet prefetch'
+		href='http://fonts.googleapis.com/css?family=Montserrat:400,700' />
+	<link rel='stylesheet prefetch'
+		href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' />
+	<link rel="stylesheet"
+		href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="../fonts/myFonts.css" />
 
-	<h:body>
-	
-		<div class="container">
-		    <div class="info">
-		        <h1 class="Font">خوش آمدید</h1>
-		    </div>
+</h:head>
+
+<h:body>
+
+	<div class="container">
+		<div class="info">
+			<h1 class="Font">خوش آمدید</h1>
 		</div>
-		<div class="form" >
-		    <div class="thumbnail"><img src="../img/logo5.png" /></div>
-		    <h:form class="register-form" id="registeration">
-		        <h:inputText type="text" a:placeholder="نام" value="#{signUp.username}"/>
-		        <h:inputSecret type="password" a:placeholder="رمز" value="#{signUp.password}"/>
-		        <h:inputSecret type="password" a:placeholder="تکرار رمز" value="#{signUp.password}"/>
-		        <h:inputText type="text" a:placeholder="ایمیل" value="#{signUp.email}"/>
-		        
-		        
-		        <h:selectOneMenu value="#{signUp.gender}" label="" class="input">
-   				<f:selectItem itemValue="woman" itemLabel="زن" />
-   				<f:selectItem itemValue="man" itemLabel="مرد" />	   							
-				</h:selectOneMenu>
-				
-				
-		        <br/>
-		        <h:selectOneMenu value="#{signUp.country}" class="input">
-   				<f:selectItems value="#{listCountry.countries}" />   					   							
-				</h:selectOneMenu>
-		        
-		        <br/>
-		        <br/>   
-				<botDetect:jsfCaptcha id="exampleCaptcha"
-					binding="#{signUp.captcha}" />
-				<br></br>
-				<h:inputText id="captchaCodeTextBox" value="#{signUp.captchaCode}"
-					placeholder="عبارت نشان داده شده در تصویر" styleClass="input" />
-				<br></br>
+	</div>
+	<div class="form">
+		<div class="thumbnail">
+			<img src="../img/logo5.png" />
+		</div>
+		<h:form class="register-form" id="registeration">
+			<h:inputText type="text" a:placeholder="نام"
+				value="#{signUp.username}" />
+			<h:inputSecret type="password" a:placeholder="رمز"
+				value="#{signUp.password}" />
+			<h:inputSecret type="password" a:placeholder="تکرار رمز"
+				value="#{signUp.password}" />
+			<h:inputText type="text" a:placeholder="ایمیل"
+				value="#{signUp.email}" />
 
-		        <h:commandButton  value="ثبت نام" class="button" action="#{signUp.signItUp}"/>
-		        
-		        <p class="message">ثبت نام کرده اید؟ <a href="#">ورود</a></p>
-		        <p class="message" id="signupButton"></p>
-		    </h:form>
-		    
-		    <h:form class="login-form">
+
+			<h:selectOneMenu value="#{signUp.gender}" label="" class="input">
+				<f:selectItem itemValue="woman" itemLabel="زن" />
+				<f:selectItem itemValue="man" itemLabel="مرد" />
+			</h:selectOneMenu>
+
+
+			<br />
+			<h:selectOneMenu value="#{signUp.country}" class="input">
+				<f:selectItems value="#{listCountry.countries}" />
+			</h:selectOneMenu>
+
+			<br />
+			<br />
+			<botDetect:jsfCaptcha id="exampleCaptcha" binding="#{signUp.captcha}" />
+			<br></br>
+			<h:inputText id="captchaCodeTextBox" value="#{signUp.captchaCode}"
+				placeholder="عبارت نشان داده شده در تصویر" styleClass="input" />
+			<br></br>
+
+			<h:commandButton value="ثبت نام" class="button"
+				action="#{signUp.signItUp}" />
+			<p class="message" id="signupButton"></p>
+			<p class="message">
+				ثبت نام کرده اید؟ <a href="#">ورود</a>
+			</p>
+
+		</h:form>
+
+		<h:form class="login-form">
 			<!-- use JSF here -->
-		        <h:inputText type="text" a:placeholder="ایمیل"/>
-		        <h:inputSecret type="password" a:placeholder="رمز" value="#{signUp.password}"/>
-		        <h:commandButton value="ورود" class="button" />
-		        <h:messages/>
-		        <p class="message">هنوز ثبت نام نکردید؟ <a href="#">ساخت اکانت</a></p>
-		    </h:form>
-		</div>
-        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-        <script src="js/index.js"></script>
-	    
-	</h:body>
+			<h:inputText type="text" a:placeholder="نام کاربری"
+				value="#{loginBean.username}" />
+			<h:inputSecret type="password" a:placeholder="رمز"
+				value="#{loginBean.password}" />
+			<h:commandButton value="ورود" class="button"
+				action="#{loginBean.doLogin}" />
+			<h:messages />
+			<p class="message">
+				هنوز ثبت نام نکردید؟ <a href="#">ساخت اکانت</a>
+			</p>
+		</h:form>
+	</div>
+	<script
+		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src="js/index.js"></script>
+
+</h:body>
 </html>

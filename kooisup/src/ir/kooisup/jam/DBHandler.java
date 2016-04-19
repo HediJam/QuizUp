@@ -176,8 +176,12 @@ public class DBHandler {
 		return true;
 	}
 	
+	boolean active(String email,String code){
+		return true;
+	}
 	
 	
+	// bayad check koni ke comfirmedmail=1 bashe
 	static boolean existUser(String name, String password) {
 		BasicDBObject query = new BasicDBObject("_id", name).append("password", password);
 		DBCursor cursor = users.find(query);

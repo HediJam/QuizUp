@@ -4,6 +4,12 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:p="http://java.sun.com/jsf/core"
 >
 
+<p:metadata>
+    <p:viewParam name="code" value="#{activation.code}" />
+    <p:viewParam name="mail" value="#{activation.mail}" />
+    <p:viewAction action="#{activation.onload}" />
+</p:metadata>
+
 <h:head>
 
     <meta charset="utf-8"></meta>
