@@ -78,20 +78,8 @@ public class DBHandler {
 	private DBHandler() {
 		initDB();
 	}
-	
 	static void initDB()
-	{
-        // connect to the local database server
-		
-//		MongoClient mongoClient = new MongoClient();
-
-        /*
-        // Authenticate - optional
-        MongoCredential credential = MongoCredential.createMongoCRCredential(userName, database, password);
-        MongoClient mongoClient = new MongoClient(new ServerAddress(), Arrays.asList(credential));
-        */
-
-       
+	{       
         MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
         users = db.getCollection("users");
@@ -109,20 +97,16 @@ public class DBHandler {
         	  DBObject c = cursor.curr();
         	  if(c.get("confirmationCode").equals(confirmationCode) &&  ((Boolean) c.get("mailConfirmed"))==false)
         	  {
-        		  System.out.println("change");
         		  BasicDBObject set = new BasicDBObject("$set", new BasicDBObject("mailConfirmed", true));
         		  users.update(c, set);
         		  return true;
         	  }
         	  return false;
         	}
-          //System.out.println("username of password wrong");
-          //throw;
       } finally {
           cursor.close();
       }
       return false;
-		//if (user.mailconfirm==false && code == user.code) return true
 		
 	}
 	
@@ -130,10 +114,10 @@ public class DBHandler {
 	
 	//mail unique
 	public static void main(final String[] args) {
-		initDB();
+		
 		User u = new User("eeee", "1", "FM","hgh", "Iran","jj");
 		try {
-			insertUser(u);
+			getInstance().insertUser(u);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -146,7 +130,7 @@ public class DBHandler {
         	
 	}
 	
-	public static void insertUser(User u) throws Exception
+	public void insertUser(User u) throws Exception
 	{
 		
 		System.out.println("enter");
@@ -180,6 +164,19 @@ public class DBHandler {
         }
         
 	}
+	
+	
+	
+	
+	//TODO for ayda
+	boolean isUniqueUsername(String username){
+		return true;
+	}
+	boolean isUniqueEmail(String email){
+		return true;
+	}
+	
+	
 	
 	static boolean existUser(String name, String password) {
 		BasicDBObject query = new BasicDBObject("_id", name).append("password", password);

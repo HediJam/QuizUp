@@ -1,5 +1,7 @@
 package ir.kooisup.jam;
 
+import java.util.UUID;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -80,6 +82,7 @@ public class SignUp {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	public String signItUp(){
 		
 		
@@ -89,6 +92,35 @@ public class SignUp {
 		System.out.println(gender);
 		System.out.println(username);
 		System.out.println(email);
+		
+		try {
+			
+			DBHandler db = DBHandler.getInstance();
+			if(!db.isUniqueUsername(username)){
+				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("نام کاربری تکراری"));
+				return "chert";
+			}
+			if(!db.isUniqueEmail(email)){
+				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("ایمیل تکراری"));
+				return "chert";
+			}
+			if (captcha.validate(captchaCode)){
+				String uuid = UUID.randomUUID().toString();
+				RegistrationListener.sendMail(email, uuid);
+				User u = new User(username, password, email, gender, country, uuid);
+				db.insertUser(u);
+				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("با مراجعه به ایمیل خود ثبت نامتان را نهایی کنید"));
+			}
+			else{
+				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("عبارت داخل تصویر درست وارد نشده است"));
+				return "chert";
+			}
+			
+		}catch(Exception e){
+			System.err.println("error in DB connection");
+		}
+		
+		
 		//connect to DB
 	/*	RegistrationListener.sendMail("hedieh_jam@live.com");
 		RegistrationListener.sendMail("sjfjsa");

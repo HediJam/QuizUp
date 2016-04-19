@@ -27,9 +27,9 @@
 		        <h1 class="Font">خوش آمدید</h1>
 		    </div>
 		</div>
-		<div class="form">
+		<div class="form" >
 		    <div class="thumbnail"><img src="../img/logo5.png" /></div>
-		    <h:form class="register-form">
+		    <h:form class="register-form" id="registeration">
 		        <h:inputText type="text" a:placeholder="نام" value="#{signUp.username}"/>
 		        <h:inputSecret type="password" a:placeholder="رمز" value="#{signUp.password}"/>
 		        <h:inputSecret type="password" a:placeholder="تکرار رمز" value="#{signUp.password}"/>
@@ -56,9 +56,10 @@
 					placeholder="عبارت نشان داده شده در تصویر" styleClass="input" />
 				<br></br>
 
-		        <h:commandButton value="ثبت نام" class="button" action="#{signUp.signItUp}"/>
+		        <h:commandButton  value="ثبت نام" class="button" action="#{signUp.signItUp}"/>
 		        
 		        <p class="message">ثبت نام کرده اید؟ <a href="#">ورود</a></p>
+		        <p class="message" id="signupButton"></p>
 		    </h:form>
 		    
 		    <h:form class="login-form">

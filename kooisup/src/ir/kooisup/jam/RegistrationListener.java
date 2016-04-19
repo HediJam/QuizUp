@@ -12,13 +12,8 @@ import javax.mail.internet.MimeMessage;
 
 public class RegistrationListener {
 	
-	static String uuid;
 
-	public String getUuid() {
-		return uuid;
-	}
-
-	public static void sendMail(String mail) {
+	public static void sendMail(String mail,String uuid) {
 
 		final String username = "kooisup.ir@gmail.com";
 		final String password = "d7100game";
@@ -44,7 +39,6 @@ public class RegistrationListener {
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(mail));
 			message.setSubject("KooisUp-confirmation mail");
-			uuid = UUID.randomUUID().toString();
 			message.setText("Hello"
 				+ "\n\n please click on " + "\n\n http://localhost:8080/quizup/flat-login-form/index.xhtml?code=" + uuid);
 
@@ -53,7 +47,7 @@ public class RegistrationListener {
 			System.out.println("Done");
 
 		} catch (MessagingException e) {
-			throw new RuntimeException(e);
+			System.err.println("invalid mail...." + mail);
 		}
 	}
 }
