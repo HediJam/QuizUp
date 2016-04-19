@@ -104,6 +104,10 @@ public class SignUp {
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("ایمیل تکراری"));
 				return "chert";
 			}
+			if(!password.equals(rePassword)){
+				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("تکرار رمز درست نیست"));
+				return "chert";
+			}
 			if (captcha.validate(captchaCode)){
 				String uuid = UUID.randomUUID().toString();
 				RegistrationListener.sendMail(email, uuid);
