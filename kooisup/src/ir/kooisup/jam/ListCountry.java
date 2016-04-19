@@ -28,11 +28,14 @@ public class ListCountry{
 		}
 	}
 	
+//	public List<String> getCountries() {
+//        return (List<String>) countries.values();
+//    }
 	public List<String> getCountries() {
+
 		List<String> list = new ArrayList<String>(countries.values());
 		java.util.Collections.sort(list);
         return list;
-        
     }
 	
 }
