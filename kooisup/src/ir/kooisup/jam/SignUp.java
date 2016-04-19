@@ -10,6 +10,17 @@ import botdetect.web.jsf.JsfCaptcha;
 public class SignUp {
 	public SignUp(){}
 	
+
+	private String username;
+	private String password;
+	private String rePassword;
+	private String email;
+	private String gender;
+	private String country;
+	private JsfCaptcha captcha;
+	private String captchaCode;
+	private String confirmationCode;
+	
 	public String getRePassword() {
 		return rePassword;
 	}
@@ -18,7 +29,6 @@ public class SignUp {
 		this.rePassword = rePassword;
 	}
 
-	private String username;
 	public String getUsername() {
 		return username;
 	}
@@ -26,15 +36,6 @@ public class SignUp {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	private String rePassword;
-	private String name;
-	private String password;
-	private String email;
-	private String gender;
-	private String country;
-	private JsfCaptcha captcha;
-	private String captchaCode;
-	private String uuid;
 	
 	public String getCaptchaCode() {
 		return captchaCode;
@@ -73,30 +74,23 @@ public class SignUp {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getName() {
-		return name;
-	}
 	public String getPassword() {
 		return password;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 	public String signItUp(){
 		
 		
-		System.out.println(name);
+		System.out.println("---------------------------");
 		System.out.println(captchaCode);
 		System.out.println(country);
 		System.out.println(gender);
 		System.out.println(username);
 		System.out.println(email);
 		//connect to DB
-		RegistrationListener.sendMail("hedieh_jam@live.com");
+	/*	RegistrationListener.sendMail("hedieh_jam@live.com");
 		RegistrationListener.sendMail("sjfjsa");
 		String uuid = RegistrationListener.uuid; 
 		User u = new User(name, password, email,"ssaf","asdff","hghgh");
@@ -136,18 +130,4 @@ public class SignUp {
 		}*/
 		return "index";
 	}
-	
-	public String login(){
-		if (name.equals("admin") & password.equals("admin")){
-            return "admin";
-        } else {
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            "Incorrect name and Passowrd",
-                            "Please enter correct username and Password"));
-            return "login";
-        }
-	}
-	
 }
