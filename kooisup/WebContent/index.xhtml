@@ -92,7 +92,8 @@ xmlns:p="http://java.sun.com/jsf/core"
                 	<p style="color:black; font-size:28px; font-weight:600;">افرادی که شبیه شما هستند را پیدا کنید و با آنها دوست شوید</p>
                 <!-- <p style="color:black; font-size:28px; font-weight:600;">!اطلاعات خود و دوستانتان را در رقابتی نفس گیر، در بازیی جذاب و پرهیجان به چالش بکشید</p> -->
                 <!--<a href="#" class="btn btn-primary btn-xl page-scroll Font">شروع بازی</a>-->
-            <a href="flat-login-form/index.xhtml" class="btn btn-primary btn-xl page-scroll">ورود</a>
+            <a href="flat-login-form/index.xhtml" class="btn btn-primary btn-xl page-scroll" style="display:#{loginBean.hide}">ورود</a>
+            <a href="activate.xhtml" class="btn btn-primary btn-xl page-scroll" style="display:#{loginBean.exit}">شروع بازی</a>
             </div>
         </div>
     </header>

@@ -14,6 +14,7 @@ public class LoginBean {
 	private String password;
 	private String username;
 	private String exit ="none";
+	private String hide = "";
 
 
 	public String getPassword() {
@@ -40,6 +41,7 @@ public class LoginBean {
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
 			exit="";
+			hide = "none";
 			//return "quizup/index.xhtml";
 			//return "th";
 			return "http://localhost:8080/quizup/index.xhtml";
@@ -55,11 +57,16 @@ public class LoginBean {
 		HttpSession hs = Util.getSession();
 		hs.invalidate();
 		exit="none";
+		hide = "";
 		return "/index.xhtml";
 	}
 
 	public String getExit(){
 		return exit;
+	}
+	
+	public String getHide(){
+		return hide;
 	}
 	
 	public String test() {
