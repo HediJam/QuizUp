@@ -39,11 +39,11 @@ public class RegistrationListener {
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(mail));
 			message.setSubject("KooisUp-confirmation mail");
-			message.setText("Hello"
-				+ "\n\n please click on " + "\n\n http://localhost:8080/quizup/index.xhtml?code=" + uuid + "&mail=" + mail);
-			
 			/*message.setText("Hello"
-					+ "\n\n please click on " + "\n\n http://www.kooisup.ir/index.xhtml?code=" + uuid + "&mail=" + mail);*/
+				+ "\n\n please click on " + "\n\n http://localhost:8080/quizup/index.xhtml?code=" + uuid + "&mail=" + mail);*/
+			
+			message.setText("Hello"
+					+ "\n\n please click on " + "\n\n http://www.kooisup.ir/index.xhtml?code=" + uuid + "&mail=" + mail);
 			Transport.send(message);
 			System.out.println("Done");
 
