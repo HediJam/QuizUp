@@ -48,8 +48,13 @@
 
 
       <h:selectOneMenu value="#{signUp.gender}" label="" class="input">
+<<<<<<< HEAD
         <f:selectItem itemValue="woman" itemLabel="زن" />
         <f:selectItem itemValue="man" itemLabel="مرد" />
+=======
+        <f:selectItem itemValue="female" itemLabel="زن" />
+        <f:selectItem itemValue="male" itemLabel="مرد" />
+>>>>>>> 9cc60fc3b0ce3181ecd1f849b709719c206bfa09
       </h:selectOneMenu>
 
 
@@ -66,16 +71,17 @@
         placeholder="عبارت نشان داده شده در تصویر" styleClass="input" />
       <br></br>
 
-      <h:commandButton value="ثبت نام" class="button"
-        action="#{signUp.signItUp}" />
+      <h:commandButton value="ثبت نام" class="button" action="#{signUp.signItUp}" />
       <p class="message" id="signupButton"></p>
       <p class="message">
-        ثبت نام کرده اید؟ <a href="#top">ورود</a>
+        ثبت نام کرده اید؟ <a href="#">ورود</a>
+
       </p>
 
     </h:form>
 
     <h:form class="login-form">
+
       <h:inputText type="text" a:placeholder="نام کاربری"
         value="#{loginBean.username}" />
       <h:inputSecret type="password" a:placeholder="رمز"

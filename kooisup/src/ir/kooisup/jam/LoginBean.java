@@ -1,11 +1,11 @@
 package ir.kooisup.jam;
 
-import java.util.Map;
+import java.io.IOException;
 
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,19 +15,9 @@ import javax.servlet.http.HttpSession;
 public class LoginBean {
 	private String password;
 	private String username;
-	private String uuid;
-	private String exit;
+	private String exit ="none";
+	private String hide = "";
 
-	private UIComponent loginButton;
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		System.out.println("miam tush");
-		this.uuid = uuid;
-	}
 
 	public String getPassword() {
 		return password;
@@ -38,42 +28,30 @@ public class LoginBean {
 	}
 
 	public String getUsername() {
-		username = "پریسا" ;
 		return username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	public UIComponent getLoginButton() {
-		return loginButton;
-	}
-
-	public void setLoginButton(UIComponent loginButton) {
-		this.loginButton = loginButton;
-	}
-
 	public String doLogin() {
 
 		HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
-		String value=request.getParameter("code");
-		System.out.println("uuid is++++++++++:" + value);
-		
-		System.out.println("uuid is:" + uuid);
-		if (username.equals("admin") && password.equals("admin")) {
-			// System.out.println("salam");
-			// RegistrationListener.sendMail();
+		DBHandler db = DBHandler.getInstance();
+		if(db.existConfirmedUser(username,password)){
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			return "/WebPage/home.xhtml";
+			exit="";
+			hide = "none";
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			try {
+				ec.redirect(ec.getRequestContextPath() + "/" + "index.xhtml");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "http://localhost:8080/quizup/index.xhtml";
 		} else {
-
-			// FacesMessage message = new FacesMessage("Invalid password
-			// length");
-			// FacesContext context = FacesContext.getCurrentInstance();
-			// context.addMessage(loginButton.getClientId(context), message);
 			FacesContext.getCurrentInstance().addMessage("myForm:loginButton",
 					new FacesMessage("اطلاعات ورودی صحیح نیست"));
 			return "th";
@@ -84,12 +62,17 @@ public class LoginBean {
 		System.out.println("logOut");
 		HttpSession hs = Util.getSession();
 		hs.invalidate();
+		exit="none";
+		hide = "";
 		return "/index.xhtml";
 	}
 
 	public String getExit(){
-		exit = "none";
 		return exit;
+	}
+	
+	public String getHide(){
+		return hide;
 	}
 	
 	public String test() {
@@ -97,11 +80,5 @@ public class LoginBean {
 
 		return "/index.xhtml";
 	}
-	
-	   public void onload() {
-		   
-		      System.out.println(uuid);
-
-		    }
 
 }

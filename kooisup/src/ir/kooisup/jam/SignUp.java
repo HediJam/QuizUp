@@ -92,21 +92,23 @@ public class SignUp {
 		System.out.println(gender);
 		System.out.println(username);
 		System.out.println(email);
+		System.out.println(password);
+		System.out.println(rePassword);
 		
 		try {
 			
 			DBHandler db = DBHandler.getInstance();
 			if(!db.isUniqueUsername(username)){
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("نام کاربری تکراری"));
-				return "chert";
+				return "#";
 			}
 			if(!db.isUniqueEmail(email)){
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("ایمیل تکراری"));
-				return "chert";
+				return "#";
 			}
 			if(!password.equals(rePassword)){
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("تکرار رمز درست نیست"));
-				return "chert";
+				return "#";
 			}
 			if (captcha.validate(captchaCode)){
 				String uuid = UUID.randomUUID().toString();
@@ -114,56 +116,17 @@ public class SignUp {
 				User u = new User(username, password, email, gender, country, uuid);
 				db.insertUser(u);
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("با مراجعه به ایمیل خود ثبت نامتان را نهایی کنید"));
+				return "#";
 			}
 			else{
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("عبارت داخل تصویر درست وارد نشده است"));
-				return "chert";
+				return "#";
 			}
 			
 		}catch(Exception e){
 			System.err.println("error in DB connection");
 		}
 		
-		
-		//connect to DB
-	/*	RegistrationListener.sendMail("hedieh_jam@live.com");
-		RegistrationListener.sendMail("sjfjsa");
-		String uuid = RegistrationListener.uuid; 
-		User u = new User(name, password, email,"ssaf","asdff","hghgh");
-		System.out.println(name+password);
-		try {
-			System.out.println(name);
-			//System.out.println(u.getName());
-			//DBHandler.getInstance().insertUser(u);
-			//System.out.println("djsnfjsd" + DBHandler.getInstance().existUser(name, password));
-		}catch(Exception e){
-			
-		}
-		System.out.println("horaaaaaaaaaaaa");
-		/*if (captcha.validate(captchaCode)){
-			try {
-				DBHandler.getInstance().insertUser(u);
-			} catch (Exception e) {
-				if (e.getMessage().equals("code1")){
-		            FacesContext.getCurrentInstance().addMessage(
-		                    null,
-		                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-		                            "ایمیل وارد شده قبلا در سیستم ثبت شده است.",
-		                            "Please enter correct username and Password"));
-				}
-				else if (e.getMessage().equals("code2")){
-		            FacesContext.getCurrentInstance().addMessage(
-		                    null,
-		                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-		                            "نام کاربری قبلا در سیستم ثبت شده است.",
-		                            "Please enter correct username and Password"));
-				}
-				else {
-					
-				}
-			}
-			return "admin";
-		}*/
 		return "index";
 	}
 }
