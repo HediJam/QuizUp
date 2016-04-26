@@ -16,6 +16,7 @@ public class LoginBean {
 	private String password;
 	private String username;
 	private String uuid;
+	private String exit;
 
 	private UIComponent loginButton;
 
@@ -37,6 +38,7 @@ public class LoginBean {
 	}
 
 	public String getUsername() {
+		username = "پریسا" ;
 		return username;
 	}
 
@@ -85,6 +87,11 @@ public class LoginBean {
 		return "/index.xhtml";
 	}
 
+	public String getExit(){
+		exit = "none";
+		return exit;
+	}
+	
 	public String test() {
 		System.out.println("logOutljdgkjfsbgnljsnglksdngksdnglkds");
 

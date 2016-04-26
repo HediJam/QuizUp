@@ -2,7 +2,8 @@
 <html xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http:/primefaces.org/ui" xmlns:botDetect="botDetectFacelets">
+	xmlns:p="http:/primefaces.org/ui"
+	xmlns:u="http://primefaces.org/ui" xmlns:botDetect="botDetectFacelets">
 
 <h:head>
 	<meta charset="UTF-8" />
@@ -37,14 +38,32 @@
 			<img src="../img/logo5.png" />
 		</div>
 		<h:form class="register-form" id="registeration">
-			<h:inputText type="text" a:placeholder="نام"
-				value="#{signUp.username}" />
-			<h:inputSecret type="password" a:placeholder="رمز"
-				value="#{signUp.password}" />
-			<h:inputSecret type="password" a:placeholder="تکرار رمز"
-				value="#{signUp.password}" />
-			<h:inputText type="text" a:placeholder="ایمیل"
-				value="#{signUp.email}" />
+			
+			<h:inputText id="username" styleClass="input"
+				a:placeholder="نام کاربری" value="#{signUp.username}"
+				required="true" requiredMessage="نام کاربری را وارد کنید"></h:inputText>
+				<u:watermark for="username" value="Username *" />
+			<h:message for="username" />
+			<h:inputText id="name" styleClass="input"
+				a:placeholder="نام  و نام خانوادگی" value="#{signUp.name}"
+				required="true" requiredMessage="نام و نام خانوادگی را وارد کنید"></h:inputText>
+			<h:message for="name" />
+			<h:inputSecret id="password" styleClass="input" a:placeholder="رمز"
+				required="true" requiredMessage="رمز را وارد کنید"
+				value="#{signUp.password}"></h:inputSecret>
+			<h:message for="password" />
+			<h:inputSecret id="rep_password" styleClass="input"
+				a:placeholder="تکرار رمز" required="true"
+				requiredMessage="تکرار رمز را وارد کنید"
+				value="#{signUp.rePassword}"></h:inputSecret>
+			<h:message for="rep_password" />
+			<h:inputText id="mail" styleClass="input" a:placeholder="ایمیل"
+				required="true" size="40" requiredMessage="ورود ایمیل را وارد کنید"
+				validatorMessage="ایمیل نامعتبر است" value="#{signUp.email}">
+				<p:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			</h:inputText>
+			<h:message for="mail" />
 
 
 			<h:selectOneMenu value="#{signUp.gender}" label="" class="input">
@@ -60,32 +79,41 @@
 
 			<br />
 			<br />
-			<botDetect:jsfCaptcha id="exampleCaptcha" binding="#{signUp.captcha}" />
-			<br></br>
-			<h:inputText id="captchaCodeTextBox" value="#{signUp.captchaCode}"
-				placeholder="عبارت نشان داده شده در تصویر" styleClass="input" />
-			<br></br>
+			<h:form prependId="false">
+				<botDetect:jsfCaptcha id="exampleCaptcha"
+					binding="#{signUp.captcha}" />
+				<br></br>
+				<h:inputText id="captchaCodeTextBox" value="#{signUp.captchaCode}"
+					styleClass="input" />
+				<br></br>
 
-			<h:commandButton value="ثبت نام" class="button"
-				action="#{signUp.signItUp}" />
-			<p class="message" id="signupButton"></p>
+			</h:form>
+			<h:commandButton styleClass="commandButton" value="ثبت نام" action="#{signUp.signItUp}"></h:commandButton>
 			<p class="message">
-				ثبت نام کرده اید؟ <a href="#">ورود</a>
+				ثبت نام کرده اید؟<a href="#">ورود</a>
 			</p>
 
 		</h:form>
+		<h:commandButton value="ثبت نام" action="#{loginBean.doLogin}"></h:commandButton>
+		<h:form class="login-form" id="myForm">
+			<h:inputText id="username" styleClass="input" required="true"
+				requiredMessage="نام کاربری را وارد کنید" a:placeholder="نام کاربری"
+				value="#{loginBean.username}"></h:inputText>
+			<u:watermark for="username" value="Username *" />
+			<h:message for="username" />
 
-		<h:form class="login-form">
-			<!-- use JSF here -->
-			<h:inputText type="text" a:placeholder="نام کاربری"
-				value="#{loginBean.username}" />
-			<h:inputSecret type="password" a:placeholder="رمز"
-				value="#{loginBean.password}" />
-			<h:commandButton value="ورود" class="button"
-				action="#{loginBean.doLogin}" />
-			<h:messages />
+
+			<h:inputSecret id="password" styleClass="input" required="true"
+				requiredMessage="رمز را وارد کنید" a:placeholder="رمز"
+				value="#{loginBean.password}">
+			</h:inputSecret>
+			<u:watermark for="password" value="password *" />
+			<h:message for="password" />
+			<h:commandButton id="loginButton" value="ورود"
+				styleClass="commandButton" action="#{loginBean.doLogin}"></h:commandButton>
+			<h:message color="red" for="loginButton" />
 			<p class="message">
-				هنوز ثبت نام نکردید؟ <a href="#">ساخت اکانت</a>
+				هنوز ثبت نام نکرده اید؟ <a href="#">ساخت اکانت</a>
 			</p>
 		</h:form>
 	</div>

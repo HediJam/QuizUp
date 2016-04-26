@@ -4,13 +4,8 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:p="http://java.sun.com/jsf/core"
 >
 
-<p:metadata>
-    <p:viewParam name="code" value="#{activation.code}" />
-    <p:viewParam name="mail" value="#{activation.mail}" />
-    <p:viewAction action="#{activation.onload}" />
-</p:metadata>
 
-<h:head>
+<h:head> 
 
     <meta charset="utf-8"></meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
@@ -52,12 +47,25 @@ xmlns:p="http://java.sun.com/jsf/core"
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
 
-            <div class="navbar-header Font">
+            <div id="exitButton" class="navbar-header Font" style="display:#{loginBean.exit} ">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                 <!-- class="navbar-brand page-scroll Font" href="flat-login-form/index.xhtml">ورود</a> -->
  				<h:commandButton class="navbar-brand page-scroll Font" value="خروج" action="#{loginBean.test}" />
 
             </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+            
+                <ul class="nav navbar-nav navbar-right Font" style="direction:rtl; display:#{loginBean.exit}"> 
+                    <li>
+                    	<i class="fa fa-user" aria-hidden="true"></i> 
+                    	
+                        <h:outputLabel id="usernameLabel" for="username" style="color:white; font-size:30px; text-align:rtl;"
+                       value="#{loginBean.username} گرامی خوش آمدید" />
+                    </li>
+                </ul>
+            </div>
+            
 
         </div> 
         <!-- /.container-fluid -->
@@ -70,7 +78,12 @@ xmlns:p="http://java.sun.com/jsf/core"
                 <!--<h1 class="Font">خوش آمدید</h1>-->
                 <hr/>
                 <!-- MOVE STYLE -->
-                <p style="color:black; font-size:28px; font-weight:600;">!اطلاعات خود و دوستانتان را در رقابتی نفس گیر، در بازیی جذاب و پرهیجان به چالش بکشید</p>
+                 <h1 class="Font" style="color:black; ">برحسب علایق خود بازی کنید</h1>
+                <hr></hr>
+                	<p style="color:black; font-size:28px; font-weight:600;">موضوعات متنوع و جذاب</p>
+                	<p style="color:black; font-size:28px; font-weight:600;">به صورت آنلاین با دوستانتان بازی کنید</p>
+                	<p style="color:black; font-size:28px; font-weight:600;">افرادی که شبیه شما هستند را پیدا کنید و با آنها دوست شوید</p>
+                <!-- <p style="color:black; font-size:28px; font-weight:600;">!اطلاعات خود و دوستانتان را در رقابتی نفس گیر، در بازیی جذاب و پرهیجان به چالش بکشید</p> -->
                 <!--<a href="#" class="btn btn-primary btn-xl page-scroll Font">شروع بازی</a>-->
             <a href="flat-login-form/index.xhtml" class="btn btn-primary btn-xl page-scroll">ورود</a>
             </div>
