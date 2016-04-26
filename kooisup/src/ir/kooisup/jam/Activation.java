@@ -6,10 +6,10 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class Activation {
-	
+
 	private String code;
 	private String mail;
-	
+
 	public String getCode() {
 		return code;
 	}
@@ -26,11 +26,13 @@ public class Activation {
 		this.mail = mail;
 	}
 
-	public void onload(){
+	public void onload() {
 		System.out.println("activation code is" + code);
 		System.out.println("activation mail is" + mail);
-		DBHandler.getInstance().active(mail, code);
-		System.out.println("active shod!");
+		if (code != null && mail != null) {
+			DBHandler.getInstance().confirmEmail(mail,code);
+			System.out.println("active shod!");
+		}
 	}
 
 }

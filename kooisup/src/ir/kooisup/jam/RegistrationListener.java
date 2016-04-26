@@ -41,9 +41,7 @@ public class RegistrationListener {
 			message.setSubject("KooisUp-confirmation mail");
 			message.setText("Hello"
 				+ "\n\n please click on " + "\n\n http://localhost:8080/quizup/index.xhtml?code=" + uuid + "&mail=" + mail);
-
 			Transport.send(message);
-
 			System.out.println("Done");
 
 		} catch (MessagingException e) {
