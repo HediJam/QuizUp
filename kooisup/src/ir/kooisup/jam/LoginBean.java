@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 public class LoginBean {
 	private String password;
 	private String username;
+	private String exit;
+
+
 	public String getPassword() {
 		return password;
 	}
@@ -36,7 +39,9 @@ public class LoginBean {
 		if(db.existConfirmedUser(username,password)){
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			return "/WebPage/home.xhtml";
+			exit="";
+			//return "/WebPage/home.xhtml";
+			return "th";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("myForm:loginButton",
 					new FacesMessage("اطلاعات ورودی صحیح نیست"));
@@ -48,9 +53,14 @@ public class LoginBean {
 		System.out.println("logOut");
 		HttpSession hs = Util.getSession();
 		hs.invalidate();
+		exit="none";
 		return "/index.xhtml";
 	}
 
+	public String getExit(){
+		return exit;
+	}
+	
 	public String test() {
 		System.out.println("logOutljdgkjfsbgnljsnglksdngksdnglkds");
 
