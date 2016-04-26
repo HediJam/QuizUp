@@ -52,11 +52,14 @@ xmlns:p="http://java.sun.com/jsf/core"
             <!-- Brand and toggle get grouped for better mobile display -->
 
             <div id="exitButton" class="navbar-header Font" style="display:#{loginBean.exit} ">
+                <h:form>
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                 <!-- class="navbar-brand page-scroll Font" href="flat-login-form/index.xhtml">ورود</a> -->
- 				<h:commandButton class="navbar-brand page-scroll Font" value="خروج" action="#{loginBean.test}" />
-
+ 				 <h:commandButton class="navbar-brand page-scroll Font" value="خروج" action="#{loginBean.doLogout}" />
+ 				 </h:form>
+ 				 
             </div>
+            
             
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
             
@@ -64,7 +67,7 @@ xmlns:p="http://java.sun.com/jsf/core"
                     <li>
                     	<i class="fa fa-user" aria-hidden="true"></i> 
                     	
-                        <h:outputLabel id="usernameLabel" for="username" style="color:white; font-size:30px; text-align:rtl;"
+                        <h:outputLabel id="usernameLabel" style="color:white; font-size:30px; text-align:rtl;"
                        value="#{loginBean.username} گرامی خوش آمدید" />
                     </li>
                 </ul>

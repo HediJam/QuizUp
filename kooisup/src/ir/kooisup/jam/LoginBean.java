@@ -3,7 +3,7 @@ package ir.kooisup.jam;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 public class LoginBean {
 	private String password;
 	private String username;
-	private String exit;
+	private String exit ="none";
 
 
 	public String getPassword() {
@@ -40,8 +40,9 @@ public class LoginBean {
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
 			exit="";
-			//return "/WebPage/home.xhtml";
-			return "th";
+			//return "quizup/index.xhtml";
+			//return "th";
+			return "http://localhost:8080/quizup/index.xhtml";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("myForm:loginButton",
 					new FacesMessage("اطلاعات ورودی صحیح نیست"));
