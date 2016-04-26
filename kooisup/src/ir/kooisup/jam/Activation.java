@@ -30,7 +30,8 @@ public class Activation {
 		System.out.println("activation code is" + code);
 		System.out.println("activation mail is" + mail);
 		if (code != null && mail != null) {
-			DBHandler.getInstance().confirmEmail(mail,code);
+			DBHandler db = DBHandler.getInstance();
+			db.confirmEmail(mail,code);
 			System.out.println("active shod!");
 		}
 	}

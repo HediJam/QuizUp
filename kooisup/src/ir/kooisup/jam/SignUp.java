@@ -100,15 +100,15 @@ public class SignUp {
 			DBHandler db = DBHandler.getInstance();
 			if(!db.isUniqueUsername(username)){
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("نام کاربری تکراری"));
-				return "chert";
+				return "#";
 			}
 			if(!db.isUniqueEmail(email)){
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("ایمیل تکراری"));
-				return "chert";
+				return "#";
 			}
 			if(!password.equals(rePassword)){
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("تکرار رمز درست نیست"));
-				return "chert";
+				return "#";
 			}
 			if (captcha.validate(captchaCode)){
 				String uuid = UUID.randomUUID().toString();
@@ -116,10 +116,11 @@ public class SignUp {
 				User u = new User(username, password, email, gender, country, uuid);
 				db.insertUser(u);
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("با مراجعه به ایمیل خود ثبت نامتان را نهایی کنید"));
+				return "#";
 			}
 			else{
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("عبارت داخل تصویر درست وارد نشده است"));
-				return "chert";
+				return "#";
 			}
 			
 		}catch(Exception e){
