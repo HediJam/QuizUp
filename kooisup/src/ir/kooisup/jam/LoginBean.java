@@ -1,5 +1,7 @@
 package ir.kooisup.jam;
 
+import java.io.IOException;
+
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
@@ -42,8 +44,12 @@ public class LoginBean {
 			hs.setAttribute("username", username);
 			exit="";
 			hide = "none";
-			//return "quizup/index.xhtml";
-			//return "th";
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			try {
+				ec.redirect(ec.getRequestContextPath() + "/" + "index.xhtml");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return "http://localhost:8080/quizup/index.xhtml";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("myForm:loginButton",
