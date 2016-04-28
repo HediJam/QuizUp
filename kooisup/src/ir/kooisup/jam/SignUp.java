@@ -1,6 +1,8 @@
 package ir.kooisup.jam;
 
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -92,8 +94,8 @@ public class SignUp {
 		System.out.println(gender);
 		System.out.println(username);
 		System.out.println(email);
-		System.out.println(password);
-		System.out.println(rePassword);
+		System.out.println("pass : " + password);
+		System.out.println("rePass :" + rePassword);
 		
 		try {
 			
@@ -102,6 +104,16 @@ public class SignUp {
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("نام کاربری تکراری"));
 				return "#";
 			}
+			Pattern pattern;
+			Matcher matcher;
+			String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+			pattern = Pattern.compile(EMAIL_PATTERN);
+			matcher = pattern.matcher(email);
+			if(!matcher.matches()){
+				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("ایمیل نامعتبر"));
+				return "#";
+			}
+			
 			if(!db.isUniqueEmail(email)){
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("ایمیل تکراری"));
 				return "#";
@@ -110,7 +122,8 @@ public class SignUp {
 				FacesContext.getCurrentInstance().addMessage("registeration:signupButton", new FacesMessage("تکرار رمز درست نیست"));
 				return "#";
 			}
-			if (captcha.validate(captchaCode)){
+			//if (captcha.validate(captchaCode)){
+			if(true){
 				String uuid = UUID.randomUUID().toString();
 				RegistrationListener.sendMail(email, uuid);
 				User u = new User(username, password, email, gender, country, uuid);
