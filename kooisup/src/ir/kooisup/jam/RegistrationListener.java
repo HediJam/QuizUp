@@ -39,6 +39,7 @@ public class RegistrationListener {
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(mail));
 			message.setSubject("KooisUp-confirmation mail");
+			//for new push
 			/*message.setText("Hello"
 				+ "\n\n please click on " + "\n\n http://localhost:8080/quizup/index.xhtml?code=" + uuid + "&mail=" + mail);*/
 			
