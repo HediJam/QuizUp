@@ -54,7 +54,7 @@ public class DBHandler {
         db = client.getDB("mydb");
         users = db.getCollection("users");
         
-    //    users.createIndex(new BasicDBObject("email", 1).append("unique", true));
+        db.getCollection("users").drop();
 	}
 	
 	
