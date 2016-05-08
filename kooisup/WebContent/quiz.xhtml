@@ -1,0 +1,97 @@
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http:/primefaces.org/ui" xmlns:u="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>کوییز</title>
+	<link rel="stylesheet" href="css/quiz.css" />
+	<link rel="stylesheet" href="flat-login-form/css/reset.css" />
+	<link rel='stylesheet prefetch'
+		href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' />
+	<link rel='stylesheet prefetch'
+		href='http://fonts.googleapis.com/css?family=Montserrat:400,700' />
+	<link rel='stylesheet prefetch'
+		href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' />
+	<link rel="stylesheet"
+		href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="../fonts/myFonts.css" />
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="text-center">
+			<br />
+			<h:outputText value="امتیاز = #{quizHandler.score}" />
+			<br /> <br></br>
+
+			<hr></hr>
+		</div>
+
+		<div class="text-center">
+			<h:outputText value="زمان = #{quizHandler.timer}" />
+			<br /> <br></br>
+
+			<hr></hr>
+		</div>
+		<div class="row well well-lg">
+			<div class="text-center">
+				<h3>
+					<h:outputText value="#{quizHandler.curQuestion}" />
+					<br />
+				</h3>
+				<hr></hr>
+
+
+				<small style="font-variant: small-caps;">Placeholder: Real
+					Content to come later </small>
+			</div>
+			<!--	<div class="col-sm-6">
+				<div class="funkyradio">
+					<div class="funkyradio-success">
+						<input type="radio" name="radio" id="radioA" /> <label
+							for="radioA">Yes</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="funkyradio">
+					<div class="funkyradio-danger">
+						<input type="radio" name="radio" id="radioB" /> <label
+							for="radioB">No</label>
+					</div>
+				</div>
+			</div>
+			<br></br>
+
+-->
+
+			<div class="funkyradio">
+				<div class="funkyradio-success">
+					<h:form>
+						<h:selectOneRadio value="#{quizHandler.selectedValue}">
+
+							<f:selectItem itemValue="1" itemLabel="#{quizHandler.option1}" />
+
+							<f:selectItem itemValue="2" itemLabel="#{quizHandler.option2}" />
+
+							<f:selectItem itemValue="3" itemLabel="#{quizHandler.option3}" />
+
+							<f:selectItem itemValue="4" itemLabel="#{quizHandler.option4}" />
+
+							<f:ajax listener="#{quizHandler.ajaxSubmit}" />
+						</h:selectOneRadio>
+					</h:form>
+					
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</h:body>
+</html>
