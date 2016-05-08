@@ -1,7 +1,11 @@
 package ir.kooisup.jam;
 
+import java.io.IOException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 @ManagedBean
@@ -68,7 +72,24 @@ public class QuizHandler {
 	public void ajaxSubmit(AjaxBehaviorEvent event){
 	
 		System.out.println("changing event...");
+		option1 = "new opt1";
+		FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("form:opt1");
+		option2 = "new opt2";
+		option3 = "new opt3";
+		option4 = "new opt4";
 		curQuestion = "salam";
+		timer = Long.toString(System.currentTimeMillis());
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		try {
+			ec.redirect(ec.getRequestContextPath() + "/" + "quiz.xhtml" );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	public void increment(AjaxBehaviorEvent event){
+		timer = Integer.toString((Integer.parseInt(timer) + 1));
 	}
 
 }

@@ -1,7 +1,6 @@
 <html xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http:/primefaces.org/ui" xmlns:u="http://primefaces.org/ui">
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<meta charset="UTF-8" />
 	<title>کوییز</title>
@@ -26,14 +25,14 @@
 	<div class="container">
 		<div class="text-center">
 			<br />
-			<h:outputText value="امتیاز = #{quizHandler.score}" />
+			<h:outputText id="scr" value="امتیاز = #{quizHandler.score}" />
 			<br /> <br></br>
 
 			<hr></hr>
 		</div>
 
 		<div class="text-center">
-			<h:outputText value="زمان = #{quizHandler.timer}" />
+			<h:outputText id="timer" value="زمان = #{quizHandler.timer}" />
 			<br /> <br></br>
 
 			<hr></hr>
@@ -41,7 +40,8 @@
 		<div class="row well well-lg">
 			<div class="text-center">
 				<h3>
-					<h:outputText value="#{quizHandler.curQuestion}" />
+					<h:outputText id="question" value="#{quizHandler.curQuestion}"
+						for="que1" />
 					<br />
 				</h3>
 				<hr></hr>
@@ -72,21 +72,26 @@
 
 			<div class="funkyradio">
 				<div class="funkyradio-success">
-					<h:form>
+					<h:form id="form">
 						<h:selectOneRadio value="#{quizHandler.selectedValue}">
 
-							<f:selectItem itemValue="1" itemLabel="#{quizHandler.option1}" />
+							<f:selectItem id="opt1" itemValue="1"
+								itemLabel="#{quizHandler.option1}" />
 
-							<f:selectItem itemValue="2" itemLabel="#{quizHandler.option2}" />
+							<f:selectItem id="opt2" itemValue="2"
+								itemLabel="#{quizHandler.option2}" />
 
-							<f:selectItem itemValue="3" itemLabel="#{quizHandler.option3}" />
+							<f:selectItem id="opt3" itemValue="3"
+								itemLabel="#{quizHandler.option3}" />
 
-							<f:selectItem itemValue="4" itemLabel="#{quizHandler.option4}" />
+							<f:selectItem id="opt4" itemValue="4"
+								itemLabel="#{quizHandler.option4}" />
 
-							<f:ajax listener="#{quizHandler.ajaxSubmit}" />
+							<f:ajax listener="#{quizHandler.ajaxSubmit}" immediate="true"
+								render="opt2" />
 						</h:selectOneRadio>
 					</h:form>
-					
+
 				</div>
 			</div>
 
