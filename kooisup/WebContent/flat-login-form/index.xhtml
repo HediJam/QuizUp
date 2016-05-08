@@ -48,6 +48,7 @@
 				requiredMessage="رمز را وارد کنید" />
 			<h:message for="pass" />
 
+
 			<h:inputSecret id="repass" type="password" a:placeholder="تکرار رمز"
 				value="#{signUp.rePassword}" required="true"
 				requiredMessage="تکرار رمز را وارد کنید" />
@@ -63,7 +64,6 @@
 				<f:selectItem itemValue="female" itemLabel="زن" />
 				<f:selectItem itemValue="male" itemLabel="مرد" />
 			</h:selectOneMenu>
-
 
 			<br />
 			<h:selectOneMenu value="#{signUp.country}" class="input">

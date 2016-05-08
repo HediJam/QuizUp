@@ -1,6 +1,7 @@
 package ir.kooisup.jam;
 
 import javax.annotation.ManagedBean;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean
@@ -33,6 +34,8 @@ public class Activation {
 			DBHandler db = DBHandler.getInstance();
 			db.confirmEmail(mail,code);
 			System.out.println("active shod!");
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "ثبت نام شما با موفقیت انجام شد", null);
+			
 		}
 	}
 
