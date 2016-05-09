@@ -53,8 +53,6 @@ public class DBHandler {
         MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
         users = db.getCollection("users");
-        //db.getCollection("users").drop();
-    //    users.createIndex(new BasicDBObject("email", 1).append("unique", true));
 	}
 	
 	
