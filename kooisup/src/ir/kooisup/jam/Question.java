@@ -1,4 +1,5 @@
 package ir.kooisup.jam;
+
 import java.util.ArrayList;
 
 public class Question {
@@ -7,25 +8,20 @@ public class Question {
 		this.choices = new ArrayList<String>(choices);
 	}*/
 	
-	public Question(int qsID, String text, String category, ArrayList<String> choices) {
+	public Question(int qsID, String text, String category, String answer, ArrayList<String> choices) {
 		this.qsID=qsID;
 		this.text=text;
 		this.category=category;
 		this.choices=choices;
+		this.answer=answer;
 	}
 
 	private String text;
+	private String answer;
 	private String category;
 	private int qsID;
-	ArrayList<String> choices;
-	private String answer;
-	
-	public String getAnswer() {
-		return answer;
-	}
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
+	ArrayList<String> choices;	
+
 	public String getText() {
 		return text;
 	}
@@ -33,6 +29,12 @@ public class Question {
 		this.text = text;
 	}
 	
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	public String getCategory() {
 		return category;
 	}
@@ -53,7 +55,9 @@ public class Question {
 	}
 	@Override
 	public String toString() {
-		return "Question [text=" + text + ", category=" + category + ", qsID=" + qsID + ", choices=" + choices + "]";
+		return "Question [text=" + text + ", answer=" + answer + ", category=" + category + ", qsID=" + qsID
+				+ ", choices=" + choices + "]";
 	}
+	
 	
 }
