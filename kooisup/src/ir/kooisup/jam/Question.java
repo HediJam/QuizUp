@@ -1,4 +1,4 @@
-//package ir.kooisup.jam;
+package ir.kooisup.jam;
 
 import java.util.ArrayList;
 
