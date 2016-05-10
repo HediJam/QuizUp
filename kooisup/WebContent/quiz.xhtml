@@ -23,7 +23,7 @@
 </h:head>
 <h:body class="header">
 	<div class="container">
-		<div class="text-center">
+		<div class="text-center Font">
 			<br />
 			<h:outputText id="scr" value="امتیاز = #{quizHandler.score}" />
 			<br /> <br></br>
@@ -31,7 +31,7 @@
 			<hr></hr>
 		</div>
 
-		<div class="text-center">
+		<div class="text-center Font">
 			<h:outputText id="timer" value="زمان = #{quizHandler.timer}" />
 			<br /> <br></br>
 
@@ -40,40 +40,18 @@
 		<div class="row well well-lg">
 			<div class="text-center">
 				<h3>
-					<h:outputText id="question" value="#{quizHandler.curQuestion}"
+					<h:outputText id="question" class="question" value="#{quizHandler.curQuestion}"
 						for="que1" />
 					<br />
 				</h3>
 				<hr></hr>
-
-
-				<small style="font-variant: small-caps;">Placeholder: Real
-					Content to come later </small>
 			</div>
-			<!--	<div class="col-sm-6">
-				<div class="funkyradio">
-					<div class="funkyradio-success">
-						<input type="radio" name="radio" id="radioA" /> <label
-							for="radioA">Yes</label>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="funkyradio">
-					<div class="funkyradio-danger">
-						<input type="radio" name="radio" id="radioB" /> <label
-							for="radioB">No</label>
-					</div>
-				</div>
-			</div>
-			<br></br>
 
--->
 
 			<div class="funkyradio">
 				<div class="funkyradio-success">
 					<h:form id="form">
-						<h:selectOneRadio value="#{quizHandler.selectedValue}">
+						<h:selectOneRadio value="#{quizHandler.selectedValue}" class="Font">
 
 							<f:selectItem id="opt1" itemValue="1"
 								itemLabel="#{quizHandler.option1}" />
