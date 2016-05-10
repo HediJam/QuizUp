@@ -1,6 +1,7 @@
 package ir.kooisup.jam;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,12 +14,26 @@ import javax.faces.event.AjaxBehaviorEvent;
 public class QuizHandler {
 	
 	String curQuestion = "question1";
-	String option1 = "opt1";
-	String option2="opt2";
-	String option3 = "opt3";
-	String option4 = "opt4";
+	String option1;
+	String option2;
+	String option3;
+	String option4;
 	String selectedValue;
 	String timer = "0";
+	String score = "0";
+	ArrayList<Question> questions;
+	ArrayList<String> options;
+	
+	public QuizHandler() {
+		DBHandler db = DBHandler.getInstance();
+		Quiz quiz = db.createQuiz("math");
+		questions = db.loadQuestions(quiz);
+		options = questions.get(0).choices;
+		option1 = options.get(0);
+		option2 = options.get(1);
+		option3 = options.get(2);
+		option4 = options.get(3);
+	}
 	public String getTimer() {
 		return timer;
 	}
@@ -31,7 +46,7 @@ public class QuizHandler {
 	public void setScore(String score) {
 		this.score = score;
 	}
-	String score = "0";
+	
 	public String getSelectedValue() {
 		return selectedValue;
 	}
@@ -72,12 +87,28 @@ public class QuizHandler {
 	public void ajaxSubmit(AjaxBehaviorEvent event){
 	
 		System.out.println("changing event...");
-		option1 = "new opt1";
+		
 		FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("form:opt1");
-		option2 = "new opt2";
-		option3 = "new opt3";
-		option4 = "new opt4";
-		curQuestion = "salam";
+		int i = 0;
+		for(Question q : questions){
+			if( i > 0 ){
+				i++;
+				options = q.choices;
+				option1= "new opt";
+				option2 = "new opt2";
+				option3 = "new opt3";
+				option4 = "new opt4";
+				option1 = options.get(0);
+				option2 = options.get(1);
+				option3 = options.get(2);
+				option4 = options.get(3);
+				
+				if(selectedValue.equals(q.getAnswer())){
+					score = Integer.toString((Integer.parseInt(score) + 1));
+				}
+			}
+		}
+
 		timer = Long.toString(System.currentTimeMillis());
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		try {

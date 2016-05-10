@@ -1,5 +1,4 @@
-//package ir.kooisup.jam;
-
+package ir.kooisup.jam;
 import java.util.ArrayList;
 
 public class Question {
@@ -19,7 +18,14 @@ public class Question {
 	private String category;
 	private int qsID;
 	ArrayList<String> choices;
+	private String answer;
 	
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	public String getText() {
 		return text;
 	}

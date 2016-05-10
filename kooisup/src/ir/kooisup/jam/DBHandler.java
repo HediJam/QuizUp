@@ -10,6 +10,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
 import com.mongodb.ParallelScanOptions;
 
 import java.net.UnknownHostException;
@@ -26,44 +27,7 @@ import com.mongodb.client.MongoDatabase;
 
 
 
-import com.mongodb.Mongo;
-import com.mongodb.MongoException;
- 
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-import com.mongodb.*;
-
-
-import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.BulkWriteOperation;
-import com.mongodb.BulkWriteResult;
-import com.mongodb.Cursor;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.ParallelScanOptions;
-
-import java.net.UnknownHostException;
-import java.util.List;
-import java.util.Set;
-import java.util.ArrayList;
- 
-import org.bson.Document;
-import org.bson.conversions.Bson;
- 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
-
-import com.mongodb.Mongo;
-import com.mongodb.MongoException;
- 
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-import com.mongodb.*;
 
 public class DBHandler {
 	public static DBHandler instance = null;
@@ -249,6 +213,7 @@ public class DBHandler {
 		return qssInQz;
 	}
 	
+
 	public Quiz findQuiz(int qzID) {
 		DBObject qz = findOne(new BasicDBObject("_id", qzID), quizs);
 		if(qz==null)
@@ -256,8 +221,8 @@ public class DBHandler {
 			System.out.println("Invalid Quiz ID => not found so return null");
 			return null;
 		}
-		return new Quiz((int)qz.get("_id"), (int)qz.get("score1"), (int)qz.get("score2"), 
-				(int)qz.get("finishTime1"), (int)qz.get("finishTime2"), 
+		return new Quiz( ((Integer) qz.get("_id")).intValue() ,((Integer) qz.get("score1")).intValue(), ((Integer) qz.get("score2")).intValue(), 
+				((Integer) qz.get("finishTmie1")).intValue(), ((Integer) qz.get("finishTime2")).intValue(), 
 				(String)qz.get("category"), (String)qz.get("uid1"), (String)qz.get("uid2"), 
 				(ArrayList<Integer>) qz.get("qsIDs"));
 	}
@@ -309,7 +274,7 @@ public class DBHandler {
 			System.out.println("invalid question ID => return null");
 			return null;
 		}
-		return new Question((int)qs.get("_id"), (String)qs.get("text"), (String)qs.get("category"), 
+		return new Question(((Integer) qs.get("_id")).intValue(), (String)qs.get("text"), (String)qs.get("category"), 
 				(ArrayList<String>) qs.get("choices"));
 	}
 	
@@ -322,7 +287,7 @@ public class DBHandler {
 			while (curs.hasNext()) {
 			DBObject qs = curs.next() ;
 			System.out.println(qs);
-			questionsArr.add(new Question((int)qs.get("_id"), (String)qs.get("text"), (String)qs.get("category"), 
+			questionsArr.add(new Question( ((Integer) qs.get("_id")).intValue(), (String)qs.get("text"), (String)qs.get("category"), 
 					(ArrayList<String>) qs.get("choices")));
 		}
 		
