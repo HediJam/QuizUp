@@ -87,10 +87,10 @@ public class DBHandler {
 	private DBHandler() {
 	    MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
-        db.getCollection("users").drop();
+     /*  db.getCollection("users").drop();
         db.getCollection("quizs").drop();
         db.getCollection("questions").drop();
-        db.getCollection("categories").drop();
+        db.getColclection("categories").drop();*/
         
         users = db.getCollection("users");
         quizs = db.getCollection("quizs");
@@ -263,9 +263,9 @@ public class DBHandler {
 			if(! selectedIDs.contains(allQuestionsIDs.get(index)))
 				selectedIDs.add(allQuestionsIDs.get(index));
 		}
-		Quiz quiz = new Quiz(category, 77, selectedIDs);
+		//Quiz quiz = new Quiz(category, 78, selectedIDs);
 
-		//Quiz quiz = new Quiz(category, (int) quizs.count() /*lastQzID++*/, selectedIDs);
+		Quiz quiz = new Quiz(category, (int) quizs.count() /*lastQzID++*/, selectedIDs);
 
 		insertQuiz(quiz);
 		return quiz;

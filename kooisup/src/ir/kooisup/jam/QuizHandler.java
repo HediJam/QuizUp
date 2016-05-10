@@ -136,22 +136,21 @@ public class QuizHandler {
 
 	public void ajaxSubmit(AjaxBehaviorEvent event) {
 
-		if (i < numOfQuestions-1) {
+		if (i < numOfQuestions - 1) {
 			System.out.println("changing event..." + i);
 
 			// FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("form:opt1");
-
 
 			System.out.println("selected value is :   " + selectedValue);
 			if (questions.get(i).getAnswerIndex() == Integer.valueOf(selectedValue)) {
 				System.out.println("javab dorost bud...");
 				score = Integer.toString((Integer.parseInt(score) + 1));
-				
+
 			}
-			
+
 			i++;
 			timer = Long.toString(System.currentTimeMillis());
-			
+
 			curQuestion = questions.get(i).getText();
 			System.out.println(curQuestion);
 			options = questions.get(i).choices;
@@ -169,9 +168,9 @@ public class QuizHandler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} 
-		if(i==numOfQuestions-1){
-			// setUser();
+		}
+		if (i == numOfQuestions - 1) {
+			setUser();
 			System.out.println("Result Page.....");
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
@@ -192,6 +191,7 @@ public class QuizHandler {
 	private void setUser() {
 		HttpSession hs = Util.getSession();
 		String username = hs.getAttribute("username").toString();
+		System.out.println(username);
 		DBHandler db = DBHandler.getInstance();
 		db.updateQuiz(quiz, username, Integer.valueOf(score), 40);
 	}
