@@ -17,6 +17,7 @@ public class ResultBean {
 	}
 
 	public void setQuizId(String quizId) {
+		System.out.println("miam into");
 		this.quizId = quizId;
 	}
 
