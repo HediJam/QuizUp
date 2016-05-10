@@ -9,17 +9,35 @@
 <ui:composition> 
 	<h:form id="form">
 	<p>
+	<h:outputText value="#{catsNQuestions.selectedCategory}">
+	</h:outputText>
+	<h:dataTable style="text-align:center;" border="2" value="#{catsNQuestions.questions}" var="question">
+		 <h:column class="well">
+		 	<f:facet name="header">Question</f:facet>    				
+		 	#{question.text}
+		 </h:column>
+		 <h:column class="well">
+		 	<f:facet name="header">Choice#1</f:facet>    				
+		 	#{question.choices[0]}
+		 </h:column>
+		 <h:column class="well">
+		 	<f:facet name="header">Choice#2</f:facet>    				
+		 	#{question.choices[1]}
+		 </h:column>
+		 <h:column class="well">
+		 	<f:facet name="header">Choice#3</f:facet>    				
+		 	#{question.choices[2]}
+		 </h:column>
+		 <h:column class="well">
+		 	<f:facet name="header">Choice#4</f:facet>    				
+		 	#{question.choices[3]}
+		 </h:column>
+		 <h:column class="well">
+		 	<f:facet name="header">Action</f:facet>
+    			<h:commandLink value="Edit" />
+		 </h:column>
+	</h:dataTable>
 	
-		<h:dataTable style="width:-moz-available;align:center" value="#{catsNQuestions.}" var="item">
-         	<h:column class="well">
-         		<h:form class="well">
-	         		<h:commandLink id="inputCat" align="center" value="#{item}">
-	         			<f:ajax execute="inputCat" update="tableOfQuestions" />
-	         		</h:commandLink>
-         		</h:form>
-         	</h:column>
-         </h:dataTable>
-         
 	</p>
 	</h:form>
 </ui:composition>
