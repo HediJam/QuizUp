@@ -2,6 +2,9 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
+	<f:metadata>
+		<f:viewParam name="category" value="#{quizHandler.category}" />
+	</f:metadata>
 	<meta charset="UTF-8" />
 	<title>کوییز</title>
 	<link rel="stylesheet" href="css/quiz.css" />
@@ -53,16 +56,16 @@
 					<h:form id="form">
 						<h:selectOneRadio value="#{quizHandler.selectedValue}" class="Font">
 
-							<f:selectItem id="opt1" itemValue="1"
+							<f:selectItem id="opt1" itemValue="0"
 								itemLabel="#{quizHandler.option1}" />
 
-							<f:selectItem id="opt2" itemValue="2"
+							<f:selectItem id="opt2" itemValue="1"
 								itemLabel="#{quizHandler.option2}" />
 
-							<f:selectItem id="opt3" itemValue="3"
+							<f:selectItem id="opt3" itemValue="2"
 								itemLabel="#{quizHandler.option3}" />
 
-							<f:selectItem id="opt4" itemValue="4"
+							<f:selectItem id="opt4" itemValue="3"
 								itemLabel="#{quizHandler.option4}" />
 
 							<f:ajax listener="#{quizHandler.ajaxSubmit}"/>
