@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped
@@ -24,13 +25,21 @@ public class QuizHandler {
 	static int numOfQuestions = 4;
 	ArrayList<Question> questions;
 	ArrayList<String> options;
+	Quiz quiz;
 	int i = 1;
+	String quizId;
 
 	public QuizHandler() {
+
 		System.out.println("man tuye constructoram");
 		DBHandler db = DBHandler.getInstance();
 		db.basicInit();
-		Quiz quiz = db.createQuiz("math");
+		if (quizId == null) {
+			quiz = db.createQuiz("math");
+		} else{
+			System.out.println("quiz ghadimi ba id " + quizId);
+			quiz = db.findQuiz(Integer.valueOf(quizId));
+			}
 		questions = db.loadQuestions(quiz);
 		curQuestion = questions.get(0).getText();
 		options = questions.get(0).choices;
@@ -38,6 +47,14 @@ public class QuizHandler {
 		option2 = options.get(1);
 		option3 = options.get(2);
 		option4 = options.get(3);
+	}
+
+	public String getQuizId() {
+		return quizId;
+	}
+
+	public void setQuizId(String quizId) {
+		this.quizId = quizId;
 	}
 
 	public String getTimer() {
@@ -110,7 +127,7 @@ public class QuizHandler {
 		if (i < numOfQuestions) {
 			System.out.println("changing event...");
 
-			//FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("form:opt1");
+			// FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("form:opt1");
 
 			curQuestion = questions.get(i).getText();
 			System.out.println(curQuestion);
@@ -118,7 +135,7 @@ public class QuizHandler {
 			option1 = options.get(0);
 			option2 = options.get(1);
 			option3 = options.get(2);
-			option4 = "44444444";
+			option4 = options.get(3);
 			System.out.println("selected value is :   " + selectedValue);
 			if (questions.get(i).getAnswer().equals(selectedValue)) {
 
@@ -130,19 +147,35 @@ public class QuizHandler {
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
 				ec.redirect(ec.getRequestContextPath() + "/" + "quiz.xhtml");
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else{
+		} else {
+			//setUser();
 			System.out.println("Result Page.....");
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			try {
+				System.out.println(ec.getRequestContextPath() + "/" + "result.xhtml?id = " + quiz.getQzId());
+				ec.redirect(ec.getRequestContextPath() + "/" + "result.xhtml?id=" + quiz.getQzId());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 	public void increment(AjaxBehaviorEvent event) {
 		timer = Integer.toString((Integer.parseInt(timer) + 1));
+	}
+
+	private void setUser() {
+		HttpSession hs = Util.getSession();
+		String username = hs.getAttribute("username").toString();
+		// quiz.setResult();
+
 	}
 
 }

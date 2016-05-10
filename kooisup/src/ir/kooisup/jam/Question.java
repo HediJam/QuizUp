@@ -3,11 +3,6 @@ package ir.kooisup.jam;
 import java.util.ArrayList;
 
 public class Question {
-	/*public Question(String text, ArrayList<String> choices){
-		this.text = text;
-		this.choices = new ArrayList<String>(choices);
-	}*/
-	
 	public Question(int qsID, String text, String category, String answer, ArrayList<String> choices) {
 		this.qsID=qsID;
 		this.text=text;
@@ -20,8 +15,15 @@ public class Question {
 	private String answer;
 	private String category;
 	private int qsID;
-	ArrayList<String> choices;	
-
+	ArrayList<String> choices;
+	
+	public int getAnswerIndex() {
+		for(int i=0; i<choices.size(); i++)
+			if(choices.get(i).equals(answer))
+				return i;
+		System.out.println("not found answer");
+		return -1;
+	}
 	public String getText() {
 		return text;
 	}
