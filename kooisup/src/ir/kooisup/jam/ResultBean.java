@@ -17,6 +17,7 @@ public class ResultBean {
 	}
 
 	public void setQuizId(String quizId) {
+		System.out.println("miam into");
 		this.quizId = quizId;
 	}
 
@@ -40,7 +41,7 @@ public class ResultBean {
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		message += "localhost:8080/"+ ec.getRequestContextPath() + "/" + "quiz.xhtml?id=" + quizId;
 		System.out.println(message);
-		RegistrationListener.sendMailQuiz("hedieh_jam@live.com", message,"KooisUp invitation");
+		RegistrationListener.sendMailQuiz(opponent, message,"KooisUp invitation");
 		
 		return "th";
 	}

@@ -2,6 +2,7 @@ package ir.kooisup.jam;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -22,12 +23,22 @@ public class QuizHandler {
 	String selectedValue;
 	String timer = "0";
 	String score = "0";
-	static int numOfQuestions = 4;
+	String category;
+	Quiz quiz;
+	int i = 0;
+	String quizId;
+	int numOfQuestions = 7;
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	ArrayList<Question> questions;
 	ArrayList<String> options;
-	Quiz quiz;
-	int i = 1;
-	String quizId;
 
 	public QuizHandler() {
 
@@ -36,13 +47,14 @@ public class QuizHandler {
 		db.basicInit();
 		if (quizId == null) {
 			quiz = db.createQuiz("math");
-		} else{
+		} else {
 			System.out.println("quiz ghadimi ba id " + quizId);
 			quiz = db.findQuiz(Integer.valueOf(quizId));
-			}
+		}
 		questions = db.loadQuestions(quiz);
 		curQuestion = questions.get(0).getText();
 		options = questions.get(0).choices;
+		Collections.sort(options);
 		option1 = options.get(0);
 		option2 = options.get(1);
 		option3 = options.get(2);
@@ -124,36 +136,41 @@ public class QuizHandler {
 
 	public void ajaxSubmit(AjaxBehaviorEvent event) {
 
-		if (i < numOfQuestions) {
-			System.out.println("changing event...");
+		if (i < numOfQuestions - 1) {
+			System.out.println("changing event..." + i);
 
 			// FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("form:opt1");
+
+			System.out.println("selected value is :   " + selectedValue);
+			if (questions.get(i).getAnswerIndex() == Integer.valueOf(selectedValue)) {
+				System.out.println("javab dorost bud...");
+				score = Integer.toString((Integer.parseInt(score) + 1));
+
+			}
+
+			i++;
+			timer = Long.toString(System.currentTimeMillis());
 
 			curQuestion = questions.get(i).getText();
 			System.out.println(curQuestion);
 			options = questions.get(i).choices;
+			Collections.sort(options);
 			option1 = options.get(0);
 			option2 = options.get(1);
 			option3 = options.get(2);
 			option4 = options.get(3);
-			System.out.println("selected value is :   " + selectedValue);
-			if (questions.get(i).getAnswer().equals(selectedValue)) {
-
-				System.out.println("javab dorost bud...");
-				score = Integer.toString((Integer.parseInt(score) + 1));
-			}
-			i++;
-			timer = Long.toString(System.currentTimeMillis());
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
+				selectedValue = null;
 				ec.redirect(ec.getRequestContextPath() + "/" + "quiz.xhtml");
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
-			//setUser();
+		}
+		if (i == numOfQuestions - 1) {
+			setUser();
 			System.out.println("Result Page.....");
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
@@ -174,8 +191,9 @@ public class QuizHandler {
 	private void setUser() {
 		HttpSession hs = Util.getSession();
 		String username = hs.getAttribute("username").toString();
-		// quiz.setResult();
-
+		System.out.println(username);
+		DBHandler db = DBHandler.getInstance();
+		db.updateQuiz(quiz, username, Integer.valueOf(score), 40);
 	}
 
 }
