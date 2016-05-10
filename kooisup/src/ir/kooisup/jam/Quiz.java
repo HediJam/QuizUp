@@ -1,3 +1,5 @@
+package ir.kooisup.jam;
+
 import java.util.ArrayList;
 
 public class Quiz {
