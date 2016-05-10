@@ -35,7 +35,7 @@ public class Activation {
 			db.confirmEmail(mail,code);
 			System.out.println("active shod!");
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "ثبت نام شما با موفقیت انجام شد", null);
-			
+			facesMessage.notify();
 		}
 	}
 
