@@ -4,13 +4,14 @@
 <h:head>
 
 	<f:metadata>
-		<f:viewParam name="quizId" value="#{quizHandler.quizId}" />
+		<f:viewParam name="quizId" value="#{resultBean.quizId}" />
 	</f:metadata>
 
 </h:head>
 <h:body>
 	<h:form>
-		<h:inputText name="name dust : " />
+		<h:inputText value="#{resultBean.opponent}"/>
+		<h:commandButton value="ارسال" action="#{resultBean.sendMail}"/>
 	</h:form>
 </h:body>
 </html>

@@ -135,7 +135,7 @@ public class QuizHandler {
 			option1 = options.get(0);
 			option2 = options.get(1);
 			option3 = options.get(2);
-			option4 = "44444444";
+			option4 = options.get(3);
 			System.out.println("selected value is :   " + selectedValue);
 			if (questions.get(i).getAnswer().equals(selectedValue)) {
 
@@ -153,11 +153,12 @@ public class QuizHandler {
 				e.printStackTrace();
 			}
 		} else {
-			setUser();
+			//setUser();
 			System.out.println("Result Page.....");
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
-				ec.redirect(ec.getRequestContextPath() + "/" + "result.xhtml?id =" + quiz.getQzId());
+				System.out.println(ec.getRequestContextPath() + "/" + "result.xhtml?id = " + quiz.getQzId());
+				ec.redirect(ec.getRequestContextPath() + "/" + "result.xhtml?id=" + quiz.getQzId());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
