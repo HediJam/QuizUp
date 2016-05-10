@@ -36,11 +36,25 @@ hidden
 	width: 100%;
 	border-radius: 3px;
 	border: 1px solid #D1D3D4;
-	font-weight: normal;
+	font-weight: bold;
+	color: black;
+	font-size: large;
+	margin-right: 40px;
+	padding-left: 30px;
 }
 
 td{
 	display: table-row;
+}
+
+.question{
+	color:black;
+	font-size:-webkit-xxx-large;
+}
+
+.text-center{
+	font-weight:600;
+	font-size:x-large;
 }
 
 .funkyradio input[type="radio"]:empty, .funkyradio input[type="checkbox"]:empty
