@@ -41,5 +41,12 @@ public class User {
   public boolean isMailConfirmed() {
     return mailConfirmed;
   }
+@Override
+public String toString() {
+	return "User [username=" + username + ", password=" + password + ", email=" + email + ", gender=" + gender
+			+ ", country=" + country + ", confirmationCode=" + confirmationCode + ", mailConfirmed=" + mailConfirmed
+			+ "]";
+}
+  
   
 }
