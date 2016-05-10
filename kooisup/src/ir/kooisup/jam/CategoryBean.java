@@ -13,12 +13,20 @@ public class CategoryBean {
 	
 	public CategoryBean() {
 		// TODO Auto-generated constructor stub
-		db.insertCategory("MATH");
-		db.insertCategory("ART");
-		db.insertCategory("SCIENCE");
-		db.insertCategory("MATH2");
-		db.insertCategory("ART2");
-		db.insertCategory("SCIENCE2");
+		
+		if(db.findCategory("MATH") == null)
+			db.insertCategory("MATH");
+		if(db.findCategory("ART") == null)
+			db.insertCategory("ART");
+		if(db.findCategory("SCIENCE") == null)
+			db.insertCategory("SCIENCE");
+		if(db.findCategory("MATH2") == null)
+			db.insertCategory("MATH2");
+		if(db.findCategory("ART2") == null)
+			db.insertCategory("ART2");
+		if(db.findCategory("SCIENCE2") == null)
+			db.insertCategory("SCIENCE2");
+		
 		
 		this.categoryList = db.findCategories();
 		
