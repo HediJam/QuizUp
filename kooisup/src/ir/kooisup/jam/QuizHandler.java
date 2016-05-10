@@ -25,7 +25,7 @@ public class QuizHandler {
 	String score = "0";
 	String category;
 	Quiz quiz;
-	int i = 1;
+	int i = 0;
 	String quizId;
 	int numOfQuestions = 7;
 
@@ -136,19 +136,12 @@ public class QuizHandler {
 
 	public void ajaxSubmit(AjaxBehaviorEvent event) {
 
-		if (i < numOfQuestions) {
-			System.out.println("changing event...");
+		if (i < numOfQuestions-1) {
+			System.out.println("changing event..." + i);
 
 			// FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("form:opt1");
 
-			curQuestion = questions.get(i).getText();
-			System.out.println(curQuestion);
-			options = questions.get(i).choices;
-			Collections.sort(options);
-			option1 = options.get(0);
-			option2 = options.get(1);
-			option3 = options.get(2);
-			option4 = options.get(3);
+
 			System.out.println("selected value is :   " + selectedValue);
 			if (questions.get(i).getAnswerIndex() == Integer.valueOf(selectedValue)) {
 				System.out.println("javab dorost bud...");
@@ -158,6 +151,15 @@ public class QuizHandler {
 			
 			i++;
 			timer = Long.toString(System.currentTimeMillis());
+			
+			curQuestion = questions.get(i).getText();
+			System.out.println(curQuestion);
+			options = questions.get(i).choices;
+			Collections.sort(options);
+			option1 = options.get(0);
+			option2 = options.get(1);
+			option3 = options.get(2);
+			option4 = options.get(3);
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
 				selectedValue = null;
@@ -167,7 +169,8 @@ public class QuizHandler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
+		} 
+		if(i==numOfQuestions-1){
 			// setUser();
 			System.out.println("Result Page.....");
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();

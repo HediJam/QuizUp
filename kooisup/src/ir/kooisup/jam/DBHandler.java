@@ -257,7 +257,7 @@ public class DBHandler {
 			if(! selectedIDs.contains(allQuestionsIDs.get(index)))
 				selectedIDs.add(allQuestionsIDs.get(index));
 		}
-		Quiz quiz = new Quiz(category, lastQzID++, selectedIDs);
+		Quiz quiz = new Quiz(category, 57, selectedIDs);
 		insertQuiz(quiz);
 		return quiz;
 	}
