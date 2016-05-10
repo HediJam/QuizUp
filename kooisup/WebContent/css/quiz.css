@@ -39,6 +39,10 @@ hidden
 	font-weight: normal;
 }
 
+td{
+	display: table-row;
+}
+
 .funkyradio input[type="radio"]:empty, .funkyradio input[type="checkbox"]:empty
 	{
 	display: none;
