@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -156,63 +157,40 @@ public class Quiz1 {
 	}
 
 	public void ajaxSubmit(AjaxBehaviorEvent event) {
-		
-		
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		System.out.println("chnage----");
-		if (i < numOfQuestions - 1) {
+		if (i < numOfQuestions) {
 			System.out.println("changing event..." + i);
-
-			// FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("form:opt1");
-
 			System.out.println("selected value is :   " + selectedValue);
-			questions.get(i).getAnswerIndex();
-			Integer.valueOf(selectedValue);
-			if (questions.get(i).getAnswerIndex() == Integer.valueOf(selectedValue)) {
-				System.out.println("javab dorost bud...");
-				score = Integer.toString((Integer.parseInt(score) + 1));
-				System.out.println("score is .... " + score);
+			if (i < numOfQuestions - 1) {
+				questions.get(i).getAnswerIndex();
+				Integer.valueOf(selectedValue);
+				if (questions.get(i).getAnswerIndex() == Integer.valueOf(selectedValue)) {
+					System.out.println("javab dorost bud...");
+					score = Integer.toString((Integer.parseInt(score) + 1));
+					System.out.println("score is .... " + score);
+				}
+
+				i++;
 			}
-
-			i++;
 			time = Long.toString(System.currentTimeMillis());
-
-			/*curQuestion = questions.get(i).getText();
-			System.out.println(curQuestion);
-			options = questions.get(i).choices;
-			Collections.sort(options);
-			option1 = options.get(0);
-			option2 = options.get(1);
-			option3 = options.get(2);
-			option4 = options.get(3);
-			*/
-
+			selectedValue = null;
+			String address = "/" + "quiz1.xhtml?id=" + quiz.getQzId();
+			if(i==numOfQuestions-1){
+				i=0;
+				score ="0";
+				
+				address = "/" + "result.xhtml?id=" + quiz.getQzId();
+			}
 			try {
-				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-				selectedValue = null; //
-				ec.redirect(ec.getRequestContextPath() + "/" + "quiz1.xhtml?id=" + quiz.getQzId());
+
+				ec.redirect(ec.getRequestContextPath() + address);
 
 			} catch (IOException e) { // TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
-		if (i == numOfQuestions - 1) {
-			//setUser();
-			System.out.println("Result Page.....");
-			try {
-				quizId = null;
-				questions = null;
-				i = 0;
-				
-				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-				//System.out.println(ec.getRequestContextPath() + "/" + "result.xhtml?id = " + quiz.getQzId());
-				System.out.println(ec.getRequestContextPath() + "/" + "result.xhtml");
-				ec.redirect(ec.getRequestContextPath() + "/" + "result.xhtml?id=" + quiz.getQzId());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
 	}
+
 }
