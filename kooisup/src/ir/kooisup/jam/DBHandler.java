@@ -43,10 +43,10 @@ public class DBHandler {
 	private DBHandler() {
 	    MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
-     /*  db.getCollection("users").drop();
+       //db.getCollection("users").drop();
         db.getCollection("quizs").drop();
         db.getCollection("questions").drop();
-        db.getColclection("categories").drop();*/
+        db.getCollection("categories").drop();
         
         users = db.getCollection("users");
         quizs = db.getCollection("quizs");
@@ -60,16 +60,17 @@ public class DBHandler {
 	public void basicInit() {
 		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("none","5","4","3"));
 		getInstance().insertCategory("math");
-		Question qs1 = new Question(0, "1+2=?", "math", "3", choices);
-		Question qs2 = new Question(1, "2+2=?", "math", "4", choices);
-		Question qs3 = new Question(2, "3+2=?", "math", "5", choices);
-		Question qs4 = new Question(3, "4+2=?", "math", "none",choices);
-		Question qs5 = new Question(4, "5+2=?", "math", "none", choices);
-		Question qs6 = new Question(5, "6+2=?", "math", "none", choices);
-		Question qs7 = new Question(6, "7+2=?", "math", "none", choices);
-		Question qs8 = new Question(7, "8+2=?", "math", "none", choices);
-		Question qs9 = new Question(8, "9+2=?", "math", "none", choices);
-		Question qs10 = new Question(9, "10+2=?", "math", "none", choices);
+		System.out.println("tuye basic iniam");
+		Question qs1 = new Question(10, "1+2=?", "math", "3", choices);
+		Question qs2 = new Question(11, "2+2=?", "math", "4", choices);
+		Question qs3 = new Question(12, "3+2=?", "math", "5", choices);
+		Question qs4 = new Question(13, "4+2=?", "math", "none",choices);
+		Question qs5 = new Question(14, "5+2=?", "math", "none", choices);
+		Question qs6 = new Question(15, "6+2=?", "math", "none", choices);
+		Question qs7 = new Question(16, "7+2=?", "math", "none", choices);
+		Question qs8 = new Question(17, "8+2=?", "math", "none", choices);
+		Question qs9 = new Question(18, "9+2=?", "math", "none", choices);
+		Question qs10 = new Question(19, "10+2=?", "math", "none", choices);
 		
 
 		//System.out.println("answer  "+qs1.getAnswer());

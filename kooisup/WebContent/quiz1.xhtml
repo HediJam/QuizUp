@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<HTML lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
 <h:head>
 	<f:metadata>
-		<f:viewParam name="id" value="#{quizHandler.quizId}" />
-		<f:viewParam name="category" value="#{quizHandler.category}" />
-		<f:viewAction action="#{quizHandler.onload}" />
+		<f:viewParam name="id" value="#{quiz1.quizId}" />
+		<f:viewParam name="category" value="#{quiz1.category}" />
+		<f:viewAction action="#{quiz1.onload}" />
 	</f:metadata>
-
-
-	<meta charset="UTF-8" />
-	<title>کوییز</title>
 	<meta charset="utf-8"></meta>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -31,19 +30,24 @@
 		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/creative.css" type="text/css" />
 	<link rel="stylesheet" href="fonts/myFonts.css" />
+	
+
+
+
+
 </h:head>
 <h:body class="header">
 	<div class="container">
 		<div class="text-center Font">
 			<br />
-			<h:outputText id="scr" value="امتیاز = #{quizHandler.score}" />
+			<h:outputText id="scr" value="امتیاز = #{quiz1.score}" />
 			<br /> <br></br>
 
 			<hr></hr>
 		</div>
 
 		<div class="text-center Font">
-			<h:outputText id="timer" value="زمان = #{quizHandler.timer}" />
+			<h:outputText id="timer" value="زمان = #{quiz1.time}" />
 			<br /> <br></br>
 
 			<hr></hr>
@@ -52,7 +56,7 @@
 			<div class="text-center">
 				<h3>
 					<h:outputText id="question" class="question"
-						value="#{quizHandler.curQuestion}" for="que1" />
+						value="#{quiz1.curQuestion}" for="que1" />
 					<br />
 				</h3>
 				<hr></hr>
@@ -62,23 +66,24 @@
 			<div class="funkyradio">
 				<div class="funkyradio-success">
 					<h:form id="form">
-						<h:selectOneRadio value="#{quizHandler.selectedValue}"
-							class="Font">
+						<h:selectOneRadio value="#{quiz1.selectedValue}" class="Font">
 
 							<f:selectItem id="opt1" itemValue="0"
-								itemLabel="#{quizHandler.option1}" />
+								itemLabel="#{quiz1.option1}" />
 
 							<f:selectItem id="opt2" itemValue="1"
-								itemLabel="#{quizHandler.option2}" />
+								itemLabel="#{quiz1.option2}" />
 
 							<f:selectItem id="opt3" itemValue="2"
-								itemLabel="#{quizHandler.option3}" />
+								itemLabel="#{quiz1.option3}" />
 
 							<f:selectItem id="opt4" itemValue="3"
-								itemLabel="#{quizHandler.option4}" />
+								itemLabel="#{quiz1.option4}" />
 
-							<f:ajax listener="#{quizHandler.ajaxSubmit}" />
+							<f:ajax listener="#{quiz1.ajaxSubmit}" />
 						</h:selectOneRadio>
+						
+						
 					</h:form>
 
 				</div>
@@ -87,4 +92,4 @@
 		</div>
 	</div>
 </h:body>
-</html>
+</HTML>

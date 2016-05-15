@@ -33,10 +33,11 @@
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 
-	<managed-bean>
-		<managed-bean-name>resultBean</managed-bean-name>
-		<managed-bean-class>ir.kooisup.jam.ResultBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+	
+<managed-bean>
+		<managed-bean-name>quiz1</managed-bean-name>
+		<managed-bean-class>ir.kooisup.jam.Quiz1</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 
 </faces-config>

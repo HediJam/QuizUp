@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -28,7 +29,9 @@ public class QuizHandler {
 	int i = 0;
 	String quizId;
 	int numOfQuestions = 7;
-
+	ArrayList<Question> questions;
+	ArrayList<String> options;
+	
 	public String getCategory() {
 		return category;
 	}
@@ -37,20 +40,25 @@ public class QuizHandler {
 		this.category = category;
 	}
 
-	ArrayList<Question> questions;
-	ArrayList<String> options;
+
 
 	public QuizHandler() {
 
-		System.out.println("man tuye constructoram");
-		DBHandler db = DBHandler.getInstance();
-		db.basicInit();
+		System.out.println("man tuye constructoram....");
+		System.out.println("quiz ghadimi ba id " + quizId);
+		System.out.println("category ghadimi ba id " + category);
+		
+		/*DBHandler db = DBHandler.getInstance();
+		
 		if (quizId == null) {
+			System.out.println("nulle");
+			db.basicInit();
 			quiz = db.createQuiz("math");
 		} else {
 			System.out.println("quiz ghadimi ba id " + quizId);
 			quiz = db.findQuiz(Integer.valueOf(quizId));
 		}
+		
 		questions = db.loadQuestions(quiz);
 		curQuestion = questions.get(0).getText();
 		options = questions.get(0).choices;
@@ -58,7 +66,7 @@ public class QuizHandler {
 		option1 = options.get(0);
 		option2 = options.get(1);
 		option3 = options.get(2);
-		option4 = options.get(3);
+		option4 = options.get(3);*/
 	}
 
 	public String getQuizId() {
@@ -66,6 +74,7 @@ public class QuizHandler {
 	}
 
 	public void setQuizId(String quizId) {
+		System.out.println("set quizID .... "+ quizId) ;
 		this.quizId = quizId;
 	}
 
@@ -135,9 +144,12 @@ public class QuizHandler {
 	}
 
 	public void ajaxSubmit(AjaxBehaviorEvent event) {
-
+		ExternalContext ec1 = FacesContext.getCurrentInstance().getExternalContext();
+		
+		String[] value = ec1.getRequestParameterValuesMap().get("id");
+		System.out.println(value[0]);
 		if (i < numOfQuestions - 1) {
-			System.out.println("changing event..." + i);
+			System.out.println("changing event..." + i + quizId);
 
 			// FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("form:opt1");
 
@@ -194,6 +206,28 @@ public class QuizHandler {
 		System.out.println(username);
 		DBHandler db = DBHandler.getInstance();
 		db.updateQuiz(quiz, username, Integer.valueOf(score), 40);
+	}
+	
+	public void onload(){
+		System.out.println("tuye onloadam");
+		DBHandler db = DBHandler.getInstance();
+		if (quizId == null) {
+			System.out.println("nulle");
+			db.basicInit();
+			quiz = db.createQuiz("math");
+		} else {
+			System.out.println("quiz ghadimi ba id " + quizId);
+			quiz = db.findQuiz(Integer.valueOf(quizId));
+		}
+		
+		questions = db.loadQuestions(quiz);
+		curQuestion = questions.get(0).getText();
+		options = questions.get(0).choices;
+		Collections.sort(options);
+		option1 = options.get(0);
+		option2 = options.get(1);
+		option3 = options.get(2);
+		option4 = options.get(3);
 	}
 
 }
