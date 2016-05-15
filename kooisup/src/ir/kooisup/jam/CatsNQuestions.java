@@ -29,12 +29,12 @@ public class CatsNQuestions {
 	}
 	
 	public void fetchCategories(){
-		DBHandler db = DBHandler.getInstance();
+		//DBHandler db = DBHandler.getInstance();
 		//categories = new ArrayList<String>(db.fetchCategories());
 	}
 	
 	public void fetchQuestions(){
-		DBHandler db = DBHandler.getInstance();
+		//DBHandler db = DBHandler.getInstance();
 		//questions = new ArrayList<Question>(db.fetchQuestions(selectedCategory));
 	}
 	

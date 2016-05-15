@@ -1,14 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <HTML
 xmlns:h="http://java.sun.com/jsf/html"
 xmlns:p="http://java.sun.com/jsf/core"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
 
-<p:metadata>
-    <p:viewParam name="code" value="#{activation.code}" />
-    <p:viewParam name="mail" value="#{activation.mail}" />
-    <p:viewAction action="#{activation.onload}" />
-</p:metadata>
 <h:head> 
 
     <meta charset="utf-8"></meta>
@@ -17,7 +13,7 @@ xmlns:p="http://java.sun.com/jsf/core"
     <meta name="description" content=""></meta>
     <meta name="author" content=""></meta>
 
-    <title>kooisup</title>
+    <title>category</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"></link>
@@ -47,7 +43,7 @@ xmlns:p="http://java.sun.com/jsf/core"
 
 <h:body id="page-top">
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
 
@@ -61,43 +57,61 @@ xmlns:p="http://java.sun.com/jsf/core"
 
             </div>
             
-            
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-            
-                <ul class="nav navbar-nav navbar-right Font" style="direction:rtl; display:#{loginBean.exit}"> 
-                    <li>
-                    	<i class="fa fa-user" aria-hidden="true"></i> 
-                    	
-                        <h:outputLabel id="usernameLabel" style="color:white; font-size:30px; text-align:rtl;"
-                       value="#{loginBean.username} گرامی خوش آمدید" />
-                    </li>
-                </ul>
-            </div>
-            
 
         </div> 
         <!-- /.container-fluid -->
     </nav>
 
-    <header>
-        <div class="header-content Font">
-            <div class="header-content-inner Font">
-                <img src="./img/logo5.png"/>
-                <!--<h1 class="Font">خوش آمدید</h1>-->
-                <hr/>
-                <!-- MOVE STYLE -->
-                 <h1 class="Font" style="color:black; ">برحسب علایق خود بازی کنید</h1>
+    <!-- <header>
+         <div class="header-content">
+            <div class="header-content-inner">
+                <h1>Your Favorite Source of Free Bootstrap Themes</h1>
                 <hr></hr>
-                	<p style="color:black; font-size:28px; font-weight:600;">موضوعات متنوع و جذاب</p>
-                	<p style="color:black; font-size:28px; font-weight:600;">به صورت آنلاین با دوستانتان بازی کنید</p>
-                	<p style="color:black; font-size:28px; font-weight:600;">افرادی که شبیه شما هستند را پیدا کنید و با آنها دوست شوید</p>
-                <!-- <p style="color:black; font-size:28px; font-weight:600;">!اطلاعات خود و دوستانتان را در رقابتی نفس گیر، در بازیی جذاب و پرهیجان به چالش بکشید</p> -->
-                <!--<a href="#" class="btn btn-primary btn-xl page-scroll Font">شروع بازی</a>-->
-            <a href="flat-login-form/index.xhtml" class="btn btn-primary btn-xl page-scroll" style="display:#{loginBean.hide}">ورود</a>
-            <a href="category.xhtml" class="btn btn-primary btn-xl page-scroll" style="display:#{loginBean.exit}">شروع بازی</a>
+                <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
+                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+            </div>
+        </div>  
+    </header> -->
+    
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                
             </div>
         </div>
-    </header>
+    </aside>
+
+    <section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+            
+            
+            <ui:repeat value="#{categoryBean.categoryList}" var="category">
+                <div class="col-lg-4 col-sm-6">
+                    <a href="quiz.xhtml?category=#{category}" class="portfolio-box">
+                        <img src="img/portfolio/#{category}.jpg" class="img-responsive" alt=""/>
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    #{category}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+             </ui:repeat>
+  
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                
+            </div>
+        </div>
+    </aside>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
