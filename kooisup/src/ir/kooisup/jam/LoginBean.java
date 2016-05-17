@@ -15,9 +15,18 @@ import javax.servlet.http.HttpSession;
 public class LoginBean {
 	private String password;
 	private String username;
-	private String exit ="none";
+	private String exit = "none";
 	private String hide = "";
+	private String parameter;
 
+	public String getParameter() {
+		return parameter;
+	}
+
+	public void setParameter(String parameter) {
+		System.out.println("tu set parameter");
+		this.parameter = parameter;
+	}
 
 	public String getPassword() {
 		return password;
@@ -34,19 +43,26 @@ public class LoginBean {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String doLogin() {
 
-		HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
 
 		DBHandler db = DBHandler.getInstance();
-		if(db.existConfirmedUser(username,password)){
+		if (db.existConfirmedUser(username, password)) {
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			exit="";
+			exit = "";
 			hide = "none";
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
-				ec.redirect(ec.getRequestContextPath() + "/" + "index.xhtml");
+				if (parameter == null) {
+					System.out.println("parameter is null");
+					ec.redirect(ec.getRequestContextPath() + "/" + "index.xhtml");
+				} else {
+					ec.redirect(ec.getRequestContextPath() + "/" + "quiz1.xhtml?id=" + parameter);
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -62,22 +78,22 @@ public class LoginBean {
 		System.out.println("logOut");
 		HttpSession hs = Util.getSession();
 		hs.invalidate();
-		exit="none";
+		exit = "none";
 		hide = "";
 		return "/index.xhtml";
 	}
 
-	public String getExit(){
+	public String getExit() {
 		return exit;
 	}
-	
-	public String getHide(){
+
+	public String getHide() {
 		return hide;
 	}
-	
-	public String test() {
-		System.out.println("logOutljdgkjfsbgnljsnglksdngksdnglkds");
 
+	public String test() {
+		System.out.println("logOut");
+		System.out.println("dfkgjerogjnoerjngjoerngowrngojwnrgoerngn" + parameter);
 		return "/index.xhtml";
 	}
 
