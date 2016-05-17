@@ -80,9 +80,23 @@ public class Quiz1 {
 		System.out.println("constructor " + category);
 	}
 
-	public void onload() {
+	public String onload() {
+
+		HttpSession hs = Util.getSession();
+		if (hs == null || hs.getAttribute("username") == null) {
+			//return "flat-login-form/index.xhtml";
+			System.out.println("hs is null........" + quizId);
+			//ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			//String address = ec.getRequestContextPath() + "/" + "flat-login-form/index.xhtml?quizId=" + quizId;
+			// return
+			// "http://localhost:8080/quizup/flat-login-form/index.xhtml?quizId="
+			// + quizId;
+			return "flat-login-form/index.xhtml?quizId=" + quizId;
+		}
+
 		System.out.println("on load  " + quizId);
 		System.out.println("on load " + category);
+		permission();
 		System.out.println("tuye onloadam");
 		DBHandler db = DBHandler.getInstance();
 		if (quizId == null) {
@@ -106,6 +120,7 @@ public class Quiz1 {
 		option3 = options.get(2);
 		option4 = options.get(3);
 		System.out.println("size qustion is " + questions.size());
+		return "th";
 	}
 
 	public String getCurQuestion() {
@@ -156,6 +171,26 @@ public class Quiz1 {
 		db.updateQuiz(quiz, username, Integer.valueOf(score), 40);
 	}
 
+	private void permission() {
+
+		HttpSession hs = Util.getSession();
+		if (hs == null) {
+			System.out.println("hs is null........" + quizId);
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			String address = ec.getRequestContextPath() + "/" + "login.xhtml?quizId=" + quizId;
+			try {
+				System.out.println("ghabl az redirect" + address);
+				ec.redirect("http://localhost:8080/quizup/quiz1.xhtml?id=190");
+				System.out.println("bad az redirect" + address);
+				// ec.redirect(address);
+			} catch (IOException e) {
+				System.out.println("IO execption dadam");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public void ajaxSubmit(AjaxBehaviorEvent event) {
 
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -177,10 +212,10 @@ public class Quiz1 {
 			time = Long.toString(System.currentTimeMillis());
 			selectedValue = null;
 			String address = "/" + "quiz1.xhtml?id=" + quiz.getQzId();
-			if(i==numOfQuestions-1){
-				i=0;
-				score ="0";
-				
+			if (i == numOfQuestions - 1) {
+				i = 0;
+				score = "0";
+
 				address = "/" + "result.xhtml?id=" + quiz.getQzId();
 			}
 			try {
