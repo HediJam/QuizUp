@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html dir="rtl"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+  <h:head>
+    <meta charset="UTF-8"></meta>
+    <title>پنل ویرایش سوالات</title>
+    
+    <!-- <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.css'> -->
+    <link rel="stylesheet" href="css/style.css"></link>
+    <link rel="stylesheet" href="css/bootstrap.css"></link>
+
+  </h:head>
+
+  <body background="img/header6.jpg" style="-webkit-background-size: cover;
+        									-moz-background-size: cover;
+									        -o-background-size: cover;
+									        background-size: cover;">
+ 
+
+    <div class="container wrap sidebar-right">
+   <div class="row">
+         <div class="header col-xs-12"> 
+                <div align="center" class="well"><img style="height:128px;" src="http://kooisup.ir/img/logo5.png"/></div>   
+     </div>
+  </div>
+  <div class="row">
+    <div class= "main col-xs-9">
+    <!-- body -->
+         <div class="well">
+         <div id="content">
+			<ui:insert name="content" >
+				<ui:include src="questions.xhtml" />
+			</ui:insert>
+		 </div>
+         <h:outputText id="tableOfQuestions" />
+    	</div>
+    </div> 
+    <div class="sidebar col-xs-3" align="center">
+         <div class="well" style="padding:0">
+         <h3 class="well">دسته بندی ها</h3>
+         
+         <h:dataTable style="width:-moz-available;align:center" value="#{catsNQuestions.categories}" var="item">
+         	<h:column class="well">
+         		<h:form class="well">
+	         		<h:commandLink id="inputCat" align="center" value="#{item}" actionListener="#{catsNQuestions.processAction}">
+	         			<f:attribute name="catName" value="#{item}"/>
+	         		</h:commandLink>
+         		</h:form>
+         	</h:column>
+         </h:dataTable>
+   </div>
+</div>
+  
+ </div>  
+</div>
+<div class="container">     
+  <div class="row">
+    <div class="Footer col-xs-12"> 
+      <div align="center" class="well">KooIsUp</div>   
+    </div>
+  </div>
+
+     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+     <script src="js/index.js"></script>
+</div>
+  </body>
+</html>
