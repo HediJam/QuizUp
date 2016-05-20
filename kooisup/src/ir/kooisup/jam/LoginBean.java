@@ -97,4 +97,7 @@ public class LoginBean {
 		return "/index.xhtml";
 	}
 
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
 }

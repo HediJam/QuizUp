@@ -142,4 +142,8 @@ public class SignUp {
 		
 		return "index";
 	}
+	
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
 }

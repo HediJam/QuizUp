@@ -408,5 +408,9 @@ public class DBHandler {
 		}
 		return category;
 	}
+	
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
 
 }

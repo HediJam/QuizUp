@@ -38,4 +38,8 @@ public class ListCountry{
         return list;
     }
 	
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
+	
 }

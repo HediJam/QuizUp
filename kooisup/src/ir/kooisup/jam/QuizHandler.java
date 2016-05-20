@@ -229,5 +229,9 @@ public class QuizHandler {
 		option3 = options.get(2);
 		option4 = options.get(3);
 	}
+	
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
 
 }

@@ -35,4 +35,8 @@ public class CategoryBean {
 	public List<String> getCategoryList(){
 		return categoryList;
 	}
+	
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
 }

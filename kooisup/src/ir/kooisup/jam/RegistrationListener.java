@@ -86,5 +86,8 @@ public class RegistrationListener {
 			System.err.println("invalid mail...." + mail);
 		}
 	}
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
 	
 }

@@ -1,6 +1,7 @@
 package ir.kooisup.jam;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped
-public class Quiz1 {
+public class Quiz1 implements Serializable {
 
 	String curQuestion;
 	String option1;
@@ -28,10 +29,11 @@ public class Quiz1 {
 	static ArrayList<Question> questions = new ArrayList<Question>();
 	ArrayList<String> options = new ArrayList<String>();
 	static String score = "0";
-	String time = "0";
+	static int time = 0;
 	String selectedValue;
 	static int i = 0;
 	int numOfQuestions = 7;
+	String opponent;
 
 	public String getScore() {
 		return score;
@@ -41,11 +43,11 @@ public class Quiz1 {
 		this.score = score;
 	}
 
-	public String getTime() {
+	public int getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(int time) {
 		this.time = time;
 	}
 
@@ -84,10 +86,12 @@ public class Quiz1 {
 
 		HttpSession hs = Util.getSession();
 		if (hs == null || hs.getAttribute("username") == null) {
-			//return "flat-login-form/index.xhtml";
+			// return "flat-login-form/index.xhtml";
 			System.out.println("hs is null........" + quizId);
-			//ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-			//String address = ec.getRequestContextPath() + "/" + "flat-login-form/index.xhtml?quizId=" + quizId;
+			// ExternalContext ec =
+			// FacesContext.getCurrentInstance().getExternalContext();
+			// String address = ec.getRequestContextPath() + "/" +
+			// "flat-login-form/index.xhtml?quizId=" + quizId;
 			// return
 			// "http://localhost:8080/quizup/flat-login-form/index.xhtml?quizId="
 			// + quizId;
@@ -96,6 +100,7 @@ public class Quiz1 {
 
 		System.out.println("on load  " + quizId);
 		System.out.println("on load " + category);
+		
 		permission();
 		System.out.println("tuye onloadam");
 		DBHandler db = DBHandler.getInstance();
@@ -209,7 +214,6 @@ public class Quiz1 {
 
 				i++;
 			}
-			time = Long.toString(System.currentTimeMillis());
 			selectedValue = null;
 			String address = "/" + "quiz1.xhtml?id=" + quiz.getQzId();
 			if (i == numOfQuestions - 1) {
@@ -217,6 +221,7 @@ public class Quiz1 {
 				score = "0";
 
 				address = "/" + "result.xhtml?id=" + quiz.getQzId();
+				sendMail();
 			}
 			try {
 
@@ -228,4 +233,28 @@ public class Quiz1 {
 		}
 	}
 
+	public String sendMail() {
+
+		String message = "سلام " + "\r\n";
+		message += "دوستتان شما را به چالش کوییزآپ دعوت کرده";
+		message += "\r\n" + "کلیک کنید" + "\r\n";
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		message += "localhost:8080/" + ec.getRequestContextPath() + "/" + "quiz1.xhtml?id=" + quizId;
+		System.out.println(message);
+		RegistrationListener.sendMailQuiz(opponent, message, "KooisUp invitation");
+
+		return "th";
+	}
+
+	public String getOpponent() {
+		return opponent;
+	}
+
+	public void setOpponent(String opponent) {
+		this.opponent = opponent;
+	}
+
+	public void increment() {
+        time++;
+    }
 }

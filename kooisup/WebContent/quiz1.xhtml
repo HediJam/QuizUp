@@ -8,6 +8,7 @@
 	<f:metadata>
 		<f:viewParam name="id" value="#{quiz1.quizId}" />
 		<f:viewParam name="category" value="#{quiz1.category}" />
+		<f:viewParam name="opponent" value="#{quiz1.opponent}" />
 		<f:viewAction action="#{quiz1.onload}" />
 	</f:metadata>
 	<meta charset="utf-8"></meta>
@@ -30,7 +31,7 @@
 		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/creative.css" type="text/css" />
 	<link rel="stylesheet" href="fonts/myFonts.css" />
-	
+
 
 
 
@@ -47,7 +48,13 @@
 		</div>
 
 		<div class="text-center Font">
-			<h:outputText id="timer" value="زمان = #{quiz1.time}" />
+			
+
+			<h:form>
+				<h:outputText id="timer" value="#{quiz1.time}" />
+				<p:poll interval="1" listener="#{quiz1.increment}"
+					update="timer" />
+			</h:form>
 			<br /> <br></br>
 
 			<hr></hr>
@@ -82,8 +89,8 @@
 
 							<f:ajax listener="#{quiz1.ajaxSubmit}" />
 						</h:selectOneRadio>
-						
-						
+
+
 					</h:form>
 
 				</div>

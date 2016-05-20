@@ -45,4 +45,8 @@ public class ResultBean {
 		
 		return "th";
 	}
+	
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
 }

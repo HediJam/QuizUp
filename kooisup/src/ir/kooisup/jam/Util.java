@@ -17,4 +17,7 @@ public class Util {
 	public static HttpServletRequest getRequest(){
 		return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	}
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
 }

@@ -78,4 +78,8 @@ public class Question {
 				+ ", choices=" + choices + "]";
 	}
 
+	public void antiBabak(){
+		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	}
+	
 }
