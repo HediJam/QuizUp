@@ -18,7 +18,8 @@ public class Quiz {
 		this.qzID=qzID;
 		this.score1=this.score2=0;
 		this.finishTime1=this.finishTime2=0;
-		this.uid1=this.uid2="";
+		this.uid1="";
+		this.uid2="";
 		this.qsIDs=qsIDs;
 	}
 	
@@ -102,7 +103,12 @@ public class Quiz {
 				+ ", qsIDs=" + qsIDs + "]";
 	}
 	
-	public void antiBabak(){
-		System.out.println("az hamin tiribun elam mikonam ridi :|");
+	String winner() {
+		if(uid1.equals("") || uid2.equals("")) return "";
+		if (score1>score2) return uid1;
+		if (score2>score1) return uid2;
+		if(finishTime1<finishTime2) return uid1;
+		return uid2;
 	}
+	
 }
