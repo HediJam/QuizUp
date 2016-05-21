@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 public class CategoryBean {
 	private List<String> categoryList;
 	private DBHandler db = DBHandler.getInstance();
+	private String currentCategory = null;
 	
 	public CategoryBean() {
 		// TODO Auto-generated constructor stub
@@ -35,4 +36,14 @@ public class CategoryBean {
 	public List<String> getCategoryList(){
 		return categoryList;
 	}
+	
+	public String getCurrentCategory() {
+		return currentCategory;
+	}
+	
+	public void setCurrentCategory(String cat) {
+		currentCategory = cat;
+	}
+
+
 }
