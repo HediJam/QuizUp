@@ -10,7 +10,6 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoException;
 import com.mongodb.ParallelScanOptions;
 
 import java.net.UnknownHostException;
@@ -20,7 +19,52 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.bson.Document;
+import org.bson.conversions.Bson;
+ 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
+
+
+import com.mongodb.Mongo;
+import com.mongodb.MongoException;
+ 
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+import com.mongodb.*;
+
+
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.BulkWriteOperation;
+import com.mongodb.BulkWriteResult;
+import com.mongodb.Cursor;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.ParallelScanOptions;
+
+import java.net.UnknownHostException;
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+ 
+import org.bson.Document;
+import org.bson.conversions.Bson;
+ 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+
+import com.mongodb.Mongo;
+import com.mongodb.MongoException;
+ 
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+import com.mongodb.*;
 
 public class DBHandler {
 	public static DBHandler instance = null;
@@ -43,7 +87,7 @@ public class DBHandler {
 	private DBHandler() {
 	    MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
-       //db.getCollection("users").drop();
+        db.getCollection("users").drop();
         db.getCollection("quizs").drop();
         db.getCollection("questions").drop();
         db.getCollection("categories").drop();
@@ -60,17 +104,16 @@ public class DBHandler {
 	public void basicInit() {
 		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("none","5","4","3"));
 		getInstance().insertCategory("math");
-		System.out.println("tuye basic iniam");
-		Question qs1 = new Question(10, "1+2=?", "math", "3", choices);
-		Question qs2 = new Question(11, "2+2=?", "math", "4", choices);
-		Question qs3 = new Question(12, "3+2=?", "math", "5", choices);
-		Question qs4 = new Question(13, "4+2=?", "math", "none",choices);
-		Question qs5 = new Question(14, "5+2=?", "math", "none", choices);
-		Question qs6 = new Question(15, "6+2=?", "math", "none", choices);
-		Question qs7 = new Question(16, "7+2=?", "math", "none", choices);
-		Question qs8 = new Question(17, "8+2=?", "math", "none", choices);
-		Question qs9 = new Question(18, "9+2=?", "math", "none", choices);
-		Question qs10 = new Question(19, "10+2=?", "math", "none", choices);
+		Question qs1 = new Question(0, "1+2=?", "math", "3", choices);
+		Question qs2 = new Question(1, "2+2=?", "math", "4", choices);
+		Question qs3 = new Question(2, "3+2=?", "math", "5", choices);
+		Question qs4 = new Question(3, "4+2=?", "math", "none",choices);
+		Question qs5 = new Question(4, "5+2=?", "math", "none", choices);
+		Question qs6 = new Question(5, "6+2=?", "math", "none", choices);
+		Question qs7 = new Question(6, "7+2=?", "math", "none", choices);
+		Question qs8 = new Question(7, "8+2=?", "math", "none", choices);
+		Question qs9 = new Question(8, "9+2=?", "math", "none", choices);
+		Question qs10 = new Question(9, "10+2=?", "math", "none", choices);
 		
 
 		//System.out.println("answer  "+qs1.getAnswer());
@@ -86,7 +129,7 @@ public class DBHandler {
 		getInstance().insertQuestion(qs10);
 	}
 	
-	public static void main(final String[] args) {
+	public static void main(final String[] args) throws Exception {
 		getInstance().basicInit();
 		
 		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("3","4","5","none"));
@@ -104,13 +147,20 @@ public class DBHandler {
 		System.out.println(qz3);
 		
 		int id1 = qz.getQzId();
+		getInstance().insertUser(new User("aida", "پسورد", "em1","gender", "country","کد"));
+		getInstance().insertUser(new User("aria", "پسورد", "em2","gender", "country","کد"));
+		
 		System.out.println(getInstance().findQuiz(id1));
 		getInstance().updateQuiz(qz, "aida", 20, 1);
 		System.out.println(getInstance().findQuiz(id1));
 		getInstance().updateQuiz(qz, "aria", 21, 2);
 		System.out.println(getInstance().findQuiz(id1));
-		getInstance().updateQuiz(qz, "asghar", 19, 3);
+		System.out.println("winner");
+		System.out.println(getInstance().getWinner(qz));
 		
+		getInstance().updateQuiz(qz, "asghar", 21, 1);
+		
+		System.out.println(getInstance().getEmailUsers(qz));
 		
 		getInstance().insertCategory("math");
 		getInstance().insertCategory("phys");
@@ -168,6 +218,19 @@ public class DBHandler {
         
 	}
 	
+	public User findUser(String uid) {
+		DBObject user = findOne(new BasicDBObject("_id", uid), users);
+		if(user==null)
+		{
+			System.out.println("Invalid user ID => not found so return null");
+			return null;
+		}
+			   
+		return new User((String)user.get("_id"), (String)user.get("password"), 
+				(String)user.get("email"), (String)user.get("gender"), 
+				(String)user.get("country"), (String)user.get("confirmationCode"), (boolean)user.get("mailConfirmed"));
+	}
+	
 	public boolean confirmEmail(String email, String confirmationCode){
 		BasicDBObject query =new BasicDBObject("email", email)
 									.append("confirmationCode", confirmationCode);
@@ -220,10 +283,7 @@ public class DBHandler {
 			if(! selectedIDs.contains(allQuestionsIDs.get(index)))
 				selectedIDs.add(allQuestionsIDs.get(index));
 		}
-		//Quiz quiz = new Quiz(category, 78, selectedIDs);
-
 		Quiz quiz = new Quiz(category, (int) quizs.count() /*lastQzID++*/, selectedIDs);
-
 		insertQuiz(quiz);
 		return quiz;
 	}
@@ -285,6 +345,24 @@ public class DBHandler {
 		} finally {
 			curs.close();
 		}
+	}
+	
+	public User getWinner(Quiz q) {
+		Quiz qz = findQuiz(q.getQzId());
+		if(qz==null) {
+			System.out.println("not found quiz");
+			return null;
+		}
+		String uid=qz.winner();
+		return findUser(uid);
+	}
+	
+	public ArrayList<String> getEmailUsers(Quiz qz) {
+		ArrayList<String> emails =  new ArrayList<String>();
+		Quiz q=findQuiz(qz.getQzId());
+		emails.add(findUser(q.getUid1()).getEmail());
+		emails.add(findUser(q.getUid2()).getEmail());
+		return emails;
 	}
 	
 	private void insertQuiz(Quiz q) //throws Exception
@@ -407,10 +485,6 @@ public class DBHandler {
 			return null;
 		}
 		return category;
-	}
-	
-	public void antiBabak(){
-		System.out.println("az hamin tiribun elam mikonam ridi :|");
 	}
 
 }
