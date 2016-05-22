@@ -12,7 +12,7 @@
 	<meta charset="utf-8"></meta>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-	<title>score</title>
+	<title>offlineInvitation</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet"
@@ -67,9 +67,9 @@
 									<p:message for="email" />-->
 								</div> 
 								<h:inputText class="form-control" value="#{resultBean.opponent}"/>
-
-								<h:commandButton value="ارسال" class="btn2 Font"
-									action="#{resultBean.sendMail}" ajax="false" />
+									
+								<a class="btn2 Font" href="quiz1.xhtml?category=#{categoryBean.currentCategory}">ارسال و شروع بازی
+								</a>
 							</h:form>
 						</div>
 					</div>
