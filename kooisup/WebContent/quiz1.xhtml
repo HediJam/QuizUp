@@ -51,6 +51,7 @@
 			
 
 			<h:form>
+			
 				<h:outputText id="timer" value="#{quiz1.time}" />
 				<p:poll interval="1" listener="#{quiz1.increment}"
 					update="timer" />

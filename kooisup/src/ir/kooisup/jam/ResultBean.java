@@ -1,16 +1,18 @@
 package ir.kooisup.jam;
 
+import java.io.IOException;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ResultBean {
 
 	String quizId;
-	String opponent;
+	private String opponent;
 
 	public String getQuizId() {
 		return quizId;
@@ -22,17 +24,26 @@ public class ResultBean {
 	}
 
 	public String getOpponent() {
+		System.out.println("@@@@@@@@@@@@@@@@");
 		return opponent;
 	}
 
-	public void setOpponent(String opponent) {
-		this.opponent = opponent;
+	public void setOpponent(String opp) {
+		System.out.println("********************");
+		System.out.println(opp);
+		System.out.println("********************");
+		this.opponent = opp;
 	}
 
 	public ResultBean() {
 		// TODO Auto-generated constructor stub
 	}
 
+	public void start(String category) throws IOException{
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect("http://localhost:8080/quizup/quiz1.xhtml?category="+category+"&opponent="+opponent);
+	}
+	
 	public String sendMail() {
 		
 		String message = "سلام " + "\r\n";
@@ -43,7 +54,7 @@ public class ResultBean {
 		System.out.println(message);
 		RegistrationListener.sendMailQuiz(opponent, message,"KooisUp invitation");
 		
-		return "quiz1.xhtml?category=ART&opponent="+opponent;
+		return "th";
 	}
 
 }
