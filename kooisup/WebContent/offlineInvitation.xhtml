@@ -1,8 +1,7 @@
-<!-- anti babak -->
 <!DOCTYPE html>
 <HTML lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
@@ -42,39 +41,31 @@
 				<div class="row">
 					<div class="col-sm-6 col-sm-offset-3 form-box">
 						<div class="form-top">
-							<!--<div class="form-top-left">
-								<h3>#{score} = امتیاز کسب شده شما</h3>
+							<div class="form-top-left">
+								<!-- <h3>#{score} = امتیاز کسب شده شما</h3>  -->
 								<p>... دوستان خود را به رقابت دعوت کنید</p>
-							</div>-->
+							</div>
 							<div class="form-top-right">
 								<i class="fa fa-envelope"></i>
 							</div>
 						</div>
 						<div class="form-bottom contact-form">
-							<h:form role="form" action="assets/contact.php" method="post">
-								<div class="form-group">
-									<label for="email">ایمیل</label>
-								<!--  	<h:inputText id="email" required="true" class="form-control"
-										requiredMessage="Please enter your email address."
-										validatorMessage="Invalid email format"
-										value="#{resultBean.opponent}"
-										placeholder="jane.doe@example.com">
-
-										<f:validateRegex
-											pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-
-									</h:inputText>
-									<p:watermark for="email" value="Email Address *" />
-									<p:message for="email" />-->
-								</div> 
-								<h:inputText class="form-control" value="#{resultBean.opponent}"/>
+							<h:form role="form" id="form">
 								
-								<h:commandButton value="ارسال و شروع بازی" class="btn2 Font"
-								action="#{resultBean.sendMail}" />	
-								<!-- <a class="btn2 Font" href="#{resultBean.sendMail}">ارسال و شروع بازی
-									 <f:param name="category" value="#{categoryBean.currentCategory}" />
-									<f:param name="opponent" value="#{resultBean.opponent}" /> 
-								</a> -->
+									
+									<h:inputText id="opp" class="form-control" p:placeholder="jane.doe@example.com" value="#{resultBean.opponent}"/>
+									
+									<h:commandButton class="btn2 Font" value="ارسال و شروع بازی"  action="#{resultBean.start(categoryBean.currentCategory)}" />
+									
+								
+								<!-- <h:outputLink class="btn2 Font" value="quiz1.xhtml" >
+    								<h:outputText value="ارسال و شروع بازی" />
+    								 <f:param name="category" value="#{categoryBean.currentCategory}" />
+                                    <f:param name="opponent" value="#{resultBean.opponent}"/> 		 
+								</h:outputLink>  -->
+								
+								 
+					
 							</h:form>
 						</div>
 					</div>
