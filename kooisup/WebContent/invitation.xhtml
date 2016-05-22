@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<HTML lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<f:metadata>
+		<f:viewParam name="id" value="#{resultBean.quizId}" />
+	</f:metadata>
+	<meta charset="utf-8"></meta>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<title>invitation</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet"
+		href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"></link>
+	<link rel="stylesheet" href="css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="css/creative.css"></link>
+	<link rel="stylesheet" href="fonts/myFonts.css"></link>
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"></link>
+	<link rel="stylesheet" href="css/form-elements.css"></link>
+	<link rel="stylesheet" href="flat-login-form/css/styles.css"></link>
+
+
+
+
+</h:head>
+<h:body>
+	<p>آیا مایل به انجام بازی هستید؟</p>
+	<h:form>
+		<h:commandButton value="بله" action="#{quizStarter.opponentAccept}" />
+		<h:commandButton value="خیر" action="#{quizStarter.opponentDecline}" />
+	</h:form>
+</h:body>
+</HTML>

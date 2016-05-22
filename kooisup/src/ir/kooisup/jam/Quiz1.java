@@ -216,10 +216,10 @@ public class Quiz1 implements Serializable {
 			}
 			selectedValue = null;
 			String address = "/" + "quiz1.xhtml?id=" + quiz.getQzId();
-			if (i == numOfQuestions - 1) {
+			if (i == numOfQuestions - 1 || time == 40) {
 				i = 0;
 				score = "0";
-
+				time = 0;
 				address = "/" + "result.xhtml?id=" + quiz.getQzId();
 				sendMail();
 			}
@@ -256,5 +256,21 @@ public class Quiz1 implements Serializable {
 
 	public void increment() {
         time++;
+        if(time == 40){
+        	ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        	try {
+				ec.redirect(ec.getRequestContextPath() + "/" + "result.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
     }
+	
+	public void opponentStart(){
+		System.out.println("opponent accepts...");
+	}
+
+
 }
+
