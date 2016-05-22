@@ -42,6 +42,7 @@ public class CategoryBean {
 	}
 	
 	public void setCurrentCategory(String cat) {
+		System.out.println("++++++++++++++");
 		currentCategory = cat;
 	}
 }
