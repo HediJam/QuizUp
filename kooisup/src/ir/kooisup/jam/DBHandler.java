@@ -228,7 +228,7 @@ public class DBHandler {
 			   
 		return new User((String)user.get("_id"), (String)user.get("password"), 
 				(String)user.get("email"), (String)user.get("gender"), 
-				(String)user.get("country"), (String)user.get("confirmationCode"), (boolean)user.get("mailConfirmed"));
+				(String)user.get("country"), (String)user.get("confirmationCode"), ((Boolean)user.get("mailConfirmed")).booleanValue());
 	}
 	
 	public boolean confirmEmail(String email, String confirmationCode){
