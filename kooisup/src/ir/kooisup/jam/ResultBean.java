@@ -43,10 +43,7 @@ public class ResultBean {
 		System.out.println(message);
 		RegistrationListener.sendMailQuiz(opponent, message,"KooisUp invitation");
 		
-		return "th";
+		return "quiz1.xhtml?category=ART&opponent="+opponent;
 	}
-	
-	public void antiBabak(){
-		System.out.println("az hamin tiribun elam mikonam ridi :|");
-	}
+
 }

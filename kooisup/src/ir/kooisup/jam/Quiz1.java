@@ -83,7 +83,7 @@ public class Quiz1 implements Serializable {
 	}
 
 	public String onload() {
-
+		
 		HttpSession hs = Util.getSession();
 		if (hs == null || hs.getAttribute("username") == null) {
 			// return "flat-login-form/index.xhtml";
