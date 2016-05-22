@@ -7,7 +7,8 @@
 
 <h:head>
 	<f:metadata>
-		<f:viewParam name="id" value="#{resultBean.quizId}" />
+		<!-- <f:viewParam name="id" value="#{resultBean.quizId}" />  -->
+		 <f:viewParam name="category" value="#{categoryBean.currentCategory}"/>
 	</f:metadata>
 	<meta charset="utf-8"></meta>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
@@ -41,10 +42,10 @@
 				<div class="row">
 					<div class="col-sm-6 col-sm-offset-3 form-box">
 						<div class="form-top">
-							<div class="form-top-left">
+							<!--<div class="form-top-left">
 								<h3>#{score} = امتیاز کسب شده شما</h3>
 								<p>... دوستان خود را به رقابت دعوت کنید</p>
-							</div>
+							</div>-->
 							<div class="form-top-right">
 								<i class="fa fa-envelope"></i>
 							</div>
@@ -67,9 +68,13 @@
 									<p:message for="email" />-->
 								</div> 
 								<h:inputText class="form-control" value="#{resultBean.opponent}"/>
-									
-								<a class="btn2 Font" href="quiz1.xhtml?category=#{categoryBean.currentCategory}">ارسال و شروع بازی
-								</a>
+								
+								<h:commandButton value="ارسال و شروع بازی" class="btn2 Font"
+								action="#{resultBean.sendMail}" />	
+								<!-- <a class="btn2 Font" href="#{resultBean.sendMail}">ارسال و شروع بازی
+									 <f:param name="category" value="#{categoryBean.currentCategory}" />
+									<f:param name="opponent" value="#{resultBean.opponent}" /> 
+								</a> -->
 							</h:form>
 						</div>
 					</div>

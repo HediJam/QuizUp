@@ -87,10 +87,10 @@ public class DBHandler {
 	private DBHandler() {
 	    MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
-        db.getCollection("users").drop();
+        //db.getCollection("users").drop();
         db.getCollection("quizs").drop();
         db.getCollection("questions").drop();
-        db.getCollection("categories").drop();
+        //db.getCollection("categories").drop();
         
         users = db.getCollection("users");
         quizs = db.getCollection("quizs");
