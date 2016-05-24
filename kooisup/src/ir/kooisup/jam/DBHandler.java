@@ -90,7 +90,7 @@ public class DBHandler {
         //db.getCollection("users").drop();
         db.getCollection("quizs").drop();
         db.getCollection("questions").drop();
-        //db.getCollection("categories").drop();
+        db.getCollection("categories").drop();
         
         users = db.getCollection("users");
         quizs = db.getCollection("quizs");

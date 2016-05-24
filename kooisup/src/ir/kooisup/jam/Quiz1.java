@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped
-public class Quiz1 implements Serializable {
+public class Quiz1 {
 
 	String curQuestion;
 	String option1;
@@ -33,7 +33,7 @@ public class Quiz1 implements Serializable {
 	String selectedValue;
 	static int i = 0;
 	int numOfQuestions = 7;
-	String opponent;
+	static String opponent;
 
 	public String getScore() {
 		return score;
@@ -100,6 +100,7 @@ public class Quiz1 implements Serializable {
 
 		System.out.println("on load  " + quizId);
 		System.out.println("on load " + category);
+		System.out.println("-----------------------------on load " + opponent);
 		
 		permission();
 		System.out.println("tuye onloadam");
@@ -216,12 +217,28 @@ public class Quiz1 implements Serializable {
 			}
 			selectedValue = null;
 			String address = "/" + "quiz1.xhtml?id=" + quiz.getQzId();
-			if (i == numOfQuestions - 1 || time == 40) {
+			if (i == numOfQuestions - 1) {
 				i = 0;
 				score = "0";
-				time = 0;
-				address = "/" + "result.xhtml?id=" + quiz.getQzId();
-				sendMail();
+				time = -100;
+				address = "/" + "offlineResult.xhtml?id=" + quiz.getQzId();
+				
+				
+				DBHandler db = DBHandler.getInstance();
+				HttpSession hs = Util.getSession();
+				String uid = hs.getAttribute("username").toString();
+				db.updateQuiz(quiz,uid,Integer.parseInt(score), time);
+				System.out.println("&&&&&&&&&&&&&&&&&&&&& usernam name " + quiz.getUid1());
+				if(quiz.numOfPlayed() == 1){
+					System.out.println("&&&&&&&&&&&&&&&nafar avalam ke bazi mikone");
+					sendMail();
+					System.out.println("after sending mail......");
+				}
+				else if (quiz.numOfPlayed() == 2){
+					System.out.println("&&&&&&&&&&&&&&&&&&&&nafar 2 ke bazi mikone");
+					sendMailResult();
+					System.out.println("after sending result mail......");
+				}
 			}
 			try {
 
@@ -239,7 +256,7 @@ public class Quiz1 implements Serializable {
 		message += "دوستتان شما را به چالش کوییزآپ دعوت کرده";
 		message += "\r\n" + "کلیک کنید" + "\r\n";
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-		message += "localhost:8080/" + ec.getRequestContextPath() + "/" + "quiz1.xhtml?id=" + quizId;
+		message += "localhost:8080/" + ec.getRequestContextPath() + "/" + "quiz1.xhtml?id=" + quiz.getQzId();
 		System.out.println(message);
 		RegistrationListener.sendMailQuiz(opponent, message, "KooisUp invitation");
 
@@ -256,10 +273,14 @@ public class Quiz1 implements Serializable {
 
 	public void increment() {
         time++;
-        if(time == 40){
+        if(time > 40 || time < 0){
+        	System.out.println("tims is ------------ : " + time) ;
         	ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        	time = 0;
+        	score = "0";
+        	i = 0;
         	try {
-				ec.redirect(ec.getRequestContextPath() + "/" + "result.xhtml");
+				ec.redirect(ec.getRequestContextPath() + "/" + "offlineResult.xhtml");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -271,6 +292,18 @@ public class Quiz1 implements Serializable {
 		System.out.println("opponent accepts...");
 	}
 
+	public String sendMailResult() {
 
+		DBHandler db = DBHandler.getInstance();
+		String oppMail = db.getEmailUsers(quiz).get(0);
+		String message = "سلام " + "\r\n";
+		message += "نتیجه بازی هست";
+		message += "\r\n" + "امتیاز شما = " + quiz.getScore1() + "\r\n";
+		message += "\r\n" + "امتیاز حریف = " + quiz.getScore2() + "\r\n";
+		System.out.println(message);
+		RegistrationListener.sendMailQuiz(oppMail, message, "KooisUp result");
+
+		return "th";
+	}
 }
 

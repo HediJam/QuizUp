@@ -103,12 +103,21 @@ public class Quiz {
 				+ ", qsIDs=" + qsIDs + "]";
 	}
 	
-	String winner() {
+	public String winner() {
 		if(uid1.equals("") || uid2.equals("")) return "";
 		if (score1>score2) return uid1;
 		if (score2>score1) return uid2;
 		if(finishTime1<finishTime2) return uid1;
 		return uid2;
 	}
-	
+	public int numOfPlayed(){
+		if(uid1.equals("") && uid2.equals(""))
+			return 0;
+		else if (uid1.equals("") && !uid2.equals(""))
+			return 1;
+		else if(uid1.equals("") && !uid2.equals(""))
+			return 1;
+		else 
+			return 2;
+	}
 }

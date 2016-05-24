@@ -1,4 +1,3 @@
-﻿<!-- anti babak -->
 <!DOCTYPE html>
 <HTML lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -7,7 +6,6 @@
 
 <h:head>
 	<f:metadata>
-		<!-- <f:viewParam name="id" value="#{resultBean.quizId}" />  -->
 		 <f:viewParam name="category" value="#{categoryBean.currentCategory}"/>
 	</f:metadata>
 	<meta charset="utf-8"></meta>
@@ -24,21 +22,12 @@
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"></link>
 	<link rel="stylesheet" href="css/form-elements.css"></link>
 	<link rel="stylesheet" href="flat-login-form/css/styles.css"></link>
-
-
-
-
 </h:head>
-
 <h:body class="header">
-
-
 	<!-- Top content -->
 	<div class="top-content Font">
-
 		<div class="inner-bg">
 			<div class="container">
-
 				<div class="row">
 					<div class="col-sm-6 col-sm-offset-3 form-box">
 						<div class="form-top">
@@ -51,43 +40,23 @@
 							</div>
 						</div>
 						<div class="form-bottom contact-form">
-							<h:form role="form" id="form">
-								
-									
-									<h:inputText id="opp" class="form-control" p:placeholder="jane.doe@example.com" value="#{resultBean.opponent}"/>
-									
+							<h:form role="form" id="form">	
+											
+									<h:inputText id="opp" type="email" class="form-control" p:placeholder="jane.doe@example.com" value="#{resultBean.opponent}"/>
+									<br></br>
 									<h:commandButton class="btn2 Font" value="ارسال و شروع بازی"  action="#{resultBean.start(categoryBean.currentCategory)}" />
-									
-								
-								<!-- <h:outputLink class="btn2 Font" value="quiz1.xhtml" >
-    								<h:outputText value="ارسال و شروع بازی" />
-    								 <f:param name="category" value="#{categoryBean.currentCategory}" />
-                                    <f:param name="opponent" value="#{resultBean.opponent}"/> 		 
-								</h:outputLink>  -->
-								
-								 
-					
 							</h:form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
-
-
 	<!-- Javascript -->
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
 	<script src="assets/js/retina-1.1.0.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
-
-	<!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
-
 </h:body>
-
 </HTML>
