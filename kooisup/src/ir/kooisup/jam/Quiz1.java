@@ -174,7 +174,7 @@ public class Quiz1 {
 		String username = hs.getAttribute("username").toString();
 		System.out.println(username);
 		DBHandler db = DBHandler.getInstance();
-		db.updateQuiz(quiz, username, Integer.valueOf(score), 40);
+		db.updateQuiz(quiz.getQzId(), username, Integer.valueOf(score), 40);
 	}
 
 	private void permission() {
@@ -227,7 +227,7 @@ public class Quiz1 {
 				DBHandler db = DBHandler.getInstance();
 				HttpSession hs = Util.getSession();
 				String uid = hs.getAttribute("username").toString();
-				db.updateQuiz(quiz,uid,Integer.parseInt(score), time);
+				db.updateQuiz(quiz.getQzId(),uid,Integer.parseInt(score), time);
 				System.out.println("&&&&&&&&&&&&&&&&&&&&& usernam name " + quiz.getUid1());
 				if(quiz.numOfPlayed() == 1){
 					System.out.println("&&&&&&&&&&&&&&&nafar avalam ke bazi mikone");

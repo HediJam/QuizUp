@@ -205,7 +205,7 @@ public class QuizHandler {
 		String username = hs.getAttribute("username").toString();
 		System.out.println(username);
 		DBHandler db = DBHandler.getInstance();
-		db.updateQuiz(quiz, username, Integer.valueOf(score), 40);
+		//db.updateQuiz(quiz.getQsIDs(), username, Integer.valueOf(score), 40);
 	}
 	
 	public void onload(){

@@ -120,4 +120,9 @@ public class Quiz {
 		else 
 			return 2;
 	}
+	public int numPlayed() {
+		  if(uid1.equals("")) return 0;
+		  else if(uid2.equals("")) return 1;
+		  return 2;
+		 }
 }
