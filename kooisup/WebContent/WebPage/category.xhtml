@@ -1,3 +1,4 @@
+<!-- anti babak -->
 <!DOCTYPE html>
 <HTML
 xmlns:h="http://java.sun.com/jsf/html"
@@ -88,12 +89,12 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
             
             <ui:repeat value="#{categoryBean.categoryList}" var="category">
                 <div class="col-lg-4 col-sm-6">
-                    <a href="game.xhtml?category=#{category.name}" class="portfolio-box">
-                        <img src="img/portfolio/#{category.name}.jpg" class="img-responsive" alt=""/>
+                    <a href="game.xhtml?category=#{category}" class="portfolio-box">
+                        <img src="img/portfolio/#{category}.jpg" class="img-responsive" alt=""/>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    #{category.name}
+                                    #{category}
                                 </div>
                             </div>
                         </div>

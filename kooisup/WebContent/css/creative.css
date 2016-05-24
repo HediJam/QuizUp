@@ -10,6 +10,23 @@ body {
     height: 100%;
 }
 
+.myForm{
+	margin-right: 30%;
+	margin-left: 30%;
+	margin-top: 8%;
+		
+}
+
+/*
+.ui-icon{
+	height: 20px;
+	margin-top: 4px;
+}
+
+.ui-paginator-last{
+	height: 32px;
+}*/
+
 @font-face {
         font-family: 'BBardiya';
                 src:url(./fonts/BBardiya.eot) format(‘eot’),
@@ -103,7 +120,7 @@ h6 {
 
 p {
     margin-bottom: 20px;
-    font-size: 22px;
+    font-size: 26px;
     line-height: 1.5;
     font-family:BBardiya;
 }

@@ -214,7 +214,7 @@ public class QuizHandler {
 		if (quizId == null) {
 			System.out.println("nulle");
 			db.basicInit();
-			quiz = db.createQuiz("math");
+			quiz = db.createQuiz("MATH");
 		} else {
 			System.out.println("quiz ghadimi ba id " + quizId);
 			quiz = db.findQuiz(Integer.valueOf(quizId));

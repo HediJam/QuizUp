@@ -108,7 +108,7 @@ public class Quiz1 {
 		if (quizId == null) {
 			System.out.println("quiz id is null in onload");
 			db.basicInit();
-			quiz = db.createQuiz("math");
+			quiz = db.createQuiz("MATH");
 			quizId = Integer.toString(quiz.getQzId());
 			System.out.println("quiz id after creating  " + quizId);
 
