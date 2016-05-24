@@ -104,13 +104,17 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 </p:dataTable>  
  -->
   
-  		<p:row>
-        	<h:inputText size="10" value="#{categoryBean.currentCategory}" />
-        	<h:commandButton value="افزودن" action="#{categoryBean.addCategory}" />
-        </p:row>
+  		<div class="Font" style="color:black; font-size:large; text-align: right; direction:rtl;">
+  		    <i class="fa fa-plus"></i>
+        	<h:inputText size="10"  value="#{categoryBean.currentCategory}" />	
+        	<h:commandButton value="افزودن دسته جدید" action="#{categoryBean.addCategory}" >
+        	</h:commandButton>
+       	</div>
+        
         
     <p:spacer height="20"/>  
     <p:spacer height="40"/>  
+  
   
  <p:dataTable id="rowEditingTable" var="category" value="#{categoryBean.categoryList}"  
                  paginator="true" rows="5" paginatorPosition="bottom"  
