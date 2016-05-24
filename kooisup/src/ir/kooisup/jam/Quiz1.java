@@ -18,6 +18,9 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class Quiz1 {
 
+	static String winner = "d";
+	static String myScore = "d";
+	static String oppScore;
 	String curQuestion;
 	String option1;
 	String option2;
@@ -83,26 +86,23 @@ public class Quiz1 {
 	}
 
 	public String onload() {
-		
-		HttpSession hs = Util.getSession();
-		if (hs == null || hs.getAttribute("username") == null) {
-			// return "flat-login-form/index.xhtml";
-			System.out.println("hs is null........" + quizId);
-			// ExternalContext ec =
-			// FacesContext.getCurrentInstance().getExternalContext();
-			// String address = ec.getRequestContextPath() + "/" +
-			// "flat-login-form/index.xhtml?quizId=" + quizId;
-			// return
-			// "http://localhost:8080/quizup/flat-login-form/index.xhtml?quizId="
-			// + quizId;
-			return "flat-login-form/index.xhtml?quizId=" + quizId;
-		}
+
+		/*
+		 * HttpSession hs = Util.getSession(); if (hs == null ||
+		 * hs.getAttribute("username") == null) { System.out.println(
+		 * "hs is null........" + quizId); ExternalContext ec =
+		 * FacesContext.getCurrentInstance().getExternalContext(); String
+		 * address = ec.getRequestContextPath() + "/" + "login.xhtml"; try {
+		 * ec.redirect(address); } catch (IOException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); } // return
+		 * "flat-login-form/index.xhtml?quizId=" + quizId; }
+		 */
 
 		System.out.println("on load  " + quizId);
 		System.out.println("on load " + category);
 		System.out.println("-----------------------------on load " + opponent);
-		
-		permission();
+
+		// permission();
 		System.out.println("tuye onloadam");
 		DBHandler db = DBHandler.getInstance();
 		if (quizId == null) {
@@ -218,27 +218,34 @@ public class Quiz1 {
 			selectedValue = null;
 			String address = "/" + "quiz1.xhtml?id=" + quiz.getQzId();
 			if (i == numOfQuestions - 1) {
-				i = 0;
-				score = "0";
-				time = -100;
+				
 				address = "/" + "offlineResult.xhtml?id=" + quiz.getQzId();
-				
-				
 				DBHandler db = DBHandler.getInstance();
 				HttpSession hs = Util.getSession();
 				String uid = hs.getAttribute("username").toString();
-				db.updateQuiz(quiz.getQzId(),uid,Integer.parseInt(score), time);
-				System.out.println("&&&&&&&&&&&&&&&&&&&&& usernam name " + quiz.getUid1());
-				if(quiz.numOfPlayed() == 1){
+				db.updateQuiz(quiz.getQzId(), uid, Integer.parseInt(score), time);
+				
+				quiz = db.findQuiz(quiz.getQzId());
+				System.out.println("&&&&&&&&&&&&&&&&&&&&& usernam name " + quiz.numPlayed());
+
+				time = -100;
+				if (quiz.numPlayed() == 1) {
+					myScore = Integer.toString(quiz.getScore1());
+					oppScore = "نامعلوم";
+					winner = "نامعلوم";
 					System.out.println("&&&&&&&&&&&&&&&nafar avalam ke bazi mikone");
 					sendMail();
 					System.out.println("after sending mail......");
-				}
-				else if (quiz.numOfPlayed() == 2){
+				} else if (quiz.numPlayed() == 2) {
+					myScore = Integer.toString(quiz.getScore2());
+					oppScore = Integer.toString(quiz.getScore1());
+					winner = db.getWinner(quiz).getUsername();
 					System.out.println("&&&&&&&&&&&&&&&&&&&&nafar 2 ke bazi mikone");
 					sendMailResult();
 					System.out.println("after sending result mail......");
 				}
+				
+				
 			}
 			try {
 
@@ -248,6 +255,22 @@ public class Quiz1 {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public String getMyScore() {
+		return myScore;
+	}
+
+	public void setMyScore(String myScore) {
+		this.myScore = myScore;
+	}
+
+	public String getOppScore() {
+		return oppScore;
+	}
+
+	public void setOppScore(String oppScore) {
+		this.oppScore = oppScore;
 	}
 
 	public String sendMail() {
@@ -272,24 +295,30 @@ public class Quiz1 {
 	}
 
 	public void increment() {
-        time++;
-        if(time > 40 || time < 0){
-        	System.out.println("tims is ------------ : " + time) ;
-        	ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        	time = 0;
-        	score = "0";
-        	i = 0;
-        	try {
+		time++;
+		if (time > 40 || time < 0) {
+			System.out.println("tims is ------------ : " + time);
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			reset();
+			try {
 				ec.redirect(ec.getRequestContextPath() + "/" + "offlineResult.xhtml");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        }
-    }
-	
-	public void opponentStart(){
+		}
+	}
+
+	public void opponentStart() {
 		System.out.println("opponent accepts...");
+	}
+
+	public String getWinner() {
+		return winner;
+	}
+
+	public void setWinner(String winner) {
+		this.winner = winner;
 	}
 
 	public String sendMailResult() {
@@ -297,13 +326,22 @@ public class Quiz1 {
 		DBHandler db = DBHandler.getInstance();
 		String oppMail = db.getEmailUsers(quiz).get(0);
 		String message = "سلام " + "\r\n";
-		message += "نتیجه بازی هست";
+		message += "نتیجه بازی به شرح زیر است";
 		message += "\r\n" + "امتیاز شما = " + quiz.getScore1() + "\r\n";
 		message += "\r\n" + "امتیاز حریف = " + quiz.getScore2() + "\r\n";
+		message += "\r\n" + "برنده نهایی = " + winner + "\r\n";
 		System.out.println(message);
 		RegistrationListener.sendMailQuiz(oppMail, message, "KooisUp result");
 
 		return "th";
 	}
-}
 
+	private void reset() {
+		time = 0;
+		score = "0";
+		i = 0;
+		opponent = "";
+	}
+	
+
+}

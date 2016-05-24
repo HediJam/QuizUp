@@ -87,17 +87,17 @@ public class DBHandler {
 	private DBHandler() {
 	    MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
-        db.getCollection("users").drop();
-        db.getCollection("quizs").drop();
-        db.getCollection("questions").drop();
-        db.getCollection("categories").drop();
+       // db.getCollection("users").drop();
+        //db.getCollection("quizs").drop();
+        //db.getCollection("questions").drop();
+        //db.getCollection("categories").drop();
         
         users = db.getCollection("users");
         quizs = db.getCollection("quizs");
         questions = db.getCollection("questions");
         categories = db.getCollection("categories");
         requests = db.getCollection("requests");
-        users.createIndex(new BasicDBObject("email", 1).append("unique", true));
+       // users.createIndex(new BasicDBObject("email", 1).append("unique", true));
 	
 	}
 	
@@ -329,6 +329,7 @@ public class DBHandler {
 	
 	public void updateQuiz(int qzID, Quiz q) {
 		
+		System.out.println("!!!!!! in !!!!!");
 		BasicDBObject query = new BasicDBObject("_id", qzID);
 		DBCursor curs = quizs.find(query);
 		
@@ -343,6 +344,7 @@ public class DBHandler {
         		.append("qsIDs", q.getQsIDs()));
 		try {
 			if (curs.hasNext()) {
+				
 				DBObject qz = curs.next();
 				quizs.update((DBObject) qz, (BasicDBObject) newQuiz);		
 			}
@@ -352,13 +354,16 @@ public class DBHandler {
 	}
 	
 	public void updateQuiz(int qzID, String username, int score, int finishTime) {
-		Quiz q=findQuiz(qzID);
+		System.out.println("!!!!!! in inner !!!!!");
+		Quiz q = findQuiz(qzID);
 		if(q.numPlayed()==0) {
+			System.out.println("!!!!!! nafara aval set mishe in !!!!! + " + username);
 			q.setUid1(username);
 			q.setFinishTime1(finishTime);
 			q.setScore1(score);
 		}
 		else if(q.numPlayed()==1) {
+			System.out.println("!!!!!! nafara2 aval set mishe in !!!!!");
 			q.setUid2(username);
 			q.setFinishTime2(finishTime);
 			q.setScore2(score);

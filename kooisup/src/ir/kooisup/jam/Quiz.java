@@ -110,16 +110,18 @@ public class Quiz {
 		if(finishTime1<finishTime2) return uid1;
 		return uid2;
 	}
+	
 	public int numOfPlayed(){
 		if(uid1.equals("") && uid2.equals(""))
 			return 0;
 		else if (uid1.equals("") && !uid2.equals(""))
 			return 1;
-		else if(uid1.equals("") && !uid2.equals(""))
+		else if(!uid1.equals("") && uid2.equals(""))
 			return 1;
 		else 
 			return 2;
 	}
+	
 	public int numPlayed() {
 		  if(uid1.equals("")) return 0;
 		  else if(uid2.equals("")) return 1;
