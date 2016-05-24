@@ -54,8 +54,8 @@
 							<h:form role="form" id="form">
 								
 									
-									<h:inputText id="opp" class="form-control" p:placeholder="jane.doe@example.com" value="#{resultBean.opponent}"/>
-									
+									<h:inputText id="opp" p:type="email" class="form-control" p:placeholder="jane.doe@example.com" value="#{resultBean.opponent}"/>
+									<br></br>
 									<h:commandButton class="btn2 Font" value="ارسال و شروع بازی"  action="#{resultBean.start(categoryBean.currentCategory)}" />
 									
 								

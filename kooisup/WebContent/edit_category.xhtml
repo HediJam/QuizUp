@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<HTML
+<HTML xmlns="http://www.w3.org/1999/xhtml"   
 xmlns:h="http://java.sun.com/jsf/html"
-xmlns:p="http://java.sun.com/jsf/core"
-xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+xmlns:p="http://primefaces.org/ui"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:pe="http://primefaces.org/ui/extensions" >
 
 <h:head> 
 
@@ -13,7 +13,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     <meta name="description" content=""></meta>
     <meta name="author" content=""></meta>
 
-    <title>category</title>
+    <title>edit category</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"></link>
@@ -41,7 +41,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
 </h:head>
 
-<h:body id="page-top">
+<h:body id="page-top" class="header">
 
   <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -73,45 +73,99 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         </div>  
     </header> -->
     
-    <aside class="bg-dark">
-        <div class="container text-center">
-            <div class="call-to-action">
-                
-            </div>
-        </div>
-    </aside>
+    
 
     <section class="no-padding" id="portfolio">
-        <div class="container-fluid">
-            <div class="row no-gutter">
-            
-            
-            <ui:repeat value="#{categoryBean.categoryList}" var="category">
-                <div class="col-lg-4 col-sm-6">
-                    <a href="game.xhtml?category=#{category.name}" class="portfolio-box">
-                        <img src="img/portfolio/#{category.name}.jpg" class="img-responsive" alt=""/>
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    #{category.name}
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-             </ui:repeat>
+        
+        <h:form styleClass="myForm">
+   <!-- 
+   <p:dataTable id="cellEditingTable" var="category" value="#{categoryBean.categoryList}"  
+             paginator="true" rows="5" paginatorPosition="bottom"  
+             filteredValue="#{messageTableController.filteredMessages}"  
+             editable="true" editMode="cell">  
+    <f:facet name="header">  
+        In-Cell Editing  
+    </f:facet>  
   
+    <p:column filterBy="#{category}">  
+        <f:facet name="header">  
+            <h:outputText value="Category"/>  
+        </f:facet>  
+        <p:cellEditor>  
+            <f:facet name="output">  
+                <h:outputText value="#{category}"/>  
+            </f:facet>  
+            <f:facet name="input">  
+                <p:inputText id="modelInput" value="#{category}" style="width:96%"/>  
+            </f:facet>  
+        </p:cellEditor>  
+    </p:column>  
+      
+</p:dataTable>  
+ -->
+  
+  		<p:row>
+        	<h:inputText size="10" value="#{categoryBean.currentCategory}" />
+        	<h:commandButton value="افزودن" action="#{categoryBean.addCategory}" />
+        </p:row>
+        
+    <p:spacer height="20"/>  
+    <p:spacer height="40"/>  
+  
+ <p:dataTable id="rowEditingTable" var="category" value="#{categoryBean.categoryList}"  
+                 paginator="true" rows="5" paginatorPosition="bottom"  
+                 filteredValue="#{categoryBean.filteredMessages}"  
+                 editable="true" styleClass="Font">  
+                 
+        
+        
+        <f:facet name="header" >
+        <div style="font-size: x-large;"> 
+            ویرایش دسته بندی ها  
+            </div> 
+        </f:facet>  
+  
+        <p:column filterBy="#{category.name}"> 
+          <div style="font-size: large;"> 
+            <f:facet name="header">  
+                <h:outputText value="دسته"/>  
+            </f:facet>  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{category.name}"/>  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText id="modelInput" value="#{category.name}" style="width:96%"/>  
+                </f:facet>  
+            </p:cellEditor>  
             </div>
-        </div>
+        </p:column>  
+        
+        <p:column style="width:10%">		
+    		<!-- <f:facet name="header">حذف</f:facet>  -->
+    			
+    					
+    		<h:commandLink action="#{categoryBean.deleteAction(category)}" > 	
+    			<i class="fa fa-remove"></i>
+    		</h:commandLink> 
+		</p:column>
+       
+        <p:column style="width:8%" exportable="false">
+        	
+            <p:rowEditor  />  
+        </p:column>  
+        
+        
+        
+    </p:dataTable>  
+  
+	<p:spacer height="20"/>  
+
+   		
+   </h:form>
     </section>
 
-    <aside class="bg-dark">
-        <div class="container text-center">
-            <div class="call-to-action">
-                
-            </div>
-        </div>
-    </aside>
+   
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -126,6 +180,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
     <!-- Custom Theme JavaScript -->
     <script src="js/creative.js"></script>
+   
 
 </h:body>
 

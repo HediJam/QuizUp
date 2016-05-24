@@ -103,17 +103,17 @@ public class DBHandler {
 	
 	public void basicInit() {
 		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("none","5","4","3"));
-		getInstance().insertCategory("math");
-		Question qs1 = new Question(0, "1+2=?", "math", "3", choices);
-		Question qs2 = new Question(1, "2+2=?", "math", "4", choices);
-		Question qs3 = new Question(2, "3+2=?", "math", "5", choices);
-		Question qs4 = new Question(3, "4+2=?", "math", "none",choices);
-		Question qs5 = new Question(4, "5+2=?", "math", "none", choices);
-		Question qs6 = new Question(5, "6+2=?", "math", "none", choices);
-		Question qs7 = new Question(6, "7+2=?", "math", "none", choices);
-		Question qs8 = new Question(7, "8+2=?", "math", "none", choices);
-		Question qs9 = new Question(8, "9+2=?", "math", "none", choices);
-		Question qs10 = new Question(9, "10+2=?", "math", "none", choices);
+		getInstance().insertCategory("MATH");
+		Question qs1 = new Question(0, "1+2=?", "MATH", "3", choices);
+		Question qs2 = new Question(1, "2+2=?", "MATH", "4", choices);
+		Question qs3 = new Question(2, "3+2=?", "MATH", "5", choices);
+		Question qs4 = new Question(3, "4+2=?", "MATH", "none",choices);
+		Question qs5 = new Question(4, "5+2=?", "MATH", "none", choices);
+		Question qs6 = new Question(5, "6+2=?", "MATH", "none", choices);
+		Question qs7 = new Question(6, "7+2=?", "MATH", "none", choices);
+		Question qs8 = new Question(7, "8+2=?", "MATH", "none", choices);
+		Question qs9 = new Question(8, "9+2=?", "MATH", "none", choices);
+		Question qs10 = new Question(9, "10+2=?", "MATH", "none", choices);
 		
 
 		//System.out.println("answer  "+qs1.getAnswer());
@@ -133,17 +133,17 @@ public class DBHandler {
 		getInstance().basicInit();
 		
 		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("3","4","5","none"));
-		getInstance().insertCategory("math");
+		getInstance().insertCategory("MATH");
 
 		
-		//System.out.println(getInstance().findQuestions("math"));
+		//System.out.println(getInstance().findQuestions("MATH"));
 		//System.out.println(getInstance().findQuestion(qs1.getQsID()));
 		
-		Quiz qz = getInstance().createQuiz("math");
+		Quiz qz = getInstance().createQuiz("MATH");
 		System.out.println(qz);
-		Quiz qz2 = getInstance().createQuiz("math");
+		Quiz qz2 = getInstance().createQuiz("MATH");
 		System.out.println(qz2);
-		Quiz qz3 = getInstance().createQuiz("math");
+		Quiz qz3 = getInstance().createQuiz("MATH");
 		System.out.println(qz3);
 		
 		int id1 = qz.getQzId();
@@ -162,10 +162,10 @@ public class DBHandler {
 		
 		System.out.println(getInstance().getEmailUsers(qz));
 		
-		getInstance().insertCategory("math");
+		getInstance().insertCategory("MATH");
 		getInstance().insertCategory("phys");
 		System.out.println(getInstance().findCategories());
-		System.out.println(getInstance().findCategory("math"));
+		System.out.println(getInstance().findCategory("MATH"));
 		
 		/*
 		int id2 = getInstance().createQuiz("physics").getQzId();
