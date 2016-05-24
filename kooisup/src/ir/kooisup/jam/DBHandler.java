@@ -73,7 +73,7 @@ public class DBHandler {
 	private DBCollection quizs;
 	private DBCollection categories;
 	private DBCollection users;
-	private DBCollection metaDatas;
+	private DBCollection requests;
 	
 	//private static int lastQzID=0;
 	//private static int lastQsID=0;
@@ -87,16 +87,16 @@ public class DBHandler {
 	private DBHandler() {
 	    MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
-        //db.getCollection("users").drop();
+        db.getCollection("users").drop();
         db.getCollection("quizs").drop();
         db.getCollection("questions").drop();
-        //db.getCollection("categories").drop();
+        db.getCollection("categories").drop();
         
         users = db.getCollection("users");
         quizs = db.getCollection("quizs");
         questions = db.getCollection("questions");
         categories = db.getCollection("categories");
-        metaDatas = db.getCollection("metaDatas");
+        requests = db.getCollection("requests");
         users.createIndex(new BasicDBObject("email", 1).append("unique", true));
 	
 	}
@@ -151,21 +151,41 @@ public class DBHandler {
 		getInstance().insertUser(new User("aria", "پسورد", "em2","gender", "country","کد"));
 		
 		System.out.println(getInstance().findQuiz(id1));
-		getInstance().updateQuiz(qz, "aida", 20, 1);
+		getInstance().updateQuiz(id1, "aida", 20, 1);
 		System.out.println(getInstance().findQuiz(id1));
-		getInstance().updateQuiz(qz, "aria", 21, 2);
+		getInstance().updateQuiz(id1, "aria", 21, 2);
 		System.out.println(getInstance().findQuiz(id1));
-		System.out.println("winner");
+		System.out.println("winneeeeeeeer");
 		System.out.println(getInstance().getWinner(qz));
 		
-		getInstance().updateQuiz(qz, "asghar", 21, 1);
+		getInstance().updateQuiz(id1, "asghar", 21, 1);
 		
 		System.out.println(getInstance().getEmailUsers(qz));
 		
 		getInstance().insertCategory("MATH");
 		getInstance().insertCategory("phys");
 		System.out.println(getInstance().findCategories());
+
 		System.out.println(getInstance().findCategory("MATH"));
+		
+
+		getInstance().onlineRequest(0, "0");
+		System.out.println(getInstance().findQuiz(0));
+		getInstance().onlineRequest(1, "1");
+		System.out.println(getInstance().findQuiz(1));
+		getInstance().onlineRequest(2, "2");
+		System.out.println(getInstance().findQuiz(2));
+		System.out.println(getInstance().anyRequest());
+		getInstance().acceptRequest(0, "00");
+		System.out.println(getInstance().findQuiz(0));
+		System.out.println(getInstance().anyRequest());
+		getInstance().acceptRequest(1, "11");
+		System.out.println(getInstance().findQuiz(1));
+		System.out.println(getInstance().anyRequest());
+		getInstance().acceptRequest(2, "22");
+		System.out.println(getInstance().findQuiz(2));
+		System.out.println(getInstance().anyRequest());
+
 		
 		/*
 		int id2 = getInstance().createQuiz("physics").getQzId();
@@ -309,16 +329,52 @@ public class DBHandler {
 				(ArrayList<Integer>) qz.get("qsIDs"));
 	}
 	
+	public void updateQuiz(int qzID, Quiz q) {
+		
+		BasicDBObject query = new BasicDBObject("_id", qzID);
+		DBCursor curs = quizs.find(query);
+		
+		BasicDBObject newQuiz = new BasicDBObject("$set", 
+				new BasicDBObject("score1", q.getScore1())
+                .append("score2", q.getScore2())
+                .append("finishTime1", q.getFinishTime1())
+                .append("finishTime2", q.getFinishTime2())
+                .append("category", q.getCategory())
+                .append("uid1", q.getUid1())
+        		.append("uid2", q.getUid2())
+        		.append("qsIDs", q.getQsIDs()));
+		try {
+			if (curs.hasNext()) {
+				DBObject qz = curs.next();
+				quizs.update((DBObject) qz, (BasicDBObject) newQuiz);		
+			}
+		} finally {
+			curs.close();
+		}
+	}
+	
+	public void updateQuiz(int qzID, String username, int score, int finishTime) {
+		Quiz q=findQuiz(qzID);
+		if(q.numPlayed()==0) {
+			q.setUid1(username);
+			q.setFinishTime1(finishTime);
+			q.setScore1(score);
+		}
+		else if(q.numPlayed()==1) {
+			q.setUid2(username);
+			q.setFinishTime2(finishTime);
+			q.setScore2(score);
+		}
+		else 
+			System.out.println("This quiz has done by two user before");
+		updateQuiz(qzID, q);
+	}
+	/*
 	public void updateQuiz(Quiz q, String username, int score, int finishTime) {
 		
 		BasicDBObject query = new BasicDBObject("_id", q.getQzId());
 		DBCursor curs = quizs.find(query);
 		
-	/*	System.out.println(cursor.next());
-  	  DBObject c = cursor.curr();
-  	  BasicDBObject set = new BasicDBObject("$set", new BasicDBObject("mailConfirmed", true));
-		  users.update(c, set);
-		*/  
 		try {
 			if (curs.hasNext()) {
 				DBObject qz = curs.next();
@@ -346,6 +402,7 @@ public class DBHandler {
 			curs.close();
 		}
 	}
+	*/
 	
 	public User getWinner(Quiz q) {
 		Quiz qz = findQuiz(q.getQzId());
@@ -387,7 +444,6 @@ public class DBHandler {
         	System.out.println("duplicattte quiz id");
         }
 	}
-
 
 	//QUESTION METHODS
 	public Question insertQuestion(String text, String category, String answer, ArrayList<String> choices) {
@@ -486,5 +542,56 @@ public class DBHandler {
 		}
 		return category;
 	}
-
+	
+	//REQUEST METHODS
+	private void insertRequest(int qzID, String uid1) {
+			
+		BasicDBObject doc = new BasicDBObject("_id", qzID)
+	               .append("uid1", uid1);
+	     try {
+	        	requests.insert(doc);
+	     } catch(MongoException ex) {
+	    	 System.out.println("duplicattte quiz id");
+	     }
+	}
+	
+	public void onlineRequest(int qzID, String uid1) {
+		insertRequest(qzID, uid1);
+		Quiz q=findQuiz(qzID);
+		q.setUid1(uid1);
+		updateQuiz(q.getQzId(), q);
+	}
+	
+	public int anyRequest() {
+			DBCursor curs = requests.find();
+			try {
+				if (curs.hasNext()) {
+				DBObject rq = curs.next() ;
+				return ((Integer)rq.get("_id")).intValue();
+			}
+			
+			} finally {
+				curs.close();
+			}
+			return -1;
+		}
+	
+	public void acceptRequest(int qzID, String uid2) {
+		DBCursor curs = requests.find(new BasicDBObject("_id", qzID));
+		try {
+			if (curs.hasNext()) {
+				requests.remove(curs.next());
+				Quiz q=findQuiz(qzID);
+				q.setUid2(uid2);
+				updateQuiz(q.getQzId(), q);
+			} 
+			else {
+				System.out.println("no such quiz id");
+			}
+		
+		} finally {
+			curs.close();
+		}
+	}
+	
 }
