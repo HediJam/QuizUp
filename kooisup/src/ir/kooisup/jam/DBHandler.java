@@ -87,33 +87,35 @@ public class DBHandler {
 	private DBHandler() {
 	    MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
-       // db.getCollection("users").drop();
-        //db.getCollection("quizs").drop();
-        //db.getCollection("questions").drop();
-        //db.getCollection("categories").drop();
+        //db.getCollection("users").drop();
+        db.getCollection("quizs").drop();
+        db.getCollection("questions").drop();
+        db.getCollection("categories").drop();
+        db.getCollection("requests").drop();
+        
         
         users = db.getCollection("users");
         quizs = db.getCollection("quizs");
         questions = db.getCollection("questions");
         categories = db.getCollection("categories");
         requests = db.getCollection("requests");
-       // users.createIndex(new BasicDBObject("email", 1).append("unique", true));
+        users.createIndex(new BasicDBObject("email", 1).append("unique", true));
 	
 	}
 	
 	public void basicInit() {
 		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("none","5","4","3"));
-		getInstance().insertCategory("MATH");
-		Question qs1 = new Question(0, "1+2=?", "MATH", "3", choices);
-		Question qs2 = new Question(1, "2+2=?", "MATH", "4", choices);
-		Question qs3 = new Question(2, "3+2=?", "MATH", "5", choices);
-		Question qs4 = new Question(3, "4+2=?", "MATH", "none",choices);
-		Question qs5 = new Question(4, "5+2=?", "MATH", "none", choices);
-		Question qs6 = new Question(5, "6+2=?", "MATH", "none", choices);
-		Question qs7 = new Question(6, "7+2=?", "MATH", "none", choices);
-		Question qs8 = new Question(7, "8+2=?", "MATH", "none", choices);
-		Question qs9 = new Question(8, "9+2=?", "MATH", "none", choices);
-		Question qs10 = new Question(9, "10+2=?", "MATH", "none", choices);
+		getInstance().insertCategory("math");
+		Question qs1 = new Question(0, "1+2=?", "math", "3", choices);
+		Question qs2 = new Question(1, "2+2=?", "math", "4", choices);
+		Question qs3 = new Question(2, "3+2=?", "math", "5", choices);
+		Question qs4 = new Question(3, "4+2=?", "math", "none",choices);
+		Question qs5 = new Question(4, "5+2=?", "math", "none", choices);
+		Question qs6 = new Question(5, "6+2=?", "math", "none", choices);
+		Question qs7 = new Question(6, "7+2=?", "math", "none", choices);
+		Question qs8 = new Question(7, "8+2=?", "math", "none", choices);
+		Question qs9 = new Question(8, "9+2=?", "math", "none", choices);
+		Question qs10 = new Question(9, "10+2=?", "math", "none", choices);
 		
 
 		//System.out.println("answer  "+qs1.getAnswer());
@@ -133,17 +135,17 @@ public class DBHandler {
 		getInstance().basicInit();
 		
 		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("3","4","5","none"));
-		getInstance().insertCategory("MATH");
+		getInstance().insertCategory("math");
 
 		
-		//System.out.println(getInstance().findQuestions("MATH"));
+		//System.out.println(getInstance().findQuestions("math"));
 		//System.out.println(getInstance().findQuestion(qs1.getQsID()));
 		
-		Quiz qz = getInstance().createQuiz("MATH");
+		Quiz qz = getInstance().createQuiz("math");
 		System.out.println(qz);
-		Quiz qz2 = getInstance().createQuiz("MATH");
+		Quiz qz2 = getInstance().createQuiz("math");
 		System.out.println(qz2);
-		Quiz qz3 = getInstance().createQuiz("MATH");
+		Quiz qz3 = getInstance().createQuiz("math");
 		System.out.println(qz3);
 		
 		int id1 = qz.getQzId();
@@ -162,11 +164,10 @@ public class DBHandler {
 		
 		System.out.println(getInstance().getEmailUsers(qz));
 		
-		getInstance().insertCategory("MATH");
+		getInstance().insertCategory("math");
 		getInstance().insertCategory("phys");
 		System.out.println(getInstance().findCategories());
-
-		System.out.println(getInstance().findCategory("MATH"));
+		System.out.println(getInstance().findCategory("math"));
 		
 
 		getInstance().onlineRequest(0, "0");
@@ -175,17 +176,38 @@ public class DBHandler {
 		System.out.println(getInstance().findQuiz(1));
 		getInstance().onlineRequest(2, "2");
 		System.out.println(getInstance().findQuiz(2));
+		
 		System.out.println(getInstance().anyRequest());
 		getInstance().acceptRequest(0, "00");
 		System.out.println(getInstance().findQuiz(0));
 		System.out.println(getInstance().anyRequest());
+		
+		System.out.println(getInstance().hasAccepted(1));
 		getInstance().acceptRequest(1, "11");
+		System.out.println(getInstance().hasAccepted(1));
 		System.out.println(getInstance().findQuiz(1));
+		
 		System.out.println(getInstance().anyRequest());
 		getInstance().acceptRequest(2, "22");
 		System.out.println(getInstance().findQuiz(2));
 		System.out.println(getInstance().anyRequest());
-
+		System.out.println(getInstance().hasAccepted(3));
+		
+		System.out.println(getInstance().hasOponentFinish(1, "1"));
+		System.out.println(getInstance().hasOponentFinish(1, "11"));
+		System.out.println(getInstance().findQuiz(1).numFinished());
+		
+		getInstance().Ifinished(1, "1", 3);
+		System.out.println(getInstance().findQuiz(1));
+		System.out.println(getInstance().hasOponentFinish(1, "1"));
+		System.out.println(getInstance().hasOponentFinish(1, "11"));
+		System.out.println(getInstance().findQuiz(1).numFinished());
+		
+		getInstance().Ifinished(1, "11", 4);
+		System.out.println(getInstance().findQuiz(1));
+		System.out.println(getInstance().hasOponentFinish(1, "1"));
+		System.out.println(getInstance().hasOponentFinish(1, "11"));
+		System.out.println(getInstance().findQuiz(1).numFinished());
 		
 		/*
 		int id2 = getInstance().createQuiz("physics").getQzId();
@@ -331,7 +353,6 @@ public class DBHandler {
 	
 	public void updateQuiz(int qzID, Quiz q) {
 		
-		System.out.println("!!!!!! in !!!!!");
 		BasicDBObject query = new BasicDBObject("_id", qzID);
 		DBCursor curs = quizs.find(query);
 		
@@ -346,7 +367,6 @@ public class DBHandler {
         		.append("qsIDs", q.getQsIDs()));
 		try {
 			if (curs.hasNext()) {
-				
 				DBObject qz = curs.next();
 				quizs.update((DBObject) qz, (BasicDBObject) newQuiz);		
 			}
@@ -356,16 +376,13 @@ public class DBHandler {
 	}
 	
 	public void updateQuiz(int qzID, String username, int score, int finishTime) {
-		System.out.println("!!!!!! in inner !!!!!");
-		Quiz q = findQuiz(qzID);
+		Quiz q=findQuiz(qzID);
 		if(q.numPlayed()==0) {
-			System.out.println("!!!!!! nafara aval set mishe in !!!!! + " + username);
 			q.setUid1(username);
 			q.setFinishTime1(finishTime);
 			q.setScore1(score);
 		}
 		else if(q.numPlayed()==1) {
-			System.out.println("!!!!!! nafara2 aval set mishe in !!!!!");
 			q.setUid2(username);
 			q.setFinishTime2(finishTime);
 			q.setScore2(score);
@@ -549,10 +566,10 @@ public class DBHandler {
 	}
 	
 	//REQUEST METHODS
-	private void insertRequest(int qzID, String uid1) {
+	private void insertRequest(int qzID/*, String uid1*/) {
 			
 		BasicDBObject doc = new BasicDBObject("_id", qzID)
-	               .append("uid1", uid1);
+	               .append("accept", false);
 	     try {
 	        	requests.insert(doc);
 	     } catch(MongoException ex) {
@@ -561,14 +578,14 @@ public class DBHandler {
 	}
 	
 	public void onlineRequest(int qzID, String uid1) {
-		insertRequest(qzID, uid1);
+		insertRequest(qzID/*, uid1*/);
 		Quiz q=findQuiz(qzID);
 		q.setUid1(uid1);
 		updateQuiz(q.getQzId(), q);
 	}
 	
 	public int anyRequest() {
-			DBCursor curs = requests.find();
+			DBCursor curs = requests.find(new BasicDBObject("accept", false));
 			try {
 				if (curs.hasNext()) {
 				DBObject rq = curs.next() ;
@@ -582,10 +599,15 @@ public class DBHandler {
 		}
 	
 	public void acceptRequest(int qzID, String uid2) {
-		DBCursor curs = requests.find(new BasicDBObject("_id", qzID));
+		DBCursor curs = requests.find(new BasicDBObject("_id", qzID)
+										.append("accept", false));
 		try {
 			if (curs.hasNext()) {
-				requests.remove(curs.next());
+				//requests.remove(curs.next());
+				DBObject rq = curs.next();
+				requests.update((DBObject) rq, (BasicDBObject) new BasicDBObject("$set", 
+						new BasicDBObject("accept", true)));		
+		
 				Quiz q=findQuiz(qzID);
 				q.setUid2(uid2);
 				updateQuiz(q.getQzId(), q);
@@ -597,6 +619,28 @@ public class DBHandler {
 		} finally {
 			curs.close();
 		}
+	}
+	
+	public boolean hasAccepted(int qzID) {
+		DBObject rq = findOne(new BasicDBObject("_id", qzID), requests);
+		if(rq==null) 
+		{
+			System.out.println("invalid quiz ID => return null");
+			return false;
+		}
+		return ((Boolean)rq.get("accept")).booleanValue();
+	}
+	
+	public void Ifinished(int qzID, String uid, int finishTime) {
+		Quiz q=findQuiz(qzID);
+		if(uid.equals(q.getUid1())) q.setFinishTime1(finishTime);
+		else if(uid.equals(q.getUid2())) q.setFinishTime2(finishTime);
+		updateQuiz(q.getQzId(), q);
+	}
+	
+	public boolean hasOponentFinish(int qzID, String uid) {
+		Quiz q=findQuiz(qzID);
+		return q.hasOponentFinished(uid);
 	}
 	
 }
