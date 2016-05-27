@@ -197,13 +197,13 @@ public class DBHandler {
 		System.out.println(getInstance().hasOponentFinish(1, "11"));
 		System.out.println(getInstance().findQuiz(1).numFinished());
 		
-		getInstance().Ifinished(1, "1", 3);
+		getInstance().Ifinished(1, "1", 3, 11);
 		System.out.println(getInstance().findQuiz(1));
 		System.out.println(getInstance().hasOponentFinish(1, "1"));
 		System.out.println(getInstance().hasOponentFinish(1, "11"));
 		System.out.println(getInstance().findQuiz(1).numFinished());
 		
-		getInstance().Ifinished(1, "11", 4);
+		getInstance().Ifinished(1, "11", 4, 10);
 		System.out.println(getInstance().findQuiz(1));
 		System.out.println(getInstance().hasOponentFinish(1, "1"));
 		System.out.println(getInstance().hasOponentFinish(1, "11"));
@@ -631,10 +631,18 @@ public class DBHandler {
 		return ((Boolean)rq.get("accept")).booleanValue();
 	}
 	
-	public void Ifinished(int qzID, String uid, int finishTime) {
+	public void Ifinished(int qzID, String uid, int finishTime, int score) {
 		Quiz q=findQuiz(qzID);
-		if(uid.equals(q.getUid1())) q.setFinishTime1(finishTime);
-		else if(uid.equals(q.getUid2())) q.setFinishTime2(finishTime);
+		if(uid.equals(q.getUid1())) 
+		{
+			q.setFinishTime1(finishTime);
+			q.setScore1(score);
+		}
+		else if(uid.equals(q.getUid2())) 
+		{
+			q.setFinishTime2(finishTime);
+			q.setScore2(score);
+		}
 		updateQuiz(q.getQzId(), q);
 	}
 	
