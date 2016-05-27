@@ -9,7 +9,7 @@
 	<h:body>	
 			<h:form>
 				<h:outputText id="timer" value="#{polling.sample}" />
-				<p:poll interval="2" listener="#{polling.waitingForSubject}" update="timer" />
+				<p:poll interval="1" listener="#{polling.waitingForSubject}" update="timer" />
 			</h:form>		
 	</h:body>
 </HTML>

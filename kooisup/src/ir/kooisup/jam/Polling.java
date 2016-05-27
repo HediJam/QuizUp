@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class Polling implements Serializable {
 
 	int sample = 0;
@@ -31,13 +31,14 @@ public class Polling implements Serializable {
 
 	public void waitingForSubject() {
 		sample++;
-		System.out.println("waiting----");
+		System.out.println("waitingFor subject bad bad az invitation nayad----");
 		DBHandler db = DBHandler.getInstance();
 		int state = db.anyRequest();
 		if (state > -1) {
 			System.out.println("maful bere tu safe invitiation");
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
+				System.out.println("in age umad un nayad----");
 				ec.redirect(ec.getRequestContextPath() + "/" + "invitation.xhtml?quizId=" + state);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -51,14 +52,18 @@ public class Polling implements Serializable {
 		DBHandler db = DBHandler.getInstance();
 		db.basicInit();
 		System.out.println(category);
-		// Quiz quiz = db.createQuiz(category);
 		Quiz quiz = db.createQuiz("math");
 		HttpSession hs = Util.getSession();
 		db.onlineRequest(quiz.getQzId(), (String) hs.getAttribute("username"));
-		while (true) {
-			//System.out.println("waiting for accept az tarafe maful");
+		while (!db.hasAccepted(quiz.getQzId()));
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		try {
+			ec.redirect(ec.getRequestContextPath() + "/" + "quiz2.xhtml?id=" + quiz.getQzId() );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		// redirect to quiz online
+		//redirect to quiz online
 	}
 
 	public String getCategory() {

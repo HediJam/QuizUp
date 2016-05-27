@@ -6,9 +6,9 @@
 
 <h:head>
 	<f:metadata>
-		<f:viewParam name="id" value="#{quiz1.quizId}" />
-		<f:viewParam name="category" value="#{quiz1.category}" />
-		<f:viewParam name="opponent" value="#{quiz1.opponent}" />
+		<f:viewParam name="id" value="#{quiz2.quizId}" />
+		<f:viewParam name="category" value="#{quiz2.category}" />
+		<f:viewParam name="opponent" value="#{quiz2.opponent}" />
 		<f:viewAction action="#{quiz1.onloadOnline}" />
 	</f:metadata>
 	<meta charset="utf-8"></meta>
@@ -41,7 +41,7 @@
 	<div class="container">
 		<div class="text-center Font">
 			<br />
-			<h:outputText id="scr" value="امتیاز = #{quiz1.score}" />
+			<h:outputText id="scr" value="امتیاز = #{quiz2.score}" />
 			<br /> <br></br>
 
 			<hr></hr>
@@ -52,8 +52,8 @@
 
 			<h:form>
 			
-				<h:outputText id="timer" value="#{quiz1.time}" />
-				<p:poll interval="1" listener="#{quiz1.onlineIncrement}"
+				<h:outputText id="timer" value="#{quiz2.time}" />
+				<p:poll interval="1" listener="#{quiz2.onlineIncrement}"
 					update="timer" />
 			</h:form>
 			<br /> <br></br>
@@ -64,7 +64,7 @@
 			<div class="text-center">
 				<h3>
 					<h:outputText id="question" class="question"
-						value="#{quiz1.curQuestion}" for="que1" />
+						value="#{quiz2.curQuestion}" for="que1" />
 					<br />
 				</h3>
 				<hr></hr>
@@ -77,18 +77,18 @@
 						<h:selectOneRadio value="#{quiz1.selectedValue}" class="Font">
 
 							<f:selectItem id="opt1" itemValue="0"
-								itemLabel="#{quiz1.option1}" />
+								itemLabel="#{quiz2.option1}" />
 
 							<f:selectItem id="opt2" itemValue="1"
-								itemLabel="#{quiz1.option2}" />
+								itemLabel="#{quiz2.option2}" />
 
 							<f:selectItem id="opt3" itemValue="2"
-								itemLabel="#{quiz1.option3}" />
+								itemLabel="#{quiz2.option3}" />
 
 							<f:selectItem id="opt4" itemValue="3"
-								itemLabel="#{quiz1.option4}" />
+								itemLabel="#{quiz2.option4}" />
 
-							<f:ajax listener="#{quiz1.ajaxSubmitOnline}" />
+							<f:ajax listener="#{quiz2.ajaxSubmitOnline}" />
 						</h:selectOneRadio>
 
 

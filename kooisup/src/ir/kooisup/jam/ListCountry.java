@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
  
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ListCountry{
 	
 	private Map<String,String> countries;

@@ -18,7 +18,7 @@ public class QuizStarter {
 		DBHandler db = DBHandler.getInstance();
 		HttpSession hs = Util.getSession();
 		db.acceptRequest(Integer.valueOf(quizId), (String) hs.getAttribute("username"));
-		return "quiz2.xhtml?id="+quizId;
+		return "quiz3.xhtml?id="+quizId;
 		//return "index.xhtml";
 	}
 	public String opponentDecline(){
