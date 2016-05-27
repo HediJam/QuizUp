@@ -1,5 +1,3 @@
-package ir.kooisup.jam;
-
 import java.util.ArrayList;
 
 public class Quiz {
@@ -95,6 +93,26 @@ public class Quiz {
 	public void setUid2(String uid2) {
 		this.uid2 = uid2;
 	}
+	
+	public int numPlayed() {
+		if(uid1.equals("")) return 0;
+		else if(uid2.equals("")) return 1;
+		return 2;
+	}
+	
+	public int numFinished() {
+		if(finishTime1 ==0 && finishTime2 ==0) return 0;
+		else if(finishTime1 ==0 && finishTime2 !=0) return 1;
+		else if(finishTime1 !=0 && finishTime2 ==0) return 1;
+		else if(finishTime1 !=0 && finishTime2 !=0) return 2;
+		return -1;
+	}
+	
+	public boolean hasOponentFinished(String uid) {
+		if(uid.equals(uid1)) return finishTime2!=0;
+		if(uid.equals(uid2)) return finishTime1!=0;
+		return false;
+	}
 
 	@Override
 	public String toString() {
@@ -103,7 +121,7 @@ public class Quiz {
 				+ ", qsIDs=" + qsIDs + "]";
 	}
 	
-	public String winner() {
+	String winner() {
 		if(uid1.equals("") || uid2.equals("")) return "";
 		if (score1>score2) return uid1;
 		if (score2>score1) return uid2;
@@ -111,20 +129,4 @@ public class Quiz {
 		return uid2;
 	}
 	
-	public int numOfPlayed(){
-		if(uid1.equals("") && uid2.equals(""))
-			return 0;
-		else if (uid1.equals("") && !uid2.equals(""))
-			return 1;
-		else if(!uid1.equals("") && uid2.equals(""))
-			return 1;
-		else 
-			return 2;
-	}
-	
-	public int numPlayed() {
-		  if(uid1.equals("")) return 0;
-		  else if(uid2.equals("")) return 1;
-		  return 2;
-		 }
 }
