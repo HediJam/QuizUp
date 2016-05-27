@@ -9,12 +9,12 @@
 		<f:viewParam name="id" value="#{quiz2.quizId}" />
 		<f:viewParam name="category" value="#{quiz2.category}" />
 		<f:viewParam name="opponent" value="#{quiz2.opponent}" />
-		<f:viewAction action="#{quiz1.onloadOnline}" />
+		<f:viewAction action="#{quiz2.onloadOnline}" />
 	</f:metadata>
 	<meta charset="utf-8"></meta>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-	<title>کوییز آنلاین</title>
+	<title>کوییز آنلاین </title>
 	<link rel="stylesheet" href="css/quiz.css" />
 	<link rel="stylesheet" href="flat-login-form/css/reset.css" />
 	<link rel='stylesheet prefetch'
@@ -74,7 +74,7 @@
 			<div class="funkyradio">
 				<div class="funkyradio-success">
 					<h:form id="form">
-						<h:selectOneRadio value="#{quiz1.selectedValue}" class="Font">
+						<h:selectOneRadio value="#{quiz2.selectedValue}" class="Font">
 
 							<f:selectItem id="opt1" itemValue="0"
 								itemLabel="#{quiz2.option1}" />

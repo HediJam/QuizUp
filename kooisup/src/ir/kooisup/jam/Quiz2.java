@@ -224,7 +224,7 @@ public class Quiz2 {
 				i++;
 			}
 			selectedValue = null;
-			String address = "/" + "quiz2.xhtml?id=" + quiz.getQzId();
+			String address = "/" + "quiz3.xhtml?id=" + quiz.getQzId();
 			if (i == numOfQuestions - 1) {
 
 				address = "/" + "offlineResult.xhtml?id=" + quiz.getQzId();
@@ -248,9 +248,11 @@ public class Quiz2 {
 		db.Ifinished(quiz.getQzId(), uid, time, Integer.parseInt(score));
 		quiz = db.findQuiz(quiz.getQzId());
 		System.out.println("online finish " + uid + " score: " +  score);
-		while (!quiz.hasOponentFinished(uid));
-		//myScore = Integer.toString(quiz.getScore2());
-		//oppScore = Integer.toString(quiz.getScore1());
+		while (!quiz.hasOponentFinished(uid)){
+			quiz = db.findQuiz(quiz.getQzId());
+		}
+		myScore = Integer.toString(quiz.getScore2());
+		oppScore = Integer.toString(quiz.getScore1());
 		winner = db.getWinner(quiz).getUsername();
 		System.out.println("******har 2 nafar bazi ra tamam kardan");
 		reset();

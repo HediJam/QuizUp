@@ -320,7 +320,7 @@ public class Quiz1 {
 	/////////////////////////////
 
 	public String onloadOnline() {
-		System.out.println("on load online " + quizId);
+		System.out.println("quiz1 : on load online " + quizId);
 		DBHandler db = DBHandler.getInstance();
 		if (quizId == null) {
 			System.out.println("quiz id bayad moshakas bashad");
@@ -414,10 +414,12 @@ public class Quiz1 {
 		String uid = hs.getAttribute("username").toString();
 		db.Ifinished(quiz.getQzId(), uid, time, Integer.parseInt(score));
 		quiz = db.findQuiz(quiz.getQzId());
-		System.out.println("online finish " + uid + " score: " +  score);
-		while (!quiz.hasOponentFinished(uid));
-		//myScore = Integer.toString(quiz.getScore2());
-		//oppScore = Integer.toString(quiz.getScore1());
+		System.out.println("quiz1 : online finish " + uid + " score: " +  score);
+		while (!quiz.hasOponentFinished(uid)){
+			quiz = db.findQuiz(quiz.getQzId());
+		}
+		myScore = Integer.toString(quiz.getScore1());
+		oppScore = Integer.toString(quiz.getScore2());
 		winner = db.getWinner(quiz).getUsername();
 		System.out.println("******har 2 nafar bazi ra tamam kardan");
 		reset();
