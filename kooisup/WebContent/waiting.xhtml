@@ -8,8 +8,8 @@
 	</h:head>
 	<h:body>	
 			<h:form>
-				<h:outputText id="timer" value="#{polling.sample}" />
-				<p:poll interval="1" listener="#{polling.waitingForSubject}" update="timer" />
+				<h:outputText id="timer1" value="#{polling.sample}" />
+				<p:poll interval="1" listener="#{polling.waitingForSubject}" update="timer1" />
 			</h:form>		
 	</h:body>
 </HTML>
