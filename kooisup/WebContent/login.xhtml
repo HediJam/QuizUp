@@ -1,23 +1,15 @@
-<!-- anti babak -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-	<h:body>
-		<h:form>
-			username: <h:inputText id="username" value="#{user.userName}"/>
-			<h:message for="username"></h:message>
-			<br/><br/>
-			password: <h:inputSecret id="password" value="#{user.password}"/>
-			<h:message for="password"></h:message>
-			<br/><br/>
-			<h:commandButton value="Login" action="#{user.login}"/>
-	        <br/><br/>
-	        <h:messages />
-		</h:form>
+<!DOCTYPE html>
+<HTML lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>
+	</h:head>
+	<h:body>	
+			<h:form>
+				<h:outputText id="timer" value="#{polling.sample}" />
+				<p:poll interval="1" listener="#{polling.waitingForSubject}" update="timer" />
+			</h:form>		
 	</h:body>
-</html>
+</HTML>

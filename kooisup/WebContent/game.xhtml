@@ -7,8 +7,9 @@
 
 <h:head>
 	<f:metadata>
-		<!-- <f:viewParam name="id" value="#{resultBean.quizId}" />  -->
-		 <f:viewParam name="category" value="#{categoryBean.currentCategory}"/>
+		<f:viewParam name="category" value="#{categoryBean.currentCategory}" />
+		<f:viewParam name="category" value="#{polling.category}" />
+		
 	</f:metadata>
 	<meta charset="utf-8"></meta>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
@@ -38,14 +39,17 @@
 
 				<div class="row">
 					<div class="col-sm-6 col-sm-offset-3 form-box">
-					
-					<br/>
-					<br/>
-					<br/>
-					<!--<h:commandButton value="بازی آفلاین" ajax="false" class="myButton" action="offlineInvitation.xhtml?category=#{categoryBean.currentCategory}" />-->
-					<a class="myButton" href="offlineInvitation.xhtml?category=#{categoryBean.currentCategory}" >بازی آفلاین</a>
-					<hr/>
-					<a class="myButton" href="#" >بازی آنلاین</a>
+
+						<br /> <br /> <br />
+						<!--<h:commandButton value="بازی آفلاین" ajax="false" class="myButton" action="offlineInvitation.xhtml?category=#{categoryBean.currentCategory}" />-->
+						<a class="myButton"
+							href="offlineInvitation.xhtml?category=#{categoryBean.currentCategory}">بازی
+							آفلاین</a>
+						<hr />
+						<h:form>
+							<h:commandButton value="بازی آنلاین" class="myButton"
+								action="#{polling.searchOpp}" />
+						</h:form>
 						
 					</div>
 				</div>

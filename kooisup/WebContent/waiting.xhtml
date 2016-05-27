@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<HTML lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>
+	</h:head>
+	<h:body>	
+			<h:form>
+				<h:outputText id="timer" value="#{polling.sample}" />
+				<p:poll interval="2" listener="#{polling.waitingForSubject}" update="timer" />
+			</h:form>		
+	</h:body>
+</HTML>
