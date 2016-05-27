@@ -360,8 +360,8 @@ public class Quiz1 {
 			sendMail();
 			System.out.println("after sending mail......");
 		} else if (quiz.numPlayed() == 2) {
-			myScore = Integer.toString(quiz.getScore2());
-			oppScore = Integer.toString(quiz.getScore1());
+			myScore = Integer.toString(quiz.getScore1());
+			oppScore = Integer.toString(quiz.getScore2());
 			winner = db.getWinner(quiz).getUsername();
 			//System.out.println("&&&&&&&&&&&&&&&&&&&&nafar 2 ke bazi mikone");
 			sendMailResult();
@@ -379,7 +379,7 @@ public class Quiz1 {
 		if (i < numOfQuestions) {
 			System.out.println("changing event..." + i);
 			System.out.println("selected value is :   " + selectedValue);
-			if (i < numOfQuestions - 1) {
+			if (i < numOfQuestions - 1 ) {
 				questions.get(i).getAnswerIndex();
 				Integer.valueOf(selectedValue);
 				if (questions.get(i).getAnswerIndex() == Integer.valueOf(selectedValue)) {
@@ -392,7 +392,7 @@ public class Quiz1 {
 			}
 			selectedValue = null;
 			String address = "/" + "quiz2.xhtml?id=" + quiz.getQzId();
-			if (i == numOfQuestions - 1) {
+			if (i == numOfQuestions - 1 || hasFinished()) {
 
 				address = "/" + "offlineResult.xhtml?id=" + quiz.getQzId();
 				onlineFinish();
@@ -421,14 +421,14 @@ public class Quiz1 {
 		myScore = Integer.toString(quiz.getScore1());
 		oppScore = Integer.toString(quiz.getScore2());
 		winner = db.getWinner(quiz).getUsername();
-		System.out.println("******har 2 nafar bazi ra tamam kardan");
+		System.out.println("quiz1: ******har 2 nafar bazi ra tamam kardan");
 		reset();
 		//time = -100;
 	}
 
 	public void onlineIncrement() {
 		time++;
-		if ((time > 40 || time < 0)) {
+		if ((time > 40 || time < 0) || hasFinished()) {
 			onlineFinish();
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			String address = "/" + "offlineResult.xhtml?id=" + quiz.getQzId();
@@ -441,6 +441,16 @@ public class Quiz1 {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private boolean hasFinished(){
+		
+		DBHandler db = DBHandler.getInstance();
+		HttpSession hs = Util.getSession();
+		String uid = hs.getAttribute("username").toString();
+		quiz = db.findQuiz(quiz.getQzId());
+		return quiz.hasOponentFinished(uid);
+		
 	}
 
 }

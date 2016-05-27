@@ -225,7 +225,7 @@ public class Quiz2 {
 			}
 			selectedValue = null;
 			String address = "/" + "quiz3.xhtml?id=" + quiz.getQzId();
-			if (i == numOfQuestions - 1) {
+			if (i == numOfQuestions - 1 || hasFinished()) {
 
 				address = "/" + "offlineResult.xhtml?id=" + quiz.getQzId();
 				onlineFinish();
@@ -247,21 +247,21 @@ public class Quiz2 {
 		String uid = hs.getAttribute("username").toString();
 		db.Ifinished(quiz.getQzId(), uid, time, Integer.parseInt(score));
 		quiz = db.findQuiz(quiz.getQzId());
-		System.out.println("online finish " + uid + " score: " +  score);
+		System.out.println("quiz2: online finish " + uid + " score: " +  score);
 		while (!quiz.hasOponentFinished(uid)){
 			quiz = db.findQuiz(quiz.getQzId());
 		}
 		myScore = Integer.toString(quiz.getScore2());
 		oppScore = Integer.toString(quiz.getScore1());
 		winner = db.getWinner(quiz).getUsername();
-		System.out.println("******har 2 nafar bazi ra tamam kardan");
+		System.out.println("qiz2******har 2 nafar bazi ra tamam kardan");
 		reset();
 		//time = -100;
 	}
 
 	public void onlineIncrement() {
 		time++;
-		if ((time > 40 || time < 0)) {
+		if ((time > 40 || time < 0) || hasFinished()) {
 			onlineFinish();
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			String address = "/" + "offlineResult.xhtml?id=" + quiz.getQzId();
@@ -274,6 +274,15 @@ public class Quiz2 {
 				e.printStackTrace();
 			}
 		}
+	}
+	private boolean hasFinished(){
+		
+		DBHandler db = DBHandler.getInstance();
+		HttpSession hs = Util.getSession();
+		String uid = hs.getAttribute("username").toString();
+		quiz = db.findQuiz(quiz.getQzId());
+		return quiz.hasOponentFinished(uid);
+		
 	}
 
 }
