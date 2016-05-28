@@ -76,9 +76,5 @@ public class Question {
 		return "Question [text=" + text + ", answer=" + answer + ", category=" + category + ", qsID=" + qsID
 				+ ", choices=" + choices + "]";
 	}
-
-	public void antiBabak(){
-		System.out.println("az hamin tiribun elam mikonam ridi :|");
-	}
 	
 }

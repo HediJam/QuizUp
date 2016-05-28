@@ -131,9 +131,11 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
         
         <p:column style="width:10%">		
         <f:facet name="header">مشاهده سوال ها</f:facet>
-    		<h:commandLink action="edit_question.xhtml" > 	
+    		<!--  <h:commandLink action="edit_question.xhtml?category=category.name" > -->
+    		<a href="edit_question.xhtml?category=#{category.name}">	
     			<i class="fa fa-eye"></i>
-    		</h:commandLink> 
+    			</a>
+    		<!--  </h:commandLink> -->
 		</p:column>
   
         <p:column filterBy="#{category.name}"> 
