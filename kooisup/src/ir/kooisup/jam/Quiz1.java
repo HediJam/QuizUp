@@ -20,7 +20,7 @@ import javax.swing.text.BoxView;
 public class Quiz1 {
 
 	//String host = "kooisup.ir/";
-	String host = "localhost:8080/quizup/";
+	String host = "localhost:8080/";
 	static String winner = "نامعلوم";
 	static String myScore = "نامعلوم";
 	static String oppScore = "نامعلوم";
@@ -251,7 +251,7 @@ public class Quiz1 {
 		message += "دوستتان شما را به چالش کوییزآپ دعوت کرده";
 		message += "\r\n" + "کلیک کنید" + "\r\n";
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-		message += host + ec.getRequestContextPath() + "/" + "quiz1.xhtml?id=" + quiz.getQzId();
+		message += host +  ec.getRequestContextPath() + "/" + "quiz1.xhtml?id=" + quiz.getQzId();
 		// System.out.println(message);
 		RegistrationListener.sendMailQuiz(opponent, message, "KooisUp invitation");
 
