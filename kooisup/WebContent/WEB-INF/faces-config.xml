@@ -56,5 +56,10 @@
 		<managed-bean-class>ir.kooisup.jam.Quiz2</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>profileBean</managed-bean-name>
+		<managed-bean-class>ir.kooisup.jam.ProfileBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 </faces-config>

@@ -70,10 +70,10 @@ xmlns:d="http://primefaces.org/ui"
             
                 <ul class="nav navbar-nav navbar-right Font" style="direction:rtl; display:#{loginBean.exit}"> 
                     <li>
-                    	<i class="fa fa-user" aria-hidden="true"></i> 
-                    	
-                        <h:outputLabel id="usernameLabel" style="color:white; font-size:30px; text-align:rtl;"
-                       value="#{loginBean.username} گرامی خوش آمدید" />
+                    <!-- bayad dorost beshe  <i class="fa fa-user" aria-hidden="true"></i> -->
+                       <a  style="color:white; font-size:25px; text-align:rtl;" id="usernameLabel" href=" flat-login-form/profile.xhtml ">#{loginBean.username}  گرامی خوش آمدید</a>
+                       
+                       
                     </li>
                 </ul>
             </div>
@@ -91,7 +91,7 @@ xmlns:d="http://primefaces.org/ui"
                 <!--<h1 class="Font">خوش آمدید</h1>-->
                 <hr/>
                 <!-- MOVE STYLE -->
-                 <h1 class="Font" style="color:black; ">برحسب علایق خود بازی کنید</h1>
+                 <h1 class="Font" style="color:black; "> برحسب علایق خود بازی کنید</h1>
                 <hr></hr>
                 	<p style="color:black; font-size:28px; font-weight:600;">موضوعات متنوع و جذاب</p>
                 	<p style="color:black; font-size:28px; font-weight:600;">به صورت آنلاین با دوستانتان بازی کنید</p>
