@@ -13,7 +13,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
     <meta name="description" content=""></meta>
     <meta name="author" content=""></meta>
 
-    <title>edit category</title>
+    <title>edit questions</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"></link>
@@ -62,47 +62,13 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
         <!-- /.container-fluid -->
     </nav>
 
-    <!-- <header>
-         <div class="header-content">
-            <div class="header-content-inner">
-                <h1>Your Favorite Source of Free Bootstrap Themes</h1>
-                <hr></hr>
-                <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
-            </div>
-        </div>  
-    </header> -->
-    
+   
     
 
     <section class="no-padding" id="portfolio">
         
         <h:form styleClass="myForm">
-   <!-- 
-   <p:dataTable id="cellEditingTable" var="category" value="#{categoryBean.categoryList}"  
-             paginator="true" rows="5" paginatorPosition="bottom"  
-             filteredValue="#{messageTableController.filteredMessages}"  
-             editable="true" editMode="cell">  
-    <f:facet name="header">  
-        In-Cell Editing  
-    </f:facet>  
-  
-    <p:column filterBy="#{category}">  
-        <f:facet name="header">  
-            <h:outputText value="Category"/>  
-        </f:facet>  
-        <p:cellEditor>  
-            <f:facet name="output">  
-                <h:outputText value="#{category}"/>  
-            </f:facet>  
-            <f:facet name="input">  
-                <p:inputText id="modelInput" value="#{category}" style="width:96%"/>  
-            </f:facet>  
-        </p:cellEditor>  
-    </p:column>  
-      
-</p:dataTable>  
- -->
+
   
   		<div class="Font" style="color:black; font-size:large; text-align: right; direction:rtl;">
   		    <i class="fa fa-plus"></i>
@@ -128,13 +94,6 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
             ویرایش دسته بندی ها  
             </div> 
         </f:facet>  
-        
-        <p:column style="width:10%">		
-        <f:facet name="header">مشاهده سوال ها</f:facet>
-    		<h:commandLink action="edit_question.xhtml" > 	
-    			<i class="fa fa-eye"></i>
-    		</h:commandLink> 
-		</p:column>
   
         <p:column filterBy="#{category.name}"> 
           <div style="font-size: large;"> 
@@ -159,10 +118,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
     		<h:commandLink action="#{categoryBean.deleteAction(category)}" > 	
     			<i class="fa fa-remove"></i>
     		</h:commandLink> 
-    		
 		</p:column>
-		
-		
        
         <p:column style="width:8%" exportable="false">
         	

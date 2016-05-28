@@ -17,6 +17,7 @@ public class LoginBean {
 	private String username;
 	private String exit = "none";
 	private String hide = "";
+	private String admin = "none";
 	private String parameter;
 
 	public String getParameter() {
@@ -53,7 +54,10 @@ public class LoginBean {
 		if (db.existConfirmedUser(username, password)) {
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			exit = "";
+			if(username.equals("admin") && password.equals("admin"))
+				admin = "";
+			else
+				exit = "";
 			hide = "none";
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
@@ -79,6 +83,7 @@ public class LoginBean {
 		HttpSession hs = Util.getSession();
 		hs.invalidate();
 		exit = "none";
+		admin = "none";
 		hide = "";
 		return "/index.xhtml";
 	}
@@ -89,6 +94,10 @@ public class LoginBean {
 
 	public String getHide() {
 		return hide;
+	}
+	
+	public String getAdmin(){
+		return admin;
 	}
 
 	public String test() {
