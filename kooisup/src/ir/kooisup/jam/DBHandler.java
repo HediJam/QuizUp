@@ -1,6 +1,14 @@
 package ir.kooisup.jam;
-
+import  java.lang.*;
 import com.mongodb.BasicDBList;
+import org.bson.Document;
+import com.mongodb.Block;
+import com.mongodb.client.FindIterable;
+
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Sorts.ascending;
+import static java.util.Arrays.asList;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.BulkWriteOperation;
 import com.mongodb.BulkWriteResult;
@@ -134,10 +142,15 @@ public class DBHandler {
 	public static void main(final String[] args) throws Exception {
 		getInstance().basicInit();
 		
-		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("3","4","5","none"));
-		getInstance().insertCategory("math");
-
 		
+		System.out.println(getInstance().findQuestion(9));
+		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("none","5","4","3"));
+		getInstance().updateQuestion(9, new Question(9, "20-2=?", "phys", "1", choices));
+		System.out.println(getInstance().findQuestion(9));
+		getInstance().removeQuestion(9);
+		System.out.println(getInstance().findQuestion(9));
+		
+
 		//System.out.println(getInstance().findQuestions("math"));
 		//System.out.println(getInstance().findQuestion(qs1.getQsID()));
 		
@@ -146,16 +159,60 @@ public class DBHandler {
 		Quiz qz2 = getInstance().createQuiz("math");
 		System.out.println(qz2);
 		Quiz qz3 = getInstance().createQuiz("math");
+		Quiz qz4 = getInstance().createQuiz("math");
 		System.out.println(qz3);
 		
+		qz.setUid1("1");
+		qz.setUid2("2");
+		qz2.setUid1("1");
+		qz2.setUid2("2");
+		qz3.setUid1("1");
+		qz3.setUid2("2");
+		qz4.setUid1("3");
+		qz4.setUid2("4");
+		
+		qz.setScore1(11);
+		qz.setScore2(10);
+		qz2.setScore1(10);
+		qz2.setScore2(10);
+		qz3.setScore1(9);
+		qz3.setScore2(10);
+		qz4.setScore1(9);
+		qz4.setScore2(10);
+		
+		qz.setFinishTime1(2);
+		qz.setFinishTime2(3);
+		qz2.setFinishTime1(3);
+		qz2.setFinishTime2(2);
+		qz3.setFinishTime1(2);
+		qz3.setFinishTime2(3);
+		qz4.setFinishTime1(2);
+		qz4.setFinishTime2(3);
+		
+		getInstance().updateQuiz(0, qz);
+		getInstance().updateQuiz(1, qz2);
+		getInstance().updateQuiz(2, qz3);
+		getInstance().updateQuiz(3, qz4);
+		
+		System.out.println(getInstance().findQuiz(0));
+		System.out.println(getInstance().findQuiz(1));
+		System.out.println(getInstance().findQuiz(2));
+		
+		System.out.println("numOfWin");
+		System.out.println(getInstance().numOfWin("2"));
+		System.out.println(getInstance().sumScore("2"));
+		System.out.println(getInstance().maxScore("2"));
+		
+		
+		
 		int id1 = qz.getQzId();
-		getInstance().insertUser(new User("aida", "پسورد", "em1","gender", "country","کد"));
-		getInstance().insertUser(new User("aria", "پسورد", "em2","gender", "country","کد"));
+		getInstance().insertUser(new User("1", "پسورد", "em1","gender", "country","کد"));
+		getInstance().insertUser(new User("2", "پسورد", "em2","gender", "country","کد"));
 		
 		System.out.println(getInstance().findQuiz(id1));
-		getInstance().updateQuiz(id1, "aida", 20, 1);
+		getInstance().updateQuiz(id1, "u1", 20, 1);
 		System.out.println(getInstance().findQuiz(id1));
-		getInstance().updateQuiz(id1, "aria", 21, 2);
+		getInstance().updateQuiz(id1, "u2", 21, 2);
 		System.out.println(getInstance().findQuiz(id1));
 		System.out.println("winneeeeeeeer");
 		System.out.println(getInstance().getWinner(qz));
@@ -208,6 +265,23 @@ public class DBHandler {
 		System.out.println(getInstance().hasOponentFinish(1, "1"));
 		System.out.println(getInstance().hasOponentFinish(1, "11"));
 		System.out.println(getInstance().findQuiz(1).numFinished());
+		
+		System.out.println(getInstance().findQuiz(1).getScore("1"));
+		System.out.println(getInstance().findQuiz(1).getScore("11"));
+		
+		
+		System.out.println(getInstance().findQuestions("math"));
+		System.out.println(getInstance().findCategories());
+		getInstance().updateCategory("math", "MATH");
+		System.out.println(getInstance().findQuestions("math"));
+		System.out.println(getInstance().findQuestions("MATH"));
+		System.out.println(getInstance().findCategories());
+		System.out.println(getInstance().findQuiz(1));
+		
+		getInstance().removeCategory("MATH");
+		System.out.println(getInstance().findQuestions("MATH"));
+		System.out.println(getInstance().findCategories());
+		System.out.println(getInstance().findQuiz(1));
 		
 		/*
 		int id2 = getInstance().createQuiz("physics").getQzId();
@@ -505,6 +579,37 @@ public class DBHandler {
 				(String)qs.get("category"), (String)qs.get("answer"),
 				(ArrayList<String>) qs.get("choices"));
 	}
+
+	public void updateQuestion(int qsID, Question qs) {
+		BasicDBObject query = new BasicDBObject("_id", qsID);
+		DBCursor curs = questions.find(query);
+		
+		BasicDBObject newQuestion = new BasicDBObject("$set", 
+				new BasicDBObject("text", qs.getText())
+                .append("category", qs.getCategory())
+                .append("answer", qs.getAnswer())
+                .append("choices", qs.getChoices()));;
+		try {
+			if (curs.hasNext()) {
+				DBObject q = curs.next();
+				questions.update((DBObject) q, (BasicDBObject) newQuestion);		
+			}
+		} finally {
+			curs.close();
+		}
+	}
+	
+	public void removeQuestion(int qsID) {
+		BasicDBObject query = new BasicDBObject("_id", qsID);
+		DBCursor curs = questions.find(query);
+		try {
+			if (curs.hasNext()) {
+				questions.remove(curs.next());
+			}
+		} finally {
+			curs.close();
+		}
+	}
 	
 	public ArrayList<Question> findQuestions(String category) {
 		ArrayList<Question> questionsArr= new ArrayList<Question>();
@@ -563,6 +668,55 @@ public class DBHandler {
 			return null;
 		}
 		return category;
+	}
+	
+	public void updateCategory(String category, String newCategory) {
+		BasicDBObject categoryQuery = new BasicDBObject("_id", category);
+		DBCursor curs = categories.find(categoryQuery);
+		try {
+			if (curs.hasNext()) {
+				categories.remove(curs.next());
+				}
+		} finally {
+			curs.close();
+		}
+		getInstance().insertCategory(newCategory);
+		
+		BasicDBObject questionQuery = new BasicDBObject("category", category);
+		curs = questions.find(questionQuery);
+		try {
+			while (curs.hasNext()) {
+				DBObject q = curs.next();
+				questions.update((DBObject) q, (BasicDBObject)  new BasicDBObject("$set", 
+						new BasicDBObject("category", newCategory)));		
+			}
+		} finally {
+			curs.close();
+		}
+		
+		BasicDBObject quizQuery = new BasicDBObject("category", category);
+		curs = quizs.find(questionQuery);
+		try {
+			while (curs.hasNext()) {
+				DBObject q = curs.next();
+				quizs.update((DBObject) q, (BasicDBObject)  new BasicDBObject("$set", 
+						new BasicDBObject("category", newCategory)));		
+			}
+		} finally {
+			curs.close();
+		}
+	}
+	
+	public void removeCategory(String category) {
+		BasicDBObject categoryQuery = new BasicDBObject("_id", category);
+		DBCursor curs = categories.find(categoryQuery);
+		try {
+			if (curs.hasNext()) {
+				categories.remove(curs.next());
+				}
+		} finally {
+			curs.close();
+		}
 	}
 	
 	//REQUEST METHODS
@@ -649,6 +803,76 @@ public class DBHandler {
 	public boolean hasOponentFinish(int qzID, String uid) {
 		Quiz q=findQuiz(qzID);
 		return q.hasOponentFinished(uid);
+	}
+	
+	//PROFILE METHODS
+	public int numOfWin(String uid) {
+		int res=0;
+		DBCursor curs = quizs.find(new BasicDBObject("$or", asList(new BasicDBObject("uid1", uid),
+		        		new BasicDBObject("uid2", uid))));
+		try {
+			while (curs.hasNext()) {
+				DBObject qz = curs.next() ;
+				Quiz quiz = new Quiz(((Integer)qz.get("_id")).intValue(), ((Integer)qz.get("score1")).intValue(), ((Integer)qz.get("score2")).intValue(), 
+					((Integer)qz.get("finishTime1")).intValue(), ((Integer)qz.get("finishTime2")).intValue(), 
+					(String)qz.get("category"), (String)qz.get("uid1"), (String)qz.get("uid2"), 
+					(ArrayList<Integer>) qz.get("qsIDs"));
+				//System.out.println("id "+quiz.getQzId());
+				//System.out.println("win "+quiz.winner());
+				if(quiz.winner().equals(uid)) res++;
+		}
+		
+		} finally {
+			curs.close();
+		}
+		return res;
+	}
+	
+	private int max(int x, int y) {
+		if(x>=y) return x;
+		return y;
+	}
+	public int maxScore(String uid) {
+		int res=0;
+		DBCursor curs = quizs.find(new BasicDBObject("$or", asList(new BasicDBObject("uid1", uid),
+		        		new BasicDBObject("uid2", uid))));
+		try {
+			while (curs.hasNext()) {
+				DBObject qz = curs.next() ;
+				Quiz quiz = new Quiz(((Integer)qz.get("_id")).intValue(), ((Integer)qz.get("score1")).intValue(), ((Integer)qz.get("score2")).intValue(), 
+					((Integer)qz.get("finishTime1")).intValue(), ((Integer)qz.get("finishTime2")).intValue(), 
+					(String)qz.get("category"), (String)qz.get("uid1"), (String)qz.get("uid2"), 
+					(ArrayList<Integer>) qz.get("qsIDs"));
+				//System.out.println("id "+quiz.getQzId());
+				//System.out.println("win "+quiz.winner());
+				res = max(res, quiz.getScore(uid));
+		}
+		
+		} finally {
+			curs.close();
+		}
+		return res;
+	}
+	public int sumScore(String uid) {
+		int res=0;
+		DBCursor curs = quizs.find(new BasicDBObject("$or", asList(new BasicDBObject("uid1", uid),
+		        		new BasicDBObject("uid2", uid))));
+		try {
+			while (curs.hasNext()) {
+				DBObject qz = curs.next() ;
+				Quiz quiz = new Quiz(((Integer)qz.get("_id")).intValue(), ((Integer)qz.get("score1")).intValue(), ((Integer)qz.get("score2")).intValue(), 
+					((Integer)qz.get("finishTime1")).intValue(), ((Integer)qz.get("finishTime2")).intValue(), 
+					(String)qz.get("category"), (String)qz.get("uid1"), (String)qz.get("uid2"), 
+					(ArrayList<Integer>) qz.get("qsIDs"));
+				//System.out.println("id "+quiz.getQzId());
+				//System.out.println("win "+quiz.winner());
+				res +=quiz.getScore(uid);
+		}
+		
+		} finally {
+			curs.close();
+		}
+		return res;
 	}
 	
 }
