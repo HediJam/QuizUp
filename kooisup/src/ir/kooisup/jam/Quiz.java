@@ -1,6 +1,4 @@
 package ir.kooisup.jam;
-
-
 import java.util.ArrayList;
 
 public class Quiz {
@@ -95,6 +93,12 @@ public class Quiz {
 	}
 	public void setUid2(String uid2) {
 		this.uid2 = uid2;
+	}
+	
+	public int getScore(String uid){
+		if(uid.equals(uid1)) return score1;
+		else if(uid.equals(uid2)) return score2;
+		return 0;
 	}
 	
 	public int numPlayed() {
