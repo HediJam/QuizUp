@@ -21,9 +21,9 @@ public class Quiz1 {
 
 	//String host = "kooisup.ir/";
 	String host = "localhost:8080/";
-	static String winner = "نامعلوم";
-	static String myScore = "نامعلوم";
-	static String oppScore = "نامعلوم";
+	String winner = "نامعلوم";
+	String myScore = "نامعلوم";
+	String oppScore = "نامعلوم";
 	String curQuestion;
 	String option1;
 	String option2;
@@ -31,8 +31,8 @@ public class Quiz1 {
 	String option4;
 	String quizId;
 	String category;
-	static Quiz quiz;
-	static ArrayList<Question> questions = new ArrayList<Question>();
+	Quiz quiz;
+	ArrayList<Question> questions = new ArrayList<Question>();
 	ArrayList<String> options = new ArrayList<String>();
 	static String score = "0";
 	static int time = 0;
@@ -90,16 +90,9 @@ public class Quiz1 {
 	}
 
 	public String onload() {
-		// System.out.println("on load " + quizId);
-		// System.out.println("on load " + category);
-		// System.out.println("-----------------------------on load " +
-		// opponent);
-
-		// permission();
-		// System.out.println("tuye onloadam");
 		DBHandler db = DBHandler.getInstance();
 		if (quizId == null) {
-			// System.out.println("quiz id is null in onload");
+			System.out.println("quiz id is null in onload");
 			db.basicInit();
 			quiz = db.createQuiz("math");
 			quizId = Integer.toString(quiz.getQzId());
@@ -317,6 +310,8 @@ public class Quiz1 {
 		score = "0";
 		i = 0;
 		opponent = "";
+		quizId = null;
+		
 	}
 
 	/////////////////////////////
@@ -358,14 +353,14 @@ public class Quiz1 {
 			myScore = Integer.toString(quiz.getScore1());
 			oppScore = "نامعلوم";
 			winner = "نامعلوم";
-			//System.out.println("&&&&&&&&&&&&&&&nafar avalam ke bazi mikone");
+			System.out.println("&&&&&&&&&&&&&&&nafar avalam ke bazi mikone" + quiz.getQzId());
 			sendMail();
 			System.out.println("after sending mail......");
 		} else if (quiz.numPlayed() == 2) {
 			myScore = Integer.toString(quiz.getScore1());
 			oppScore = Integer.toString(quiz.getScore2());
 			winner = db.getWinner(quiz).getUsername();
-			//System.out.println("&&&&&&&&&&&&&&&&&&&&nafar 2 ke bazi mikone");
+			System.out.println("&&&&&&&&&&&&&&&&&&&&nafar 2 ke bazi mikone");
 			sendMailResult();
 			//System.out.println("after sending result mail......");
 		}
@@ -437,7 +432,6 @@ public class Quiz1 {
 			try {
 				ec.redirect(ec.getRequestContextPath() + address);
 				isSet = false;
-
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
