@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class Quiz2 {
 
+	//String host = "kooisup.ir/";
+		String host = "localhost:8080/quizup/";
 	static String winner = "نامعلوم";
 	static String myScore = "نامعلوم";
 	static String oppScore = "نامعلوم";

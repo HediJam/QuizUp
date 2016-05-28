@@ -19,6 +19,8 @@ public class LoginBean {
 	private String hide = "";
 	private String admin = "none";
 	private String parameter;
+	//String host = "kooisup.ir/";
+	String host = "localhost:8080/quizup/";
 
 	public String getParameter() {
 		return parameter;
@@ -70,7 +72,7 @@ public class LoginBean {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return "http://localhost:8080/quizup/index.xhtml";
+			return host + "index.xhtml";
 		} else {
 			FacesContext.getCurrentInstance().addMessage("myForm:loginButton",
 					new FacesMessage("اطلاعات ورودی صحیح نیست"));

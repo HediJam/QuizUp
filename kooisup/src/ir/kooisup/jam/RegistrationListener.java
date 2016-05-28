@@ -15,6 +15,8 @@ public class RegistrationListener {
 
 	public static void sendMail(String mail,String uuid) {
 
+		//String host = "kooisup.ir/";
+		String host = "localhost:8080/quizup/";
 		final String username = "kooisup.ir@gmail.com";
 		final String password = "d7100game";
 		
@@ -41,7 +43,7 @@ public class RegistrationListener {
 			message.setSubject("KooisUp-confirmation mail");
 			//for new push
 			message.setText("Hello"
-				+ "\n\n please click on " + "\n\n http://localhost:8080/quizup/index.xhtml?code=" + uuid + "&mail=" + mail);
+				+ "\n\n please click on " + "\n\n" + host+ "index.xhtml?code=" + uuid + "&mail=" + mail);
 			
 			//message.setText("Hello"
 			//		+ "\n\n please click on " + "\n\n http://www.kooisup.ir/index.xhtml?code=" + uuid + "&mail=" + mail);

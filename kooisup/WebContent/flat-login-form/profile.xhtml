@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<HTML lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:botDetect="botDetectFacelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<h:head>
+	<f:metadata>
+		<f:viewParam name="quizId" value="#{loginBean.parameter}" />
+	</f:metadata>
+	<meta charset="utf-8"></meta>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<title>پروفایل</title>
+	<link rel="stylesheet" href="flat-login-form/css/reset.css" />
+	<link rel='stylesheet prefetch'
+		href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' />
+	<link rel='stylesheet prefetch'
+		href='http://fonts.googleapis.com/css?family=Montserrat:400,700' />
+	<link rel='stylesheet prefetch'
+		href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' />
+	<link rel="stylesheet"
+		href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/creative.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="../fonts/myFonts.css" />
+
+</h:head>
+<h:body>
+
+	<div class="container">
+		<div class="info">
+			<h1 class="Font">مشخصات کاربری</h1>
+		</div>
+	</div>
+	<div class="form">
+		<div class="thumbnail">
+			<img src="../img/prof.png" />
+		</div>
+		<br></br>
+		<br></br>
+		<br></br>
+		<h:form class="register-form" id="registeration">
+			<p class="Font">نام و نام خانوادگی</p>
+			<p class="input">#{profileBean.name}</p>
+
+			<p class="Font">نام کاربری</p>
+			<p class="input">#{profileBean.username}</p>
+			<p class="Font">ایمیل</p>
+
+			<p class="input">#{profileBean.mail}</p>
+			<p class="Font">جنسیت</p>
+
+			<p class="input">#{profileBean.sex}</p>
+			<p class="Font">کشور</p>
+
+			<p class="input">#{profileBean.country}</p>
+			<p class="message">
+				<a class="Font" href="#">دست آوردها</a>
+			</p>
+		</h:form>
+
+		<h:form class="login-form">
+			<p class="Font">مجموع امتیازهای کسب شده</p>
+			<p class="input">#{profileBean.sumScore}</p>
+			<p class="Font">تعداد بردها</p>
+			<p class="input">#{profileBean.maxWin}</p>
+			<p class="Font">حداکثر بردهای پی در پی</p>
+			<p class="input">#{profileBean.maxWinPeyDarPey}</p>
+			<p class="Font">بیشترین امتیاز کسب شده</p>
+			<p class="input">#{profileBean.maxScore}</p>
+			<p class="message">
+				<a class="Font" href="#">مشخصات کاربری</a>
+			</p>
+		</h:form>
+	</div>
+	<script
+		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src="js/index.js"></script>
+
+</h:body>
+</HTML>

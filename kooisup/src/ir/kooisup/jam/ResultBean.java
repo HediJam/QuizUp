@@ -24,14 +24,14 @@ public class ResultBean {
 	}
 
 	public String getOpponent() {
-		System.out.println("@@@@@@@@@@@@@@@@");
+		//System.out.println("@@@@@@@@@@@@@@@@");
 		return opponent;
 	}
 
 	public void setOpponent(String opp) {
-		System.out.println("********************");
+		//System.out.println("********************");
 		System.out.println(opp);
-		System.out.println("********************");
+
 		this.opponent = opp;
 	}
 
