@@ -1,78 +1,20 @@
 package ir.kooisup.jam;
-import  java.lang.*;
-import com.mongodb.BasicDBList;
-import org.bson.Document;
-import com.mongodb.Block;
-import com.mongodb.client.FindIterable;
 
-import static com.mongodb.client.model.Filters.*;
-import static com.mongodb.client.model.Sorts.ascending;
 import static java.util.Arrays.asList;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.BulkWriteOperation;
-import com.mongodb.BulkWriteResult;
-import com.mongodb.Cursor;
+
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.ParallelScanOptions;
 
-import java.net.UnknownHostException;
-import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.bson.Document;
-import org.bson.conversions.Bson;
- 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
-
-
-import com.mongodb.Mongo;
 import com.mongodb.MongoException;
- 
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-import com.mongodb.*;
-
-
-import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.BulkWriteOperation;
-import com.mongodb.BulkWriteResult;
-import com.mongodb.Cursor;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.ParallelScanOptions;
-
-import java.net.UnknownHostException;
-import java.util.List;
-import java.util.Set;
-import java.util.ArrayList;
- 
-import org.bson.Document;
-import org.bson.conversions.Bson;
- 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
-
-import com.mongodb.Mongo;
-import com.mongodb.MongoException;
- 
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-import com.mongodb.*;
 
 public class DBHandler {
 	public static DBHandler instance = null;
@@ -98,7 +40,7 @@ public class DBHandler {
         //db.getCollection("users").drop();
         //db.getCollection("quizs").drop();
         //db.getCollection("questions").drop();
-        //db.getCollection("categories").drop();
+        db.getCollection("categories").drop();
         //db.getCollection("requests").drop();
         
         

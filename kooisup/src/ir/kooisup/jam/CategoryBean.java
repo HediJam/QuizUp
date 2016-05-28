@@ -36,7 +36,7 @@ public class CategoryBean {
 		for (int i = 0; i < cats.size(); i++) {
 			Category cat = new Category();
 			cat.setName(cats.get(i));
-			cat.setFileName((i+1)+"jpg");
+			cat.setFileName((i+1)+".jpg");
 			this.categoryList.add(cat);
 		}
 		  
