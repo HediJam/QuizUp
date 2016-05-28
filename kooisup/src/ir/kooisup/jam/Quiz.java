@@ -1,4 +1,4 @@
-//package ir.kooisup.jam;
+package ir.kooisup.jam;
 import  java.lang.*;
 import com.mongodb.BasicDBList;
 import org.bson.Document;
