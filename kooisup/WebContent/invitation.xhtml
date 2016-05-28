@@ -28,10 +28,17 @@
 
 </h:head>
 <h:body class="header">
-	<p>آیا مایل به انجام بازی هستید؟</p>
-	<h:form>
-		<h:commandButton value="بله" action="#{quizStarter.opponentAccept}" />
-		<h:commandButton value="خیر" action="#{quizStarter.opponentDecline}" />
+	<h:outputText styleClass="Font"
+		style="color:black; font-size:32px; font-weight:800; text-align:rtl; position: fixed; top: 40%; left: 45%; margin-top: -50px; margin-left: -100px;"
+		value="آیا مایلید یک بازی دونفره را آغاز کنید؟"></h:outputText>
+	<h:form class="header-content Font">
+		<h:commandButton styleClass="btn btn-primary btn-xl page-scroll"
+			style=" position: fixed; top: 50%; left: 51%; margin-top: -50px; margin-left: -100px; margin-right: +10px; "
+			value="خیر" action="#{quizStarter.opponentDecline}" />
+		<h:commandButton styleClass="btn btn-primary btn-xl page-scroll"
+			style=" position: fixed; top: 50%; left: 58%; margin-top: -50px; margin-left: -100px; margin-right: +10px;"
+			value="بله" action="#{quizStarter.opponentAccept}" />
+
 	</h:form>
 </h:body>
 </HTML>
