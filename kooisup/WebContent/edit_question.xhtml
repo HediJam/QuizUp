@@ -7,6 +7,10 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 
 <h:head> 
 
+	<f:metadata>
+		 <f:viewParam name="category" value="#{categoryBean.currentCategory}"/>
+	</f:metadata>
+
     <meta charset="utf-8"></meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -91,7 +95,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
         
         <f:facet name="header" >
         <div style="font-size: x-large;"> 
-            ویرایش دسته بندی ها  
+            ویرایش سوالات دسته {{category}}  
             </div> 
         </f:facet>  
   

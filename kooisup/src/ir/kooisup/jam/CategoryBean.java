@@ -19,23 +19,24 @@ public class CategoryBean {
 		// TODO Auto-generated constructor stub
 		this.categoryList = new ArrayList<CategoryBean.Category>();
 		
-		if(db.findCategory("MATH") == null)
-			db.insertCategory("MATH");
-		if(db.findCategory("ART") == null)
-			db.insertCategory("ART");
-		if(db.findCategory("SCIENCE") == null)
-			db.insertCategory("SCIENCE");
-		if(db.findCategory("MATH2") == null)
-			db.insertCategory("MATH2");
-		if(db.findCategory("ART2") == null)
-			db.insertCategory("ART2");
-		if(db.findCategory("SCIENCE2") == null)
-			db.insertCategory("SCIENCE2");
+		if(db.findCategory("ریاضی") == null)
+			db.insertCategory("ریاضی");
+		if(db.findCategory("هنر") == null)
+			db.insertCategory("هنر");
+		if(db.findCategory("علوم") == null)
+			db.insertCategory("علوم");
+		if(db.findCategory("عکاسی") == null)
+			db.insertCategory("عکاسی");
+		if(db.findCategory("موسیقی") == null)
+			db.insertCategory("موسیقی");
+		if(db.findCategory("ورزش") == null)
+			db.insertCategory("ورزش");
 		
 		List<String> cats = db.findCategories();
 		for (int i = 0; i < cats.size(); i++) {
 			Category cat = new Category();
 			cat.setName(cats.get(i));
+			cat.setFileName((i+1)+"jpg");
 			this.categoryList.add(cat);
 		}
 		  
