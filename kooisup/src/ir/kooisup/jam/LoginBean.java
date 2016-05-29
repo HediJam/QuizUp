@@ -53,6 +53,9 @@ public class LoginBean {
 				.getRequest();
 
 		DBHandler db = DBHandler.getInstance();
+		if(username.equals("admin") && password.equals("admin")){
+			
+		}
 		if (db.existConfirmedUser(username, password)) {
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
