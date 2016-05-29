@@ -167,9 +167,10 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 		
        
         <p:column style="width:8%" exportable="false">
-        	
             <p:rowEditor  />  
         </p:column>  
+        
+        <p:ajax event="rowEdit" listener="#{categoryBean.editCategory}"/>
         
         
         
