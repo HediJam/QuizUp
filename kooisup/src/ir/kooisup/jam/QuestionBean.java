@@ -17,6 +17,13 @@ public class QuestionBean {
 	private ArrayList<Question> questionsList;
 	private String questionsCategory;
 	private Question currentQuestion;
+	private String choice1;
+	private String choice2;
+	private String choice3;
+	private String choice4;
+	private String text;
+	private String answer;
+	private String message;
 	
 	public QuestionBean(){
 		questionsList = new ArrayList<Question>();
@@ -24,7 +31,7 @@ public class QuestionBean {
 	}
 	
 	public void onload(){
-		
+		message = null;
 		
 		ArrayList<String> choices =  new ArrayList<String>(Arrays.asList("none","5","4","3"));
 		db.insertCategory(questionsCategory);
@@ -85,11 +92,94 @@ public class QuestionBean {
 		this.currentQuestion = currentQuestion;
 	}
 	
-//	public String addQuestion(){
-//    	Question q = new Question();
-//    	cat.setName(currentCategory);
-//    	categoryList.add(cat);
-//    	return null;
-//     }
+	public void addQuestion(){
+		
+		if(!check())
+			setMessage("لطفا  فیلد های ستاره دار را پر کنید\n");
+		
+		int qsID = questionsList.get(questionsList.size()-1).getQsID() + 1;
+		
+		ArrayList<String> choices = new ArrayList<String>();
+		choices.add(choice1);
+		choices.add(choice2);
+		choices.add(choice3);
+		choices.add(choice4);
+		
+		currentQuestion = new Question(qsID, text, questionsCategory, answer, choices);
+
+    	questionsList.add(currentQuestion);
+
+    	db.insertQuestion(currentQuestion);
+    	
+     }
+
+	public boolean check(){
+		if( text == null || text.isEmpty() || 
+			choice1 == null || choice1.isEmpty() || 
+			choice2 == null || choice2.isEmpty() || 
+			choice3 == null || choice3.isEmpty() || 
+			choice4 == null || choice4.isEmpty() || 
+			answer == null || answer.isEmpty() || 
+			questionsCategory == null || questionsCategory.isEmpty() )
+			return false;
+			
+		return true;	
+	}
+	
+	public String getChoice1() {
+		return choice1;
+	}
+
+	public void setChoice1(String choice1) {
+		this.choice1 = choice1;
+	}
+
+	public String getChoice2() {
+		return choice2;
+	}
+
+	public void setChoice2(String choice2) {
+		this.choice2 = choice2;
+	}
+
+	public String getChoice4() {
+		return choice4;
+	}
+
+	public void setChoice4(String choice4) {
+		this.choice4 = choice4;
+	}
+
+	public String getChoice3() {
+		return choice3;
+	}
+
+	public void setChoice3(String choice3) {
+		this.choice3 = choice3;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	
 }
