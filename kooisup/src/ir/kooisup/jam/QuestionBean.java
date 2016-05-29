@@ -77,6 +77,11 @@ public class QuestionBean {
 	
 	public void loadQuestionsList(String category){
 		questionsList = db.findQuestions(category);
+		
+		for (int i = 0; i < questionsList.size(); i++) {
+			System.out.println(questionsList.get(i).getText());
+			System.out.println(questionsList.get(i).getChoices().get(0));
+		}
 	}
 
 	public String getQuestionsCategory() {
