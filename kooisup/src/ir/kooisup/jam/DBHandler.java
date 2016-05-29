@@ -1,20 +1,78 @@
 package ir.kooisup.jam;
+import  java.lang.*;
+import com.mongodb.BasicDBList;
+import org.bson.Document;
+import com.mongodb.Block;
+import com.mongodb.client.FindIterable;
 
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Sorts.ascending;
 import static java.util.Arrays.asList;
 
 import com.mongodb.BasicDBObject;
-
+import com.mongodb.BulkWriteOperation;
+import com.mongodb.BulkWriteResult;
+import com.mongodb.Cursor;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.ParallelScanOptions;
 
+import java.net.UnknownHostException;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.bson.Document;
+import org.bson.conversions.Bson;
+ 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+
+
+import com.mongodb.Mongo;
 import com.mongodb.MongoException;
+ 
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+import com.mongodb.*;
+
+
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.BulkWriteOperation;
+import com.mongodb.BulkWriteResult;
+import com.mongodb.Cursor;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.ParallelScanOptions;
+
+import java.net.UnknownHostException;
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+ 
+import org.bson.Document;
+import org.bson.conversions.Bson;
+ 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+
+import com.mongodb.Mongo;
+import com.mongodb.MongoException;
+ 
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+import com.mongodb.*;
 
 public class DBHandler {
 	public static DBHandler instance = null;
@@ -38,11 +96,9 @@ public class DBHandler {
 	    MongoClient client = new MongoClient("localhost", 27017);
         db = client.getDB("mydb");
         //db.getCollection("users").drop();
-        //db.getCollection("quizs").drop();
-
-        //db.getCollection("questions").drop();
-        //db.getCollection("categories").drop();
-        //drop request ha bayad baghi bemanad
+        db.getCollection("quizs").drop();
+        db.getCollection("questions").drop();
+        db.getCollection("categories").drop();
         db.getCollection("requests").drop();
         
         
@@ -150,8 +206,13 @@ public class DBHandler {
 		
 		
 		int id1 = qz.getQzId();
-		getInstance().insertUser(new User("1", "پسورد", "em1","gender", "country","کد"));
-		getInstance().insertUser(new User("2", "پسورد", "em2","gender", "country","کد"));
+		getInstance().insertUser(new User("1", "Ù¾Ø³ÙˆØ±Ø¯", "em1","gender", "country","Ú©Ø¯"));
+		getInstance().insertUser(new User("2", "Ù¾Ø³ÙˆØ±Ø¯", "em2","gender", "country","Ú©Ø¯"));
+		getInstance().insertUser(new User("3", "Ù¾Ø³ÙˆØ±Ø¯", "em2","gender", "country","Ú©Ø¯"));
+		getInstance().insertUser(new User("4", "Ù¾Ø³ÙˆØ±Ø¯", "em2","gender", "country","Ú©Ø¯"));
+		
+		System.out.println("rank ");
+		System.out.println(getInstance().rank("4"));
 		
 		System.out.println(getInstance().findQuiz(id1));
 		getInstance().updateQuiz(id1, "u1", 20, 1);
@@ -233,7 +294,7 @@ public class DBHandler {
 		System.out.println(qz2.getCategory());
 		*/
 		
-		User u = new User("ییوزرنیم", "پسورد", "ایمیل","gender", "country","کد");
+		User u = new User("ÛŒÛŒÙˆØ²Ø±Ù†ÛŒÙ…", "Ù¾Ø³ÙˆØ±Ø¯", "Ø§ÛŒÙ…ÛŒÙ„","gender", "country","Ú©Ø¯");
 			try {
 				getInstance().insertUser(u);
 				//db.getCollection("users").drop();
@@ -241,10 +302,10 @@ public class DBHandler {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	        if(getInstance().existConfirmedUser("ییوزرنیم", "پسورد")) System.out.println("YES");
+	        if(getInstance().existConfirmedUser("ÛŒÛŒÙˆØ²Ø±Ù†ÛŒÙ…", "Ù¾Ø³ÙˆØ±Ø¯")) System.out.println("YES");
 	        else System.out.println("NO");
 	        
-	        if(getInstance().confirmEmail("ایمیل", "کد")) System.out.println("YEES");
+	        if(getInstance().confirmEmail("Ø§ÛŒÙ…ÛŒÙ„", "Ú©Ø¯")) System.out.println("YEES");
 	        else System.out.println("NOO");	
 	}
 	
@@ -493,7 +554,7 @@ public class DBHandler {
 		return qs;
 	}
 	
-	public void insertQuestion(Question qs)
+	private void insertQuestion(Question qs)
 	{
 		if(findCategory(qs.getCategory()) == null) {
 			System.out.println("category not found");
@@ -841,6 +902,23 @@ public class DBHandler {
 		return res;
 	}
 	
-	
+	public int rank(String uid) {
+		DBCursor cursor = users.find();
+		int rank=1;
+		int numOfwin = numOfWin(uid);
+		int sumScore = sumScore(uid);
+		try {
+			while (cursor.hasNext()) {
+				String currUid = (String) cursor.next().get("_id");
+				if(! currUid.equals(uid)) {
+					if(numOfWin(currUid) > numOfwin) rank++;
+					else if((numOfWin(currUid) == numOfwin) && (sumScore(currUid) > sumScore)) rank++;
+				}
+			}
+		} finally {
+			cursor.close();
+		}
+		return rank;
+	}
 	
 }
