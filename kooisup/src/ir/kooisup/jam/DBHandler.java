@@ -39,9 +39,11 @@ public class DBHandler {
         db = client.getDB("mydb");
         //db.getCollection("users").drop();
         //db.getCollection("quizs").drop();
-        db.getCollection("questions").drop();
-        db.getCollection("categories").drop();
-        //db.getCollection("requests").drop();
+
+        //db.getCollection("questions").drop();
+        //db.getCollection("categories").drop();
+        //drop request ha bayad baghi bemanad
+        db.getCollection("requests").drop();
         
         
         users = db.getCollection("users");
@@ -110,26 +112,26 @@ public class DBHandler {
 		qz2.setUid2("2");
 		qz3.setUid1("1");
 		qz3.setUid2("2");
-		qz4.setUid1("3");
-		qz4.setUid2("4");
+		qz4.setUid1("1");
+		qz4.setUid2("2");
 		
-		qz.setScore1(11);
+		qz.setScore1(15);
 		qz.setScore2(10);
 		qz2.setScore1(10);
-		qz2.setScore2(10);
-		qz3.setScore1(9);
+		qz2.setScore2(15);
+		qz3.setScore1(20);
 		qz3.setScore2(10);
-		qz4.setScore1(9);
-		qz4.setScore2(10);
+		qz4.setScore1(10);
+		qz4.setScore2(15);
 		
-		qz.setFinishTime1(2);
+		qz.setFinishTime1(1);
 		qz.setFinishTime2(3);
 		qz2.setFinishTime1(3);
-		qz2.setFinishTime2(2);
-		qz3.setFinishTime1(2);
-		qz3.setFinishTime2(3);
-		qz4.setFinishTime1(2);
-		qz4.setFinishTime2(3);
+		qz2.setFinishTime2(1);
+		qz3.setFinishTime1(1);
+		qz3.setFinishTime2(2);
+		qz4.setFinishTime1(5);
+		qz4.setFinishTime2(1);
 		
 		getInstance().updateQuiz(0, qz);
 		getInstance().updateQuiz(1, qz2);
@@ -144,7 +146,7 @@ public class DBHandler {
 		System.out.println(getInstance().numOfWin("2"));
 		System.out.println(getInstance().sumScore("2"));
 		System.out.println(getInstance().maxScore("2"));
-		
+		System.out.println(getInstance().numOfStronWin("2"));
 		
 		
 		int id1 = qz.getQzId();
@@ -816,5 +818,29 @@ public class DBHandler {
 		}
 		return res;
 	}
+
+	public int numOfStronWin(String uid) {
+		int res=0;
+		DBCursor curs = quizs.find(new BasicDBObject("$or", asList(new BasicDBObject("uid1", uid),
+		        		new BasicDBObject("uid2", uid))));
+		try {
+			while (curs.hasNext()) {
+				DBObject qz = curs.next() ;
+				Quiz quiz = new Quiz(((Integer)qz.get("_id")).intValue(), ((Integer)qz.get("score1")).intValue(), ((Integer)qz.get("score2")).intValue(), 
+					((Integer)qz.get("finishTime1")).intValue(), ((Integer)qz.get("finishTime2")).intValue(), 
+					(String)qz.get("category"), (String)qz.get("uid1"), (String)qz.get("uid2"), 
+					(ArrayList<Integer>) qz.get("qsIDs"));
+				//System.out.println("id "+quiz.getQzId());
+				//System.out.println("win "+quiz.winner());
+				if(quiz.strongWinner().equals(uid)) res++;
+		}
+		
+		} finally {
+			curs.close();
+		}
+		return res;
+	}
+	
+	
 	
 }

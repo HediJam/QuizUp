@@ -136,4 +136,11 @@ public class Quiz {
 		return uid2;
 	}
 	
+	String strongWinner() {
+		if(uid1.equals("") || uid2.equals("")) return "";
+		if (score1>=score2 && finishTime1*2<=finishTime2) return uid1;
+		if (score2>=score1 && finishTime2*2<=finishTime1) return uid2;
+		return "";
+	}
+	
 }
