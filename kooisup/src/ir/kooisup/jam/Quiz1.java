@@ -244,7 +244,8 @@ public class Quiz1 {
 		message += "دوستتان شما را به چالش کوییزآپ دعوت کرده";
 		message += "\r\n" + "کلیک کنید" + "\r\n";
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-		message += host +  ec.getRequestContextPath() + "/" + "quiz1.xhtml?id=" + quiz.getQzId();
+		//message += host +  ec.getRequestContextPath() + "/" + "quiz1.xhtml?id=" + quiz.getQzId();
+		message += "kooisup.ir/quiz1.xhtml?id=" + quiz.getQzId();
 		// System.out.println(message);
 		RegistrationListener.sendMailQuiz(opponent, message, "KooisUp invitation");
 
