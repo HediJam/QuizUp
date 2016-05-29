@@ -179,7 +179,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 		      </div>
 		      <div class="modal-footer">
 		      <ul class="list-group">
-			      	<li class="list-group-item">پاسخ درست
+			      	<!-- <li class="list-group-item">پاسخ درست
 			      	 <div class="radio" >
 					  <input type="radio" name="optradio" checked="question.checkedAnswer('1')"/><label style="margin-right: 5%" >گزینه 1</label>
 					</div>
@@ -193,7 +193,25 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 					  <input type="radio" name="optradio" checked="question.checkedAnswer('4')"/><label style="margin-right: 5%">گزینه 4</label>
 					</div>
 			      	 </li>
-			      </ul>
+			       -->
+			      
+			      <h:selectOneRadio value="#{question.answer}" class="Font">
+
+		              <f:selectItem id="opt1" itemValue="1"
+		                itemLabel="گزینه 1" />
+		
+		              <f:selectItem id="opt2" itemValue="2"
+		                itemLabel="گزینه 2" />
+		
+		              <f:selectItem id="opt3" itemValue="3"
+		                itemLabel="گزینه 3" />
+		
+		              <f:selectItem id="opt4" itemValue="4"
+		                itemLabel="گزینه 4" />
+	
+	              <f:ajax listener="#{quiz1.ajaxSubmit}" />
+	            </h:selectOneRadio>
+				      </ul>
 		        
 		        <h:commandButton value="ذخیره" action="#{questionBean.addQuestion}" >
         		</h:commandButton>
