@@ -19,7 +19,7 @@ public class LoginBean {
 	private String hide = "";
 	private String admin = "none";
 	private String parameter;
-	ssString host = "kooisup.ir/";
+	String host = "kooisup.ir/";
 	//String host = "localhost:8080/quizup/";
 
 	public String getParameter() {
