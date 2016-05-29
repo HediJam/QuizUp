@@ -181,16 +181,16 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 		      <ul class="list-group">
 			      	<li class="list-group-item">پاسخ درست
 			      	 <div class="radio" >
-					  <input type="radio" name="optradio"/><label style="margin-right: 5%" >گزینه 1</label>
+					  <input type="radio" name="optradio" checked="question.checkedAnswer('1')"/><label style="margin-right: 5%" >گزینه 1</label>
 					</div>
 					<div class="radio">
-					  <input type="radio" name="optradio"/><label style="margin-right: 5%">گزینه 2</label>
+					  <input type="radio" name="optradio" checked="question.checkedAnswer('2')"/><label style="margin-right: 5%">گزینه 2</label>
 					</div>
 					<div class="radio">
-					  <input type="radio" name="optradio"/><label style="margin-right: 5%">گزینه 3</label>
+					  <input type="radio" name="optradio" checked="question.checkedAnswer('3')"/><label style="margin-right: 5%">گزینه 3</label>
 					</div>
 					<div class="radio">
-					  <input type="radio" name="optradio"/><label style="margin-right: 5%">گزینه 4</label>
+					  <input type="radio" name="optradio" checked="question.checkedAnswer('4')"/><label style="margin-right: 5%">گزینه 4</label>
 					</div>
 			      	 </li>
 			      </ul>
@@ -236,7 +236,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
         	
             <p:rowEditor  />  
         </p:column>  
-        <p:ajax event="rowEdit" listener="#{questionBean.editQuestion}"/>
+        <!--  <p:ajax event="rowEdit" listener="#{questionBean.editQuestion}"/> -->
         
         
     </p:dataTable>  
