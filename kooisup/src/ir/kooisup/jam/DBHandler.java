@@ -39,7 +39,7 @@ public class DBHandler {
         db = client.getDB("mydb");
         //db.getCollection("users").drop();
         //db.getCollection("quizs").drop();
-        //db.getCollection("questions").drop();
+        db.getCollection("questions").drop();
         db.getCollection("categories").drop();
         //db.getCollection("requests").drop();
         
@@ -491,7 +491,7 @@ public class DBHandler {
 		return qs;
 	}
 	
-	private void insertQuestion(Question qs)
+	public void insertQuestion(Question qs)
 	{
 		if(findCategory(qs.getCategory()) == null) {
 			System.out.println("category not found");

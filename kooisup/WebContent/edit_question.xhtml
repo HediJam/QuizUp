@@ -8,7 +8,9 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 <h:head> 
 
 	<f:metadata>
+	
 		 <f:viewParam name="category" value="#{questionBean.questionsCategory}"/>
+		 <f:viewAction action="#{questionBean.onload}" />
 	</f:metadata>
 
     <meta charset="utf-8"></meta>
@@ -145,29 +147,114 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
               
             </div> 
         </f:facet>  
-  
-        <p:column > 
+    
+    	<p:column style="width:10%">		
+        <f:facet name="header">مشاهده گزینه ها</f:facet>
+    		<!--  <h:commandLink action="edit_question.xhtml?category=category.name" > -->
+    		<a data-toggle="modal" data-target="#answers">
+    			<i class="fa fa-eye"></i>
+	
+    		</a>
+    		
+    		<div id="answers" class="modal fade" role="dialog">
+		  <div class="modal-dialog" style="direction: rtl;">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"></button>
+		        <h4 class="modal-title">ویرایش گزینه ها</h4>
+		        
+		      </div>
+		      <div class="modal-body">
+		        
+		        <ul class="list-group">
+		        <li class="list-group-item">1. &#160;&#160;  <h:inputText size="35" value="#{question.choices[0]}" /></li>
+		        <li class="list-group-item">2. &#160;&#160;  <h:inputText size="35"  value="#{question.choices[1]}" /></li>
+		        <li class="list-group-item">3. &#160;&#160;  <h:inputText size="35"  value="#{question.choices[2]}" /></li>
+		        <li class="list-group-item">4. &#160;&#160;  <h:inputText size="35"  value="#{question.choices[3]}" /></li>
+		      </ul>
+		        
+		      </div>
+		      <div class="modal-footer">
+		      <ul class="list-group">
+			      	<li class="list-group-item">پاسخ درست
+			      	 <div class="radio" >
+					  <input type="radio" name="optradio" checked="checked"/><label style="margin-right: 5%" >گزینه 1</label>
+					</div>
+					<div class="radio">
+					  <input type="radio" name="optradio"/><label style="margin-right: 5%">گزینه 2</label>
+					</div>
+					<div class="radio">
+					  <input type="radio" name="optradio"/><label style="margin-right: 5%">گزینه 3</label>
+					</div>
+					<div class="radio">
+					  <input type="radio" name="optradio"/><label style="margin-right: 5%">گزینه 4</label>
+					</div>
+			      	 </li>
+			      </ul>
+		        
+		        <h:commandButton value="ذخیره" action="#{questionBean.addQuestion}" >
+        		</h:commandButton>
+		      </div>
+		    </div>
+		
+		  </div>
+		</div>
+    		
+    		<!--  </h:commandLink> -->
+		</p:column>
+		
+		
+		
+		<!-- <div id="answers" class="panel-collapse collapse">
+		      <ul class="list-group">
+		        <li class="list-group-item">1. &#160;&#160;  <h:inputText size="35" value="#{question.choices[0]}" /></li>
+		        <li class="list-group-item">2. &#160;&#160;  <h:inputText size="35"  value="#{question}" /></li>
+		        <li class="list-group-item">3. &#160;&#160;  <h:inputText size="35"  value="#{question}" /></li>
+		        <li class="list-group-item">4. &#160;&#160;  <h:inputText size="35"  value="#{question}" /></li>
+		      </ul>
+		      <div class="panel-footer">
+			      <ul class="list-group">
+			      	<li class="list-group-item">پاسخ درست
+			      	 <div class="radio" >
+					  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 1</label></input>
+					</div>
+					<div class="radio">
+					  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 2</label></input>
+					</div>
+					<div class="radio">
+					  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 3</label></input>
+					</div>
+					<div class="radio">
+					  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 4</label></input>
+					</div>
+			      	 </li>
+			      </ul>
+		      </div>
+	    </div>  -->
+        
+        <p:column> 
           <div style="font-size: large;"> 
-            
-            <!-- <p:cellEditor>  
+            <f:facet name="header">  
+                <h:outputText value="متن سوال"/>  
+            </f:facet> 
+             <p:cellEditor>  
                 <f:facet name="output">  
-                    <h:outputText value="#{category.name}"/>  
+                    <h:outputText value="#{question.text}"/>  
                 </f:facet>  
                 <f:facet name="input">  
-                    <p:inputText id="modelInput" value="#{category.name}" style="width:96%"/>  
+                    <p:inputText id="modelInput" value="#{question.text}" style="width:96%"/>  
                 </f:facet>  
-            </p:cellEditor>  --> 
-            <h:commandLink action="#{categoryBean.deleteAction(category)}" > 	
-    			<h:outputText value="#{question.name}"/>
-    		</h:commandLink> 
+            </p:cellEditor>  
+           <!--  <h:commandLink action="#{categoryBean.deleteAction(category)}" > 	
+    			<h:outputText value="#{question.text}"/>
+    		</h:commandLink>  -->
             </div>
-        </p:column>  
+        </p:column>
         
-        <p:column style="width:10%">		
-    		<!-- <f:facet name="header">حذف</f:facet>  -->
-    			
-    					
-    		<h:commandLink action="#{categoryBean.deleteAction(category)}" > 	
+        <p:column style="width:10%">				
+    		<h:commandLink action="#{questionBean.deleteAction(question)}" > 	
     			<i class="fa fa-remove"></i>
     		</h:commandLink> 
 		</p:column>
