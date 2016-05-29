@@ -69,7 +69,8 @@ public class ProfileBean {
 		this.maxWin = maxWin;
 	}
 	public String getMaxWinPeyDarPey() {
-		return maxWinPeyDarPey;
+		int i = db.numOfStronWin(username);
+		return Integer.toString(i);
 	}
 	public void setMaxWinPeyDarPey(String maxWinPeyDarPey) {
 		

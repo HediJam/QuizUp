@@ -54,15 +54,26 @@ public class LoginBean {
 
 		DBHandler db = DBHandler.getInstance();
 		if(username.equals("admin") && password.equals("admin")){
-			
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			admin = "";
+			hide = "none";
+			try {
+				//ec.redirect(ec.getRequestContextPath() + "/" + "edit_category.xhtml");
+				ec.redirect(ec.getRequestContextPath() + "/" + "index.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "th";
 		}
-		if (db.existConfirmedUser(username, password)) {
+		else if (db.existConfirmedUser(username, password)) {
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", username);
-			if(username.equals("admin") && password.equals("admin"))
+			/*if(username.equals("admin") && password.equals("admin"))
 				admin = "";
 			else
-				exit = "";
+				exit = "";*/
+			exit = "";
 			hide = "none";
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			try {
