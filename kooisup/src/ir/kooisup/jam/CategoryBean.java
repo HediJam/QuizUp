@@ -23,19 +23,24 @@ public class CategoryBean {
 		this.categoryList = new ArrayList<CategoryBean.Category>();
 		this.backupList = new ArrayList<CategoryBean.Category>();
 		
-		  //if(db.findCategory("book") == null) db.insertCategory("book");
-		  //if(db.findCategory("") == null) db.insertCategory("هنر");
-		  //if(db.findCategory("علوم") == null) db.insertCategory("علوم");
+
+		  if(db.findCategory("math") == null) db.insertCategory("math");
+		 //if(db.findCategory("math") == null) db.insertCategory("math");
+		  if(db.findCategory("instrument") == null) db.insertCategory("instrument");
+		  if(db.findCategory("photography") == null) db.insertCategory("photography");
+		  //if(db.findCategory("sport") == null) db.insertCategory("sport");
+		  //if(db.findCategory("cooking") == null) db.insertCategory("cooking");
 		  //if(db.findCategory("عکاسی") == null) db.insertCategory("عکاسی");
 		  //if(db.findCategory("موسیقی") == null) db.insertCategory("موسیقی");
 		  //if(db.findCategory("ورزش") == null) db.insertCategory("ورزش");
-		 
+		 //initCategory("book");
+		 //initCategory("sport");
 
 		List<String> cats = db.findCategories();
 		for (int i = 0; i < cats.size(); i++) {
 			Category cat = new Category();
 			cat.setName(cats.get(i));
-			cat.setFileName(cats.get(i));
+			cat.setFileName((cats.get(i) + ".jpg"));
 			this.categoryList.add(cat);
 		}
 
@@ -130,6 +135,16 @@ public class CategoryBean {
 		public final void setFileName(String fileName) {
 			this.fileName = fileName;
 		}
+	}
+	
+	private void initCategory(String name){
+		Category cat = new Category();
+		if (db.findCategory(name) == null)
+			db.insertCategory(name);
+		cat.setName(name);
+		cat.setFileName((name+".jpg"));
+		this.categoryList.add(cat);
+		this.backupList.add(cat);
 	}
 
 }
