@@ -24,7 +24,7 @@ public class QuestionBean {
 	private String choice3;
 	private String choice4;
 	private String text;
-	private String answer = "1";
+	private String answer;
 	private String message;
 	
 	public QuestionBean(){
@@ -79,8 +79,7 @@ public class QuestionBean {
 		questionsList = db.findQuestions(category);
 		
 		for (int i = 0; i < questionsList.size(); i++) {
-			System.out.println(questionsList.get(i).getText());
-			System.out.println(questionsList.get(i).getChoices().get(0));
+			questionsList.get(i).setAnswer(String.valueOf(questionsList.get(i).getAnswerIndex()+1) );
 		}
 	}
 
@@ -120,10 +119,9 @@ public class QuestionBean {
 		choices.add(choice3);
 		choices.add(choice4);
 		
-		answer = "1";
-		
 		currentQuestion = new Question(qsID, text, questionsCategory, answer, choices);
-
+		currentQuestion.setAnswer(String.valueOf(currentQuestion.getAnswerIndex()+1));
+		
     	questionsList.add(currentQuestion);
 
     	db.insertQuestion(text, questionsCategory, answer, choices);

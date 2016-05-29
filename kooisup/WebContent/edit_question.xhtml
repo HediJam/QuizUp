@@ -106,18 +106,21 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 			      <div class="panel-footer">
 				      <ul class="list-group">
 				      	<li class="list-group-item">پاسخ درست
-				      	  *<div class="radio" >
-						  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 1</label></input>
-						</div>
-						<div class="radio">
-						  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 2</label></input>
-						</div>
-						<div class="radio">
-						  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 3</label></input>
-						</div>
-						<div class="radio">
-						  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 4</label></input>
-						</div>
+				      	  *
+				      	  
+				      	  <h:selectOneRadio value="#{questionBean.answer}" class="Font">
+							
+			              <f:selectItem id="opt1" itemValue="1"
+			                itemLabel="گزینه 1  &#160;&#160;&#160;&#160;  &#160;&#160;" />			
+			              <f:selectItem id="opt2" itemValue="2"
+			                itemLabel="گزینه 2 &#160;&#160;&#160;&#160;&#160;&#160;" />			
+			              <f:selectItem id="opt3" itemValue="3"
+			                itemLabel="گزینه 3 &#160;&#160;&#160;&#160;&#160;&#160;" />			
+			              <f:selectItem id="opt4" itemValue="4"
+			                itemLabel="گزینه 4" />
+		
+			              
+			            </h:selectOneRadio>
 				      	 </li>
 				      </ul>
 			      </div>
@@ -195,6 +198,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 			      	 </li>
 			       -->
 			      
+			      <li class="list-group-item">پاسخ درست</li>
 			      <h:selectOneRadio value="#{question.answer}" class="Font">
 
 		              <f:selectItem id="opt1" itemValue="1"
@@ -209,7 +213,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 		              <f:selectItem id="opt4" itemValue="4"
 		                itemLabel="گزینه 4" />
 	
-	              <f:ajax listener="#{quiz1.ajaxSubmit}" />
+	              
 	            </h:selectOneRadio>
 				      </ul>
 		        
