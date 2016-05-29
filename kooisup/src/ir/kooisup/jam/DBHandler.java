@@ -97,8 +97,8 @@ public class DBHandler {
         db = client.getDB("mydb");
         //db.getCollection("users").drop();
         db.getCollection("quizs").drop();
-        //db.getCollection("questions").drop();
-        //db.getCollection("categories").drop();
+        db.getCollection("questions").drop();
+        db.getCollection("categories").drop();
         //drop request ha bayad baghi bemanad
         db.getCollection("requests").drop();
         

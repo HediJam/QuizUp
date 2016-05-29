@@ -152,12 +152,12 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
     	<p:column style="width:10%">		
         <f:facet name="header">مشاهده گزینه ها</f:facet>
     		<!--  <h:commandLink action="edit_question.xhtml?category=category.name" > -->
-    		<a data-toggle="modal" data-target="#answers">
+    		<a data-toggle="modal" data-target="##{question.qsID}" >
     			<i class="fa fa-eye"></i>
 	
     		</a>
     		
-    	<div id="answers" class="modal fade" role="dialog" >
+    	<div id="#{question.qsID}" class="modal fade" role="dialog" >
 		  <div class="modal-dialog" style="direction: rtl;">
 		
 		    <!-- Modal content-->
