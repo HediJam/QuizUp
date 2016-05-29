@@ -54,6 +54,8 @@ public class LoginBean {
 
 		DBHandler db = DBHandler.getInstance();
 		if(username.equals("admin") && password.equals("admin")){
+			HttpSession hs = Util.getSession();
+			hs.setAttribute("username", "admin");
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			admin = "";
 			hide = "none";
@@ -118,7 +120,7 @@ public class LoginBean {
 
 	public String test() {
 		System.out.println("logOut");
-		System.out.println("dfkgjerogjnoerjngjoerngowrngojwnrgoerngn" + parameter);
+		//System.out.println("dfkgjerogjnoerjngjoerngowrngojwnrgoerngn" + parameter);
 		return "/index.xhtml";
 	}
 

@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.RowEditEvent;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class CategoryBean {
 	private List<Category> categoryList;
 	private List<Category> backupList;
@@ -68,7 +69,10 @@ public class CategoryBean {
 	}
 
 	public String deleteAction(Category cat) {
+		
+		System.out.println("removing catgory ..... " +  cat.getName());
 		categoryList.remove(cat);
+		backupList.remove(cat);
 		db.removeCategory(cat.getName());
 		return null;
 	}
@@ -77,6 +81,7 @@ public class CategoryBean {
 		Category cat = new Category();
 		cat.setName(currentCategory);
 		categoryList.add(cat);
+		backupList.add(cat);
 		db.insertCategory(currentCategory);
 		return null;
 	}
