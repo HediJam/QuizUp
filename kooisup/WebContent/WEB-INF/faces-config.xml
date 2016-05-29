@@ -36,7 +36,7 @@
 	<managed-bean>
 		<managed-bean-name>categoryBean</managed-bean-name>
 		<managed-bean-class>ir.kooisup.jam.CategoryBean</managed-bean-class>
-		<managed-bean-scope>view</managed-bean-scope>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
 	<managed-bean>
