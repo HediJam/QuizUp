@@ -15,8 +15,8 @@ public class RegistrationListener {
 
 	public static void sendMail(String mail,String uuid) {
 
-		//String host = "kooisup.ir/";
-		String host = "localhost:8080/quizup/";
+		String host = "kooisup.ir/";
+		//String host = "localhost:8080/quizup/";
 		final String username = "kooisup.ir@gmail.com";
 		final String password = "d7100game";
 		
