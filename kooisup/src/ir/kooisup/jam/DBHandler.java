@@ -554,7 +554,7 @@ public class DBHandler {
 		return qs;
 	}
 	
-	private void insertQuestion(Question qs)
+	public void insertQuestion(Question qs)
 	{
 		if(findCategory(qs.getCategory()) == null) {
 			System.out.println("category not found");
