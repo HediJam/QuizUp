@@ -30,6 +30,13 @@ public class Question {
 		System.out.println("not found answer");
 		return -1;
 	}
+	
+	public String checkedAnswer(String index){
+		if(answer.equals(index))
+			return "checked";
+		return "";
+					
+	}
 
 	public String getText() {
 		return text;

@@ -13,7 +13,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
     <meta name="description" content=""></meta>
     <meta name="author" content=""></meta>
 
-    <title>edit category</title>
+    <title>ویرایش دسته بندی ها</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"></link>
@@ -164,17 +164,12 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
     		</h:commandLink> 
     		
 		</p:column>
-		
-		
        
         <p:column style="width:8%" exportable="false">
             <p:rowEditor  />  
-        </p:column>  
-        
-        <p:ajax event="rowEdit" listener="#{categoryBean.editCategory}"/>
-        
-        
-        
+        </p:column>          
+         <p:ajax event="rowEdit" listener="#{categoryBean.editCategory}"/>  
+
     </p:dataTable>  
   
 	<p:spacer height="20"/>  

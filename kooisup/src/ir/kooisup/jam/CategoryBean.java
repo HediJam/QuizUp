@@ -22,20 +22,20 @@ public class CategoryBean {
 		// TODO Auto-generated constructor stub
 		this.categoryList = new ArrayList<CategoryBean.Category>();
 		this.backupList = new ArrayList<CategoryBean.Category>();
-		/*
-		 * if(db.findCategory("ریاضی") == null) db.insertCategory("ریاضی");
-		 * if(db.findCategory("هنر") == null) db.insertCategory("هنر");
-		 * if(db.findCategory("علوم") == null) db.insertCategory("علوم");
-		 * if(db.findCategory("عکاسی") == null) db.insertCategory("عکاسی");
-		 * if(db.findCategory("موسیقی") == null) db.insertCategory("موسیقی");
-		 * if(db.findCategory("ورزش") == null) db.insertCategory("ورزش");
-		 */
+		
+		  //if(db.findCategory("book") == null) db.insertCategory("book");
+		  //if(db.findCategory("") == null) db.insertCategory("هنر");
+		  //if(db.findCategory("علوم") == null) db.insertCategory("علوم");
+		  //if(db.findCategory("عکاسی") == null) db.insertCategory("عکاسی");
+		  //if(db.findCategory("موسیقی") == null) db.insertCategory("موسیقی");
+		  //if(db.findCategory("ورزش") == null) db.insertCategory("ورزش");
+		 
 
 		List<String> cats = db.findCategories();
 		for (int i = 0; i < cats.size(); i++) {
 			Category cat = new Category();
 			cat.setName(cats.get(i));
-			cat.setFileName((i + 1) + ".jpg");
+			cat.setFileName(cats.get(i));
 			this.categoryList.add(cat);
 		}
 
@@ -69,17 +69,27 @@ public class CategoryBean {
 	}
 
 	public String deleteAction(Category cat) {
-		
-		System.out.println("removing catgory ..... " +  cat.getName());
-		categoryList.remove(cat);
-		backupList.remove(cat);
-		db.removeCategory(cat.getName());
+
+		if(cat != null){
+			System.out.println("removing catgory ..... " +  cat.getName());
+			db.removeCategory(cat.getName());
+			categoryList.remove(cat);
+			backupList.remove(cat);
+		}
+
 		return null;
 	}
 
 	public String addCategory() {
 		Category cat = new Category();
 		cat.setName(currentCategory);
+		System.out.println((currentCategory + ".jpg"));
+		if(categoryList.size() < 6)
+			cat.setFileName((currentCategory + ".jpg"));
+		else
+			cat.setFileName("book.jpg");
+		
+		
 		categoryList.add(cat);
 		backupList.add(cat);
 		db.insertCategory(currentCategory);

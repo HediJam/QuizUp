@@ -98,7 +98,8 @@ public class DBHandler {
         //db.getCollection("users").drop();
         db.getCollection("quizs").drop();
         db.getCollection("questions").drop();
-        db.getCollection("categories").drop();
+        //db.getCollection("categories").drop();
+        //drop request ha bayad baghi bemanad
         db.getCollection("requests").drop();
         
         
@@ -554,7 +555,7 @@ public class DBHandler {
 		return qs;
 	}
 	
-	public void insertQuestion(Question qs)
+	private void insertQuestion(Question qs)
 	{
 		if(findCategory(qs.getCategory()) == null) {
 			System.out.println("category not found");
@@ -569,7 +570,7 @@ public class DBHandler {
         try {
         	questions.insert(doc);
         } catch(MongoException ex) {
-        	System.out.println("duplicattte question id");
+        	System.out.println("duplicate id");
         }
 	}
 	
