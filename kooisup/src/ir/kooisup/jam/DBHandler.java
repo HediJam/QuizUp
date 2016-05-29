@@ -88,21 +88,24 @@ public class DBHandler {
 	}
 
 	private DBHandler() {
-		MongoClient client = new MongoClient("localhost", 27017);
-		db = client.getDB("mydb");
-		db.getCollection("users").drop();
-		db.getCollection("quizs").drop();
-		db.getCollection("questions").drop();
-		db.getCollection("categories").drop();
-		// drop request ha bayad baghi bemanad
-		db.getCollection("requests").drop();
 
-		users = db.getCollection("users");
-		quizs = db.getCollection("quizs");
-		questions = db.getCollection("questions");
-		categories = db.getCollection("categories");
-		requests = db.getCollection("requests");
-		users.createIndex(new BasicDBObject("email", 1).append("unique", true));
+	    MongoClient client = new MongoClient("localhost", 27017);
+        db = client.getDB("mydb");
+        //db.getCollection("users").drop();
+        db.getCollection("quizs").drop();
+        db.getCollection("questions").drop();
+        db.getCollection("categories").drop();
+        //drop request ha bayad baghi bemanad
+        db.getCollection("requests").drop();
+        
+        
+        users = db.getCollection("users");
+        quizs = db.getCollection("quizs");
+        questions = db.getCollection("questions");
+        categories = db.getCollection("categories");
+        requests = db.getCollection("requests");
+        users.createIndex(new BasicDBObject("email", 1).append("unique", true));
+	
 
 	}
 
