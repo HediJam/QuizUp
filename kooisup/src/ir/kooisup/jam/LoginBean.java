@@ -19,8 +19,8 @@ public class LoginBean {
 	private String hide = "";
 	private String admin = "none";
 	private String parameter;
-	//String host = "kooisup.ir/";
-	String host = "localhost:8080/quizup/";
+	String host = "kooisup.ir/";
+	//String host = "localhost:8080/quizup/";
 
 	public String getParameter() {
 		return parameter;
@@ -57,7 +57,7 @@ public class LoginBean {
 			HttpSession hs = Util.getSession();
 			hs.setAttribute("username", "admin");
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-			admin = "";
+			admin ="";
 			hide = "none";
 			try {
 				//ec.redirect(ec.getRequestContextPath() + "/" + "edit_category.xhtml");
@@ -106,6 +106,12 @@ public class LoginBean {
 		return "/index.xhtml";
 	}
 
+	public String doLogoutAdmin(){
+		admin = "none";
+		exit = "none";
+		hide = "";
+		return "/index.xhtml";
+	}
 	public String getExit() {
 		return exit;
 	}

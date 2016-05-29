@@ -19,8 +19,8 @@ import javax.swing.text.BoxView;
 @SessionScoped
 public class Quiz1 {
 
-	//String host = "kooisup.ir/";
-	String host = "localhost:8080/";
+	String host = "kooisup.ir/";
+	//String host = "localhost:8080/";
 	String winner = "نامعلوم";
 	String myScore = "نامعلوم";
 	String oppScore = "نامعلوم";

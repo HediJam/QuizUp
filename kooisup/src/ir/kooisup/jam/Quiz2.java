@@ -18,8 +18,8 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class Quiz2 {
 
-	// String host = "kooisup.ir/";
-	String host = "localhost:8080/quizup/";
+	String host = "kooisup.ir/";
+	//String host = "localhost:8080/quizup/";
 	String winner = "نامعلوم";
 	String myScore = "نامعلوم";
 	String oppScore = "نامعلوم";
