@@ -94,8 +94,10 @@ public class QuestionBean {
 	
 	public void addQuestion(){
 		
-		if(!check())
+		if(!check()){
 			setMessage("لطفا  فیلد های ستاره دار را پر کنید\n");
+			return;
+		}
 		
 		int qsID = questionsList.get(questionsList.size()-1).getQsID() + 1;
 		

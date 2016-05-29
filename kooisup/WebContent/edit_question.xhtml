@@ -80,13 +80,13 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
   			<ul class="list-group">
 	  		    
 	  		   
-	  		    <li class="list-group-item"> <h:outputText style="color:red" value="#{questionBean.message}"/><i class="fa fa-plus"></i> &#160; عنوان سوال *
+	  		    <li class="list-group-item"> <h:outputText style="color:red" value="#{questionBean.message}"/><br/><i class="fa fa-plus"></i> &#160; عنوان سوال *
 	  		    <h:inputText size="34"  value="#{questionBean.text}" /> 
+	  		    
 	  		    <h:commandButton value="افزودن سوال جدید" action="#{questionBean.addQuestion}" >
         		</h:commandButton>
         		
-        		
-	  		    </li>
+        		</li>
 	  		    
 	  		    <div class="panel-group">
 			  <div class="panel panel-default">
@@ -141,9 +141,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
                  paginator="true" rows="5" paginatorPosition="bottom"  
                  filteredValue="#{categoryBean.filteredMessages}"  
                  editable="true" styleClass="Font">  
-                 
-        
-        
+  
         <f:facet name="header" >
         <div style="font-size: x-large;">
         <h:outputText  value="#{questionBean.questionsCategory}  ویرایش سوالات دسته"/>
@@ -209,34 +207,6 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 		</p:column>
 		
 		
-		
-		<!-- <div id="answers" class="panel-collapse collapse">
-		      <ul class="list-group">
-		        <li class="list-group-item">1. &#160;&#160;  <h:inputText size="35" value="#{question.choices[0]}" /></li>
-		        <li class="list-group-item">2. &#160;&#160;  <h:inputText size="35"  value="#{question}" /></li>
-		        <li class="list-group-item">3. &#160;&#160;  <h:inputText size="35"  value="#{question}" /></li>
-		        <li class="list-group-item">4. &#160;&#160;  <h:inputText size="35"  value="#{question}" /></li>
-		      </ul>
-		      <div class="panel-footer">
-			      <ul class="list-group">
-			      	<li class="list-group-item">پاسخ درست
-			      	 <div class="radio" >
-					  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 1</label></input>
-					</div>
-					<div class="radio">
-					  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 2</label></input>
-					</div>
-					<div class="radio">
-					  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 3</label></input>
-					</div>
-					<div class="radio">
-					  <input type="radio" name="optradio"><label style="margin-right: 5%">گزینه 4</label></input>
-					</div>
-			      	 </li>
-			      </ul>
-		      </div>
-	    </div>  -->
-        
         <p:column> 
           <div style="font-size: large;"> 
             <f:facet name="header">  
