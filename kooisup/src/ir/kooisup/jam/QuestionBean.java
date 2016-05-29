@@ -24,7 +24,7 @@ public class QuestionBean {
 	private String choice3;
 	private String choice4;
 	private String text;
-	private String answer;
+	private String answer = "1";
 	private String message;
 	
 	public QuestionBean(){
@@ -115,12 +115,14 @@ public class QuestionBean {
 		choices.add(choice3);
 		choices.add(choice4);
 		
+		answer = "1";
+		
 		currentQuestion = new Question(qsID, text, questionsCategory, answer, choices);
 
     	questionsList.add(currentQuestion);
 
     	db.insertQuestion(text, questionsCategory, answer, choices);
-    	
+    	setMessage(null);
      }
 	
 
@@ -134,7 +136,7 @@ public class QuestionBean {
 			choice2 == null || choice2.isEmpty() || 
 			choice3 == null || choice3.isEmpty() || 
 			choice4 == null || choice4.isEmpty() || 
-			answer == null || answer.isEmpty() || 
+			
 			questionsCategory == null || questionsCategory.isEmpty() )
 			return false;
 			
