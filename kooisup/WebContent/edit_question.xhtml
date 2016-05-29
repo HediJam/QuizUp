@@ -236,7 +236,7 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
         	
             <p:rowEditor  />  
         </p:column>  
-        
+        <p:ajax event="rowEdit" listener="#{questionBean.editQuestion}"/>
         
         
     </p:dataTable>  

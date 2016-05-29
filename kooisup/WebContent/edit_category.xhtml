@@ -165,10 +165,10 @@ xmlns:pe="http://primefaces.org/ui/extensions" >
 		</p:column>
        
         <p:column style="width:8%" exportable="false">
-        	
             <p:rowEditor  />  
-        </p:column>  
-   
+        </p:column>          
+        <p:ajax event="rowEdit" listener="#{categoryBean.editCategory}"/>
+
     </p:dataTable>  
   
 	<p:spacer height="20"/>  
